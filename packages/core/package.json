@@ -1,0 +1,43 @@
+{
+  "name": "@buttery/core",
+  "version": "0.2.0",
+  "description": "The JS API for the buttery-tokens package that is used to distribute schemas, utils, and the main ButteryTokens class.",
+  "scripts": {
+    "build": "yarn json-schema:build && yarn tsc --project tsconfig.build.json",
+    "dev": "yarn build --watch",
+    "json-schema:build": "yarn tsx ./scripts/create-json-schema.ts"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/api/index.js",
+    "./utils": "./dist/utils/index.js",
+    "./schemas": "./dist/schemas/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:green-flash-digital/buttery-tokens.git",
+    "directory": "packages/core"
+  },
+  "author": "Drew DeCarme (drewdecarme@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drewdecarme/buttery-tools/issues"
+  },
+  "homepage": "https://github.com/drewdecarme/buttery-tools#readme",
+  "dependencies": {
+    "@inquirer/prompts": "^7.3.2",
+    "chroma-js": "3.1.2",
+    "dotdir": "^0.3.1",
+    "isoscribe": "^0.1.4",
+    "ts-jolt": "^0.2.2",
+    "zod": "3.24.2"
+  },
+  "devDependencies": {
+    "@types/chroma-js": "^3.1.1",
+    "@types/node": "22.13.9",
+    "tsx": "4.19.3",
+    "typescript": "5.8.2",
+    "wrangler": "3.112.0",
+    "zod-to-json-schema": "3.24.3"
+  }
+}

@@ -10,3 +10,5 @@ node_modules
 dist
 bin
 .turbo
+.env
+.env.production
