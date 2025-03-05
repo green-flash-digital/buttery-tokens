@@ -9,20 +9,18 @@ import { CustomSchema } from "./schema.custom.js";
 
 export const ConfigSchema = z
   .object({
+    // add a schema field onto the output JSON schema so we
+    // can correctly reference the file
+    $schema: z
+      .string()
+      .default("https://schemas.greenflash.digital/buttery-tokens.json"),
+  })
+  .extend({
     runtime: RuntimeSchema,
     sizeAndSpace: SizeAndSpaceSchema,
     font: FontSchema,
     response: ResponseSchema,
     color: ColorSchema,
     custom: CustomSchema,
-  })
-  .merge(
-    z.object({
-      // add a schema field onto the output JSON schema so we
-      // can correctly reference the file
-      $schema: z
-        .string()
-        .default("https://schemas.greenflash.digital/buttery-tokens.json"),
-    })
-  );
+  });
 export type ButteryTokensConfig = z.infer<typeof ConfigSchema>;
