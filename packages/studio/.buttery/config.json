@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../buttery-tokens-utils/schema.json",
+  "$schema": "../../core/dist/buttery-tokens.json",
   "runtime": {
     "namespace": "studio-test",
     "prefix": "studio-test",
