@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import type { ChangeEventHandler, MouseEventHandler } from "react";
 import type { ColorVariantTypes } from "@buttery/core/schemas";
-import { exhaustiveMatchGuard } from "@buttery/utils/isomorphic";
+import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { useToggle } from "react-hook-primitives";
 import { makeRem } from "@tokens";
 import { css } from "@linaria/core";

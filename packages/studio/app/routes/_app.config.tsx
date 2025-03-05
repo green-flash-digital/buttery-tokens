@@ -1,7 +1,7 @@
 import { makeColor, makeCustom, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import { NavLink, Outlet, useLoaderData } from "react-router";
-import { tryHandle } from "@buttery/utils/isomorphic";
+import { tryHandle } from "ts-jolt/isomorphic";
 
 import { ButtonGroup } from "~/components/ButtonGroup";
 import { NavTabs } from "~/components/NavTabs";

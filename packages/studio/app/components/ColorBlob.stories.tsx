@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ColorBlob, type ColorBlobProps } from "./ColorBlob";
+import { ColorBlob } from "./ColorBlob";
 
 const meta: Meta<typeof ColorBlob> = {
   title: "ColorBlob",
@@ -18,14 +18,14 @@ const meta: Meta<typeof ColorBlob> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof ColorBlob>;
 
 export const CircleHue: Story = {
   args: {
     dxType: "hue",
     dxVariant: "circle",
     dxValue: 40,
-  } as ColorBlobProps,
+  },
 };
 
 export const CircleHex: Story = {
@@ -33,7 +33,7 @@ export const CircleHex: Story = {
     dxVariant: "circle",
     dxType: "hex",
     dxValue: "248ced",
-  } as ColorBlobProps,
+  },
 };
 
 export const SquareHue: Story = {
@@ -41,7 +41,7 @@ export const SquareHue: Story = {
     dxVariant: "square",
     dxType: "hue",
     dxValue: 40,
-  } as ColorBlobProps,
+  },
 };
 
 export const SquareHex: Story = {
@@ -49,5 +49,5 @@ export const SquareHex: Story = {
     dxVariant: "square",
     dxType: "hex",
     dxValue: "248ced",
-  } as ColorBlobProps,
+  },
 };

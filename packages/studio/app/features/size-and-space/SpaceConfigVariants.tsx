@@ -1,10 +1,10 @@
 import { css } from "@linaria/core";
-import { makeColor, makeRem } from "@tokens";
 import type { ChangeEventHandler, FormEventHandler, RefCallback } from "react";
 import { useCallback, useMemo, useRef } from "react";
 import { classes, useToggle } from "react-hook-primitives";
-import { debounce } from "@buttery/utils/browser";
+import { debounce } from "ts-jolt/browser";
 
+import { makeColor, makeRem } from "@tokens";
 import { Button } from "~/components/Button";
 import { IconPencilEdit01 } from "~/icons/IconPencilEdit01";
 import { IconTick01 } from "~/icons/IconTick01";
@@ -18,12 +18,12 @@ import { VariantContainerBarText } from "~/components/VariantContainerBarText";
 import { VariantContainerBarTitle } from "~/components/VariantContainerBarTitle";
 
 import { useRecalculateSpaceVariants } from "./space.useRecalculateSpaceVariants";
-
 import {
   type ConfigurationStateSizeAndSpace,
   orderSpaceVariants,
   type ConfigurationStateSizeAndSpace_SpaceVariants,
 } from "./size-and-space.utils.js";
+
 import type { ConfigurationContextType } from "../Config.context.js";
 
 const styles = css`

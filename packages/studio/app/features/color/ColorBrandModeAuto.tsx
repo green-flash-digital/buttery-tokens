@@ -2,7 +2,7 @@ import { css } from "@linaria/core";
 import { makeRem } from "@tokens";
 import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
-import { generateGUID } from "@buttery/utils/isomorphic";
+import { generateGUID } from "ts-jolt/isomorphic";
 
 import { VariantAdd } from "~/components/VariantAdd";
 import { VariantEmpty } from "~/components/VariantEmpty";

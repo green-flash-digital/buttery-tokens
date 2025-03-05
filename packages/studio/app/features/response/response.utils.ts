@@ -1,5 +1,5 @@
 import type { ButteryTokensConfig } from "@buttery/core/schemas";
-import { generateGUID } from "@buttery/utils/isomorphic";
+import { generateGUID } from "ts-jolt/isomorphic";
 import type { Updater } from "use-immer";
 import { useImmer } from "use-immer";
 

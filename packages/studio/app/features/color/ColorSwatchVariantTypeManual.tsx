@@ -1,6 +1,6 @@
 import type { ColorVariantTypeKeyValue } from "@buttery/core/schemas";
 import { useEffect } from "react";
-import { generateGUID } from "@buttery/utils/isomorphic";
+import { generateGUID } from "ts-jolt/isomorphic";
 import { useImmer } from "use-immer";
 import { css } from "@linaria/core";
 import { makeRem } from "@tokens";

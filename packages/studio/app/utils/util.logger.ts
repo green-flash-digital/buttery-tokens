@@ -1,8 +1,7 @@
-import { ButteryLogger } from "@buttery/logs";
+import { Isoscribe } from "isoscribe";
 
-export const LOG = new ButteryLogger({
-  id: "buttery-tokens-playground",
-  prefix: "@buttery/tokens-pg",
-  prefixBgColor: "#f4c417",
+export const LOG = new Isoscribe({
+  name: "@buttery/tokens-pg",
+  pillColor: "#f4c417",
   logLevel: "debug",
 });

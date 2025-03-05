@@ -20,7 +20,9 @@ export const ConfigSchema = z
     z.object({
       // add a schema field onto the output JSON schema so we
       // can correctly reference the file
-      $schema: z.string().default("https://schema.buttery.tools/tokens.json"),
+      $schema: z
+        .string()
+        .default("https://schemas.greenflash.digital/buttery-tokens.json"),
     })
   );
 export type ButteryTokensConfig = z.infer<typeof ConfigSchema>;

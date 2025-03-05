@@ -2,7 +2,7 @@ import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { css } from "@linaria/core";
 import { makeRem } from "@tokens";
-import { calculateSpaceVariantAutoValue } from "@buttery/tokens-utils";
+import { calculateSpaceVariantAutoValue } from "@buttery/core";
 
 import { InputGroup } from "~/components/InputGroup";
 import { InputLabel } from "~/components/InputLabel";

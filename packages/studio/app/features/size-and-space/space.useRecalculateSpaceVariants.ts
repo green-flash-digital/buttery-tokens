@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { calculateSpaceVariantAutoValue } from "@buttery/tokens-utils";
-import { exhaustiveMatchGuard, generateGUID } from "@buttery/utils/isomorphic";
+import { calculateSpaceVariantAutoValue } from "@buttery/core";
+import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 
 import { useConfigurationContext } from "../Config.context";
 

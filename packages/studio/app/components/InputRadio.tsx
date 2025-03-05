@@ -1,6 +1,6 @@
 import { classes } from "react-hook-primitives";
 import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
-import { exhaustiveMatchGuard } from "@buttery/utils/isomorphic";
+import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";

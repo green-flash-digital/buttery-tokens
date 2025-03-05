@@ -1,7 +1,7 @@
 import { makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
-import { getAccessibleTextColor } from "@buttery/tokens-utils";
+import { getAccessibleTextColor } from "@buttery/core";
 
 import { StyleGuideBasicColor } from "./StyleGuideBasicColor";
 import { StyleGuideBasicFont } from "./StyleGuideBasicFont";

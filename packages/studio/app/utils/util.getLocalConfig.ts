@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 
 import type { ButteryTokensConfig } from "@buttery/core/schemas";
 import { ConfigSchema } from "@buttery/core/schemas";
-import { tryHandleSync } from "@buttery/utils/isomorphic";
+import { tryHandleSync } from "ts-jolt/isomorphic";
 
 import { errors } from "./util.error-modes";
 import { LOG } from "./util.logger";

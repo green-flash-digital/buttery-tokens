@@ -1,8 +1,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { writeFileRecursive } from "@buttery/utils/node";
-import { tryHandle } from "@buttery/utils/isomorphic";
+import { writeFileRecursive } from "ts-jolt/node";
+import { tryHandle } from "ts-jolt/isomorphic";
 import { type ActionFunctionArgs } from "react-router";
 
 import {

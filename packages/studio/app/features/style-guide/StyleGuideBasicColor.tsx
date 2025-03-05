@@ -4,7 +4,7 @@ import { classes } from "react-hook-primitives";
 import {
   ColorAccessibilityChecker,
   getAccessibleTextColor,
-} from "@buttery/tokens-utils";
+} from "@buttery/core";
 import { Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
 

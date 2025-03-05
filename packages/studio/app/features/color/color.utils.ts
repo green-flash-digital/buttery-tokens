@@ -1,4 +1,3 @@
-import { exhaustiveMatchGuard } from "react-hook-primitives";
 import type {
   ButteryTokensConfig,
   ColorDefHueSchema,
@@ -14,15 +13,12 @@ import {
   ColorBrandTypeNeutralSchema,
   ColorBrandTypePastelSchema,
 } from "@buttery/core/schemas";
-import { generateGUID } from "@buttery/utils/isomorphic";
+import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import type { Updater } from "use-immer";
 import { useImmer } from "use-immer";
 import type { z, ZodUnionDef, ZodLiteral } from "zod";
 import { match } from "ts-pattern";
-import {
-  createBrandVariants,
-  createNeutralVariants,
-} from "@buttery/tokens-utils";
+import { createBrandVariants, createNeutralVariants } from "@buttery/core";
 
 import type { ColorPreviewThemeMode } from "./ColorPreview.context";
 

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { exhaustiveMatchGuard } from "react-hook-primitives";
+import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 
 import { ButtonRegular, type ButtonRegularProps } from "./ButtonRegular";
 import type { ButtonIconProps } from "./ButtonIcon";

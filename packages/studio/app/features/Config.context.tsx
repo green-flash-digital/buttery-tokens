@@ -74,6 +74,7 @@ export const ConfigurationProvider: FC<ConfigurationProviderProps> = ({
     const configSettings = getSettingsConfigFromState(settings);
 
     const parsableConfig: ButteryTokensConfig = {
+      $schema: "https://schemas.greenflash.digital/buttery-tokens.json",
       color: configColor,
       sizeAndSpace: configSizing,
       font: configFont,

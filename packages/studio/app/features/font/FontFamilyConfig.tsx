@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { makeRem, makeReset } from "@tokens";
 import { useCallback } from "react";
-import { exhaustiveMatchGuard, generateGUID } from "@buttery/utils/isomorphic";
+import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import { match } from "ts-pattern";
 import { manualFontStyles } from "@buttery/core/schemas";
 

@@ -1,5 +1,5 @@
 import { useFetcher } from "react-router";
-import { tryHandle } from "@buttery/utils/isomorphic";
+import { tryHandle } from "ts-jolt/isomorphic";
 
 import { useConfigurationContext } from "./Config.context";
 

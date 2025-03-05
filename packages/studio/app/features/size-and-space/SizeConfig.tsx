@@ -1,6 +1,6 @@
 import type { ChangeEventHandler } from "react";
 import { useCallback, useEffect } from "react";
-import { exhaustiveMatchGuard, generateGUID } from "@buttery/utils/isomorphic";
+import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 
 import { InputGroup } from "~/components/InputGroup";
 import { InputLabel } from "~/components/InputLabel";

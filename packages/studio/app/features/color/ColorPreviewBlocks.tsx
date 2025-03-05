@@ -4,7 +4,7 @@ import type { JSX } from "react";
 import {
   ColorAccessibilityChecker,
   getAccessibleTextColor,
-} from "@buttery/tokens-utils";
+} from "@buttery/core";
 import { classes } from "react-hook-primitives";
 
 import { IconTick01 } from "~/icons/IconTick01";

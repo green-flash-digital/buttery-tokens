@@ -6,7 +6,7 @@ import {
   fontFamilyFallback,
   manualFontStyles,
 } from "@buttery/core/schemas";
-import { exhaustiveMatchGuard, generateGUID } from "@buttery/utils/isomorphic";
+import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import type { Updater } from "use-immer";
 import { useImmer } from "use-immer";
 

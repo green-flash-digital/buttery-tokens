@@ -1,4 +1,4 @@
 {
-  "extends": "@buttery/tsconfig/library",
+  "extends": "ts-jolt/tsconfig/library",
   "compilerOptions": { "noEmit": false, "declaration": true }
 }

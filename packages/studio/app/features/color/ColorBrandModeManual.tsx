@@ -1,4 +1,4 @@
-import { generateGUID } from "@buttery/utils/isomorphic";
+import { generateGUID } from "ts-jolt/isomorphic";
 import { useCallback } from "react";
 
 import { VariantList } from "~/components/VariantList";
