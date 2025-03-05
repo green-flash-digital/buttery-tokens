@@ -1,10 +1,10 @@
 import { useToggle } from "react-hook-primitives";
 import { useCallback } from "react";
 import { css } from "@linaria/core";
-import { makeRem } from "@tokens";
 import { match } from "ts-pattern";
 import { CustomVariantSchema } from "@buttery/core/schemas";
 
+import { makeRem } from "@tokens";
 import { VariantContainer } from "~/components/VariantContainer";
 import { VariantContainerBar } from "~/components/VariantContainerBar";
 import { VariantContainerBarActions } from "~/components/VariantContainerBarActions";

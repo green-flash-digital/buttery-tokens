@@ -4,10 +4,11 @@ import {
   useForwardedRef,
   useTrackingNode,
 } from "react-hook-primitives";
-import { makeColor, makePx, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
+
+import { makeColor, makePx, makeRem } from "@tokens";
 
 export type InputRadioTabsPropsNative = JSX.IntrinsicElements["div"];
 export type InputRadioTabsProps = InputRadioTabsPropsNative;

@@ -1,8 +1,8 @@
 import { InputGroup } from "~/components/InputGroup";
 
 import { SpaceConfigVariants } from "./SpaceConfigVariants";
-
 import type { ConfigurationStateSizeAndSpace_SpaceManual } from "./size-and-space.utils.js";
+
 import type { ConfigurationContextType } from "../Config.context.js";
 
 export function SpaceConfigManual({

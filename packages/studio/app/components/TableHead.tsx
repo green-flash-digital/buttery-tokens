@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeColor } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeColor } from "@tokens";
 
 export type TableHeadPropsNative = JSX.IntrinsicElements["thead"];
 export type TableHeadPropsCustom = {

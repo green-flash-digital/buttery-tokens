@@ -1,9 +1,9 @@
 import { classes, useToggle } from "react-hook-primitives";
-import { makeColor, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
 
+import { makeColor, makeRem } from "@tokens";
 import { InputGroup } from "~/components/InputGroup";
 import { InputLabel } from "~/components/InputLabel";
 import { InputNumber } from "~/components/InputNumber";

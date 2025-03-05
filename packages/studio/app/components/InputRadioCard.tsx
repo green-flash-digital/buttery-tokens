@@ -1,9 +1,9 @@
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import { css } from "@linaria/core";
-import { makeColor, makeFontWeight, makeRem } from "@tokens";
 import { classes } from "react-hook-primitives";
 
+import { makeColor, makeFontWeight, makeRem } from "@tokens";
 import type { IconCode } from "~/icons/IconCode";
 
 export type InputRadioCardPropsNative = JSX.IntrinsicElements["input"];

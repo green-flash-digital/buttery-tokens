@@ -1,9 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeColor, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
+import { makeColor, makeRem } from "@tokens";
 import { IconTick04Solid } from "~/icons/IconTick04Solid";
 
 export type InputCheckboxPropsNative = Omit<

@@ -1,11 +1,13 @@
 import { css } from "@linaria/core";
-import { makeColor, makeFontWeight, makePx, makeRem, makeReset } from "@tokens";
 import type { MouseEventHandler, RefCallback } from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { classes } from "react-hook-primitives";
 
-import { useConfigurationContext } from "../Config.context";
+import { makeColor, makeFontWeight, makePx, makeRem, makeReset } from "@tokens";
+
 import type { ConfigurationStateResponseBreakpointValue } from "./response.utils";
+
+import { useConfigurationContext } from "../Config.context";
 
 const styles = css`
   /* background: #272727; */

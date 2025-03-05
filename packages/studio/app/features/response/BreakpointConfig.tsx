@@ -1,14 +1,14 @@
 import { css } from "@linaria/core";
-import { makeRem, makeReset } from "@tokens";
 import { useCallback } from "react";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 
+import { makeRem, makeReset } from "@tokens";
 import { VariantEmpty } from "~/components/VariantEmpty";
 
 import { BreakpointConfigVariant } from "./BreakpointConfigVariant";
+import type { OnResponseBreakpointAction } from "./response.utils";
 
 import { useConfigurationContext } from "../Config.context";
-import type { OnResponseBreakpointAction } from "./response.utils";
 
 const styles = css`
   ${makeReset("ul")};

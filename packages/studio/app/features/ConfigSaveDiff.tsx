@@ -1,5 +1,6 @@
 import { css } from "@linaria/core";
 import { DiffEditor } from "@monaco-editor/react";
+
 import { makeColor, makeFontWeight, makeRem } from "@tokens";
 
 import { useConfigurationContext } from "./Config.context";

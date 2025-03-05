@@ -1,8 +1,8 @@
 import { classes } from "react-hook-primitives";
-import { makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import { forwardRef } from "react";
 
+import { makeRem } from "@tokens";
 import type { NavTabsProps } from "~/components/NavTabs";
 import { NavTabs } from "~/components/NavTabs";
 

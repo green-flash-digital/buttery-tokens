@@ -1,6 +1,7 @@
 import { classes } from "react-hook-primitives";
-import { makeRem } from "@tokens";
 import { css } from "@linaria/core";
+
+import { makeRem } from "@tokens";
 
 const dropdownStyles = css`
   opacity: 0;

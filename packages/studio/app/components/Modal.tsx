@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 import type { ModalRef, UseModalOptions } from "react-hook-primitives";
 import { classes, ModalProvider, useModalDialog } from "react-hook-primitives";
 import { css } from "@linaria/core";
+
 import { makeColor, makeRem } from "@tokens";
 
 export type ModalPropsNative = Omit<

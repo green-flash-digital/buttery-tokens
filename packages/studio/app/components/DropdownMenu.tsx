@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeReset, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeReset, makeRem } from "@tokens";
 
 export type DropdownMenuPropsNative = JSX.IntrinsicElements["ul"];
 export type DropdownMenuProps = DropdownMenuPropsNative;

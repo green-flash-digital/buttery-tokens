@@ -6,7 +6,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "react-router";
-import "@tokens//css";
+import "@tokens/css";
 import type { LinksFunction } from "react-router";
 
 import { LayoutHeader } from "./components/LayoutHeader";

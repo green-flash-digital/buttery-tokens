@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
 
 export type InputLabelPropsNative = JSX.IntrinsicElements["label"];
 export type InputLabelPropsCustom = {

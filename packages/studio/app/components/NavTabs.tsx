@@ -4,10 +4,11 @@ import {
   useForwardedRef,
   useTrackingNode,
 } from "react-hook-primitives";
-import { makeColor, makeFontWeight, makePx, makeRem, makeReset } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
+
+import { makeColor, makeFontWeight, makePx, makeRem, makeReset } from "@tokens";
 
 import { NavTabsContextProvider } from "./NavTabs.context";
 

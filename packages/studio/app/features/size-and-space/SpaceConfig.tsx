@@ -1,9 +1,9 @@
 import type { ChangeEventHandler } from "react";
 import { useCallback, useMemo } from "react";
 import { match } from "ts-pattern";
-import { makeRem } from "@tokens";
 import { css } from "@linaria/core";
 
+import { makeRem } from "@tokens";
 import { InputLabel } from "~/components/InputLabel";
 import { InputRadioCard } from "~/components/InputRadioCard";
 import { InputSection } from "~/components/InputSection";

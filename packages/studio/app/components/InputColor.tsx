@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeRem, makeReset } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeRem, makeReset } from "@tokens";
 
 export type InputColorPropsNative = Omit<
   JSX.IntrinsicElements["input"],

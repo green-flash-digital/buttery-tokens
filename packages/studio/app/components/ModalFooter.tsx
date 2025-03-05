@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeCustom, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeCustom, makeRem } from "@tokens";
 
 export type ModalFooterPropsNative = JSX.IntrinsicElements["footer"];
 export type ModalFooterProps = ModalFooterPropsNative;

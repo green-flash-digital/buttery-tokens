@@ -1,9 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeReset, makeRem, makeColor, makeFontWeight } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
+import { makeReset, makeRem, makeColor, makeFontWeight } from "@tokens";
 import type { IconInspectCode } from "~/icons/IconInspectCode";
 
 export type DropdownMenuItemPropsNative = JSX.IntrinsicElements["button"];

@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeColor, makeFontWeight, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeColor, makeFontWeight, makeRem } from "@tokens";
 
 export type TableBodyCellPropsNative = JSX.IntrinsicElements["th"];
 export type TableBodyCellPropsCustom = {

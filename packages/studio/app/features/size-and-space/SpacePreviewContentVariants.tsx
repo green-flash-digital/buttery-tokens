@@ -1,6 +1,7 @@
 import { css } from "@linaria/core";
-import { makeColor, makeRem, makeReset } from "@tokens";
 import { Fragment } from "react/jsx-runtime";
+
+import { makeColor, makeRem, makeReset } from "@tokens";
 
 import type { ConfigurationStateSizeAndSpace_SpaceVariants } from "./size-and-space.utils.js";
 

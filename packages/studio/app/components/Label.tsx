@@ -1,4 +1,9 @@
 import { classes } from "react-hook-primitives";
+import { css } from "@linaria/core";
+import type { JSX } from "react";
+import { forwardRef } from "react";
+import { match } from "ts-pattern";
+
 import {
   makeColor,
   makeFontFamily,
@@ -6,11 +11,6 @@ import {
   makeRem,
   type ColorAndVariants,
 } from "@tokens";
-import { css } from "@linaria/core";
-import type { JSX } from "react";
-import { forwardRef } from "react";
-import { match } from "ts-pattern";
-
 import type { IconArrowDown } from "~/icons/IconArrowDown";
 
 export type LabelPropsNative = JSX.IntrinsicElements["span"];

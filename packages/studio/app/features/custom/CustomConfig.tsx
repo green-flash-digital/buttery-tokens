@@ -1,15 +1,15 @@
 import { useCallback } from "react";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import { css } from "@linaria/core";
-import { makeRem, makeReset } from "@tokens";
 
+import { makeRem, makeReset } from "@tokens";
 import { VariantEmpty } from "~/components/VariantEmpty";
 import { VariantAdd } from "~/components/VariantAdd";
 
 import { CustomConfigVariant } from "./CustomConfigVariant";
+import type { OnCustomAction } from "./custom.utils";
 
 import { useConfigurationContext } from "../Config.context";
-import type { OnCustomAction } from "./custom.utils";
 
 const styles = css`
   ${makeReset("ul")};

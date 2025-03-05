@@ -1,4 +1,8 @@
 import { classes } from "react-hook-primitives";
+import { css } from "@linaria/core";
+import type { JSX } from "react";
+import { forwardRef } from "react";
+
 import {
   makeColor,
   makeFontFamily,
@@ -6,9 +10,6 @@ import {
   makeRem,
   makeReset,
 } from "@tokens";
-import { css } from "@linaria/core";
-import type { JSX } from "react";
-import { forwardRef } from "react";
 
 export type InputRadioTabPropsNative = JSX.IntrinsicElements["input"];
 export type InputRadioTabPropsCustom = {

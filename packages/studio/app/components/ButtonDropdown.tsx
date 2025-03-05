@@ -2,8 +2,8 @@ import { classes, useDropdownMenu } from "react-hook-primitives";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import { css } from "@linaria/core";
-import { makeColor, makeRem, makeReset } from "@tokens";
 
+import { makeColor, makeRem, makeReset } from "@tokens";
 import { IconArrowDown } from "~/icons/IconArrowDown";
 
 import { Button } from "./Button";

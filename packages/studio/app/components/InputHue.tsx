@@ -1,6 +1,7 @@
-import { makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import { forwardRef } from "react";
+
+import { makeRem } from "@tokens";
 
 import type { InputRangePropsNative } from "./InputRange";
 import { InputRange } from "./InputRange";

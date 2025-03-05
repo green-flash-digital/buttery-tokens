@@ -1,10 +1,10 @@
 import { classes } from "react-hook-primitives";
-import { makeFontFamily, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import type { CodeToHastOptions, BundledLanguage, BundledTheme } from "shiki";
 
+import { makeFontFamily, makeRem } from "@tokens";
 import { useHighlightCode } from "~/hooks/hook.useHighlightCode";
 
 const styles = css`

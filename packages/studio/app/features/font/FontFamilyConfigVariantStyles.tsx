@@ -1,7 +1,7 @@
-import { makeReset, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { ChangeEvent } from "react";
 
+import { makeReset, makeRem } from "@tokens";
 import { InputLabel } from "~/components/InputLabel";
 import { InputCheckbox } from "~/components/InputCheckbox";
 

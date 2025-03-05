@@ -4,8 +4,8 @@ import type { ColorVariantTypes } from "@buttery/core/schemas";
 import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { makeRem } from "@tokens";
 
+import { makeRem } from "@tokens";
 import { ColorBlob, useColorBlob } from "~/components/ColorBlob";
 import { InputGroup } from "~/components/InputGroup";
 import { VariantContainer } from "~/components/VariantContainer";

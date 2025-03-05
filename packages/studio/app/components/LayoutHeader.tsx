@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeColor, makeCustom, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeColor, makeCustom, makeRem } from "@tokens";
 
 export type LayoutHeaderPropsNative = JSX.IntrinsicElements["header"];
 export type LayoutHeaderProps = LayoutHeaderPropsNative;

@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeReset, makeRem, makeColor } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeReset, makeRem, makeColor } from "@tokens";
 
 export type ColorSwatchVariantAddPropsNative = JSX.IntrinsicElements["button"];
 export type ColorSwatchVariantAddProps = ColorSwatchVariantAddPropsNative;

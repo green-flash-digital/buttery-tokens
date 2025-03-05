@@ -1,7 +1,8 @@
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
-import { makeColor, makePx, makeRem, makeReset } from "@tokens";
 import { useEffect, useRef } from "react";
+
+import { makeColor, makePx, makeRem, makeReset } from "@tokens";
 
 import { useSizePreviewContext } from "./SizePreview.context";
 

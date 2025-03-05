@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-import { makeColor, makeRem } from "@tokens";
 
+import { makeColor, makeRem } from "@tokens";
 import { InputRange } from "~/components/InputRange";
 import { InputColor } from "~/components/InputColor";
 import { Tooltip, useTooltip } from "~/components/Tooltip";

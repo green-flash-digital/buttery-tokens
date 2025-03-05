@@ -1,6 +1,7 @@
 import { css } from "@linaria/core";
-import { makeRem } from "@tokens";
 import { Fragment } from "react/jsx-runtime";
+
+import { makeRem } from "@tokens";
 
 import { StyleGuidePage } from "./StyleGuidePage";
 import { styleGuideSections } from "./style-guide.utils";

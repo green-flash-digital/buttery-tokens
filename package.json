@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "lint": "eslint ./packages/core/src/* ./packages/studio/app/* ./packages/studio/cli/* --fix"
+    "lint": "eslint ./packages/core/src/* ./packages/studio/app/* --fix"
   },
   "repository": {
     "type": "git",

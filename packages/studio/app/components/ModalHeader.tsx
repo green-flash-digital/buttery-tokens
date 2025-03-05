@@ -1,4 +1,8 @@
 import { classes, useModalContext } from "react-hook-primitives";
+import { css } from "@linaria/core";
+import type { JSX } from "react";
+import { forwardRef } from "react";
+
 import {
   makeColor,
   makeCustom,
@@ -7,10 +11,6 @@ import {
   makeRem,
   makeReset,
 } from "@tokens";
-import { css } from "@linaria/core";
-import type { JSX } from "react";
-import { forwardRef } from "react";
-
 import { IconCancel } from "~/icons/IconCancel";
 
 export type ModalHeaderPropsNative = Omit<

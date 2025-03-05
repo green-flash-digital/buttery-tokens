@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeRem, makeCustom } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeRem, makeCustom } from "@tokens";
 
 export type LayoutConfigSectionPreviewTitlePropsNative =
   JSX.IntrinsicElements["div"];

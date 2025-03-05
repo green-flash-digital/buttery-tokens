@@ -1,8 +1,9 @@
 import { classes } from "react-hook-primitives";
-import { makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+
+import { makeRem } from "@tokens";
 
 export type VariantContainerBarPropsNative = JSX.IntrinsicElements["div"];
 export type VariantContainerBarProps = VariantContainerBarPropsNative;

@@ -1,4 +1,3 @@
-import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
 import {
@@ -8,6 +7,7 @@ import {
 import { Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
 
+import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
 import { IconTick01 } from "~/icons/IconTick01";
 import { IconCancel } from "~/icons/IconCancel";
 

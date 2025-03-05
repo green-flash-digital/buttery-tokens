@@ -1,9 +1,9 @@
 import type { ButteryTokensColorBrandTypeAuto } from "@buttery/core/schemas";
 import { css } from "@linaria/core";
-import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
 import { useCallback } from "react";
 import { classes } from "react-hook-primitives";
 
+import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
 import { IconBrush } from "~/icons/IconBrush";
 import { IconColors } from "~/icons/IconColors";
 import type { IconCopy } from "~/icons/IconCopy";
