@@ -32,11 +32,11 @@ export async function bootstrap() {
       prefix,
     },
   } as ButteryTokensConfig);
-  const fizmooConfigContent = JSON.stringify(configJson, null, 2);
+  const butteryTokensConfigContent = JSON.stringify(configJson, null, 2);
 
   const configRes = await tryHandle(writeFileRecursive)(
     butteryTokensConfigPath,
-    fizmooConfigContent
+    butteryTokensConfigContent
   );
   if (configRes.hasError) {
     throw configRes.error;
