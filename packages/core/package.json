@@ -1,5 +1,5 @@
 {
-  "name": "@buttery-tokens/core",
+  "name": "@buttery/core",
   "version": "0.0.1",
   "description": "A collection of schemas and utils that can be shared across packages",
   "scripts": {
