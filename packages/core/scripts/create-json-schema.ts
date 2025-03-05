@@ -23,7 +23,7 @@ async function createJsonSchema() {
 
   LOG.debug("Writing to file");
   const res = await tryHandle(writeFileRecursive)(
-    path.resolve(import.meta.dirname, "../schema.json"),
+    path.resolve(import.meta.dirname, "../dist/buttery-tokens.json"),
     JSON.stringify(jsonSchema, null, 2)
   );
   if (res.hasError) {

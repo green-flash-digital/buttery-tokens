@@ -17,7 +17,7 @@
     "build"
   ],
   "dependencies": {
-    "@buttery/core": "0.0.1",
+    "@buttery/core": "0.2.0",
     "@linaria/server": "^6.2.0",
     "@monaco-editor/react": "4.7.0",
     "@react-router/express": "7.2.0",
@@ -32,7 +32,7 @@
     "puppeteer": "^24.3.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-hook-primitives": "^0.2.2",
+    "react-hook-primitives": "^0.2.3",
     "react-router": "7.2.0",
     "shiki": "3.1.0",
     "ts-jolt": "^0.2.2",

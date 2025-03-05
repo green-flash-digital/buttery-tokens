@@ -349,7 +349,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@buttery/core@npm:0.0.1, @buttery/core@workspace:packages/core":
+"@buttery/core@npm:0.0.1, @buttery/core@workspace:*, @buttery/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@buttery/core@workspace:packages/core"
   dependencies:
@@ -363,6 +363,14 @@ __metadata:
     wrangler: "npm:3.112.0"
     zod: "npm:3.24.2"
     zod-to-json-schema: "npm:3.24.3"
+  languageName: unknown
+  linkType: soft
+
+"@buttery/studio-tokens@workspace:packages/studio-tokens":
+  version: 0.0.0-use.local
+  resolution: "@buttery/studio-tokens@workspace:packages/studio-tokens"
+  dependencies:
+    "@buttery/core": "workspace:*"
   languageName: unknown
   linkType: soft
 
@@ -400,7 +408,7 @@ __metadata:
     puppeteer: "npm:^24.3.1"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
-    react-hook-primitives: "npm:^0.2.2"
+    react-hook-primitives: "npm:^0.2.3"
     react-router: "npm:7.2.0"
     shiki: "npm:3.1.0"
     storybook: "npm:8.6.3"
@@ -7705,16 +7713,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-primitives@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "react-hook-primitives@npm:0.2.2"
+"react-hook-primitives@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "react-hook-primitives@npm:0.2.3"
   dependencies:
     "@changesets/cli": "npm:^2.28.1"
     isoscribe: "npm:^0.1.4"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     ts-jolt: "npm:^0.2.2"
-  checksum: 10c0/2af59f519b801c3e93d655a8d11c9c68709df8f1527c6e8ceb95d10ec1abb2c2f06f293228be4f2cc8fad210020ba08c0f92461cb745015f664e524f5a5e5ae3
+  checksum: 10c0/7dd1ea03c220c6af4b532d8ee9001d1cc758e5c28ce850d4f053550a62070864455b18b2fcea001b277e905b7cb8268418b15a1a36afba3ec7d42cbd54da08e9
   languageName: node
   linkType: hard
 
