@@ -1,4 +1,4 @@
-import config from "eslint-config-greenflash";
+import gfEslint from "@gfdigital/eslint-config";
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [...config, { ignores: ["eslint.config.js"] }];
+export default gfEslint.configs.ts({ type: "monorepo" });

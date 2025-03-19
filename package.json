@@ -26,8 +26,9 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
-    "eslint": "^9.21.0",
-    "eslint-config-greenflash": "^0.2.1",
+    "@gfdigital/eslint-config": "^0.4.1",
+    "@gfdigital/tsconfig": "^0.3.1",
+    "eslint": "^9.22.0",
     "turbo": "^2.4.4",
     "typescript": "^5.8.2"
   }

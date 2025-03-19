@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/drewdecarme/buttery-tools#readme",
   "dependencies": {
-    "@inquirer/prompts": "^7.3.2",
+    "@inquirer/prompts": "^7.4.0",
     "chroma-js": "3.1.2",
     "dotdir": "^0.3.1",
     "isoscribe": "^0.1.4",
@@ -34,10 +34,10 @@
   },
   "devDependencies": {
     "@types/chroma-js": "^3.1.1",
-    "@types/node": "22.13.9",
+    "@types/node": "22.13.10",
     "tsx": "4.19.3",
     "typescript": "5.8.2",
-    "wrangler": "3.112.0",
-    "zod-to-json-schema": "3.24.3"
+    "wrangler": "4.2.0",
+    "zod-to-json-schema": "3.24.4"
   }
 }
