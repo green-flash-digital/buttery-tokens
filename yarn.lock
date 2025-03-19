@@ -1253,6 +1253,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@green-flash/buttery-tokens@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@green-flash/buttery-tokens@workspace:."
+  dependencies:
+    "@changesets/cli": "npm:^2.28.1"
+    "@gfdigital/eslint-config": "npm:^0.4.1"
+    "@gfdigital/tsconfig": "npm:^0.3.1"
+    eslint: "npm:^9.22.0"
+    turbo: "npm:^2.4.4"
+    typescript: "npm:^5.8.2"
+  languageName: unknown
+  linkType: soft
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -3868,16 +3881,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buttery-tokens@workspace:.":
+"buttery-tokens@workspace:packages/cli":
   version: 0.0.0-use.local
-  resolution: "buttery-tokens@workspace:."
-  dependencies:
-    "@changesets/cli": "npm:^2.28.1"
-    "@gfdigital/eslint-config": "npm:^0.4.1"
-    "@gfdigital/tsconfig": "npm:^0.3.1"
-    eslint: "npm:^9.22.0"
-    turbo: "npm:^2.4.4"
-    typescript: "npm:^5.8.2"
+  resolution: "buttery-tokens@workspace:packages/cli"
   languageName: unknown
   linkType: soft
 
