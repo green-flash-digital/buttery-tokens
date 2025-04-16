@@ -1,18 +1,9 @@
-import { createButteryTokens } from "@buttery/core";
+import { ButteryTokens } from "@buttery/core";
 
-import { LOG } from "./scripts.utils.js";
+const tokens = new ButteryTokens({
+  logLevel: "trace",
+  env: "development",
+  autoInit: true,
+});
 
-(async () => {
-  try {
-    LOG.debug("Building...");
-    const butteryTokens = await createButteryTokens({
-      logLevel: "trace",
-      env: "development",
-      autoInit: true,
-    });
-    if (!butteryTokens) return;
-    await butteryTokens.build();
-  } catch (error) {
-    LOG.fatal(new Error(String(error)));
-  }
-})();
+await tokens.build();

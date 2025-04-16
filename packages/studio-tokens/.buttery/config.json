@@ -1,5 +1,5 @@
 {
-  "$schema": "../../core/dist/buttery-tokens.json",
+  "$schema": "https://schemas.greenflash.digital/buttery-tokens.json",
   "runtime": {
     "prefix": "studio",
     "strict": true,

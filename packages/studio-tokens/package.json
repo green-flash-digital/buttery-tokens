@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A standalone package to test the APIs in @buttery/core and to establish the tokens for the @buttery/studio",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "yarn tsx ./scripts/build-studio-tokens.ts"
   },

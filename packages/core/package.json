@@ -10,7 +10,7 @@
   },
   "type": "module",
   "exports": {
-    ".": "./dist/api/index.js",
+    ".": "./dist/ButteryTokens.js",
     "./utils": "./dist/utils/index.js",
     "./schemas": "./dist/schemas/index.js"
   },
