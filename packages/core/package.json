@@ -31,6 +31,7 @@
     "dotdir": "^0.3.1",
     "isoscribe": "^0.1.4",
     "ts-jolt": "^0.2.2",
+    "ts-pattern": "^5.7.0",
     "zod": "3.24.2"
   },
   "devDependencies": {

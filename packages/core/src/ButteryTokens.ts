@@ -8,10 +8,20 @@ import { input } from "@inquirer/prompts";
 import { writeFileRecursive } from "ts-jolt/node";
 
 import { ConfigSchema, type ButteryTokensConfig } from "./schemas/schema.js";
+import { TemplateMakeColor } from "./templates/Template2.makeColor.js";
+
+export type TokensConfigDirectories = {
+  generated: string;
+  ts: string;
+  scss: string;
+};
+export type TokensConfig = DotDirResponse<ButteryTokensConfig> & {
+  dirs: TokensConfigDirectories;
+};
 
 export class ButteryTokens {
   private _log: Isoscribe;
-  private _config: DotDirResponse<ButteryTokensConfig> | undefined = undefined;
+  private _config: TokensConfig | undefined = undefined;
   private _configAutoInit: boolean;
 
   constructor(options: {
@@ -34,7 +44,18 @@ export class ButteryTokens {
     });
   }
 
-  private async _getConfig(): Promise<DotDirResponse<ButteryTokensConfig>> {
+  private _getDirsFromConfig(
+    dotDirRes: DotDirResponse<ButteryTokensConfig>
+  ): TokensConfigDirectories {
+    const generated = path.resolve(dotDirRes.meta.dirPath, "./_generated");
+    return {
+      generated,
+      scss: path.resolve(generated, "./scss"),
+      ts: path.resolve(generated, "./ts"),
+    };
+  }
+
+  private async _getConfig(): Promise<TokensConfig> {
     // 1. Return the config
     // Return the config if it already exists
     if (this._config) return this._config;
@@ -44,7 +65,10 @@ export class ButteryTokens {
     const dotDir = new DotDir<ButteryTokensConfig>(); // included in this closure since build is a one time thing
     const dirRes = await tryHandle(dotDir.find)({ dirName: "buttery" });
     if (dirRes.data) {
-      this._config = dirRes.data;
+      this._config = {
+        ...dirRes.data,
+        dirs: this._getDirsFromConfig(dirRes.data),
+      };
       return this._config;
     }
 
@@ -89,6 +113,8 @@ export class ButteryTokens {
       butteryTokensConfigContent
     );
 
+    // Recursively call the method again to return the config
+    // and the directories associated with that config
     const config = await this._getConfig();
 
     return config;
@@ -107,9 +133,37 @@ export class ButteryTokens {
     this._log.fatal(new Error(String(`Unknown error: ${error}`)));
   }
 
+  /**
+   * Builds the :root CSS file and the utilities that
+   * easily interface it
+   */
   async build() {
     const config = await this._getConfig();
-    console.log(config);
     this._log.debug("Building buttery tokens");
+
+    const templates = [new TemplateMakeColor(config)];
+
+    // Build all of the utils
+    const templatePromises = templates.map(async (template) => {
+      await Promise.all([
+        writeFileRecursive(path.resolve(config.dirs.ts), template.makeUtilTS()),
+        writeFileRecursive(
+          path.resolve(config.dirs.scss),
+          template.makeUtilSCSS()
+        ),
+      ]);
+    });
+    await Promise.all(templatePromises);
+
+    // Build the :root CSS
+    let cssProperties: string[] = [];
+    for (const template of templates) {
+      cssProperties = cssProperties.concat(template.makeCSSProperties());
+    }
+    const rootCSSContent = `:root { ${cssProperties.join(`;`)} }`;
+    await writeFileRecursive(
+      path.resolve(config.dirs.generated, "./root.css"),
+      rootCSSContent
+    );
   }
 }

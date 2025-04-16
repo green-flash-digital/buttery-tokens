@@ -361,6 +361,7 @@ __metadata:
     dotdir: "npm:^0.3.1"
     isoscribe: "npm:^0.1.4"
     ts-jolt: "npm:^0.2.2"
+    ts-pattern: "npm:^5.7.0"
     tsx: "npm:4.19.3"
     typescript: "npm:5.8.3"
     wrangler: "npm:4.11.1"
@@ -9906,7 +9907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-pattern@npm:5.7.0":
+"ts-pattern@npm:5.7.0, ts-pattern@npm:^5.7.0":
   version: 5.7.0
   resolution: "ts-pattern@npm:5.7.0"
   checksum: 10c0/6a49d2b502a916def7b07ed66d5675aaf5159dd09b9dbdb334ebfc464af6307e33ae9fbec8ece9182f7ae6a9b2589087da5924d35a74bd52323c3f3745b15d1e
