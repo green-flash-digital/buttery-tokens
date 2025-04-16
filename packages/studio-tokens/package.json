@@ -18,8 +18,9 @@
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
   "devDependencies": {
     "@buttery/core": "0.2.0",
+    "@gfdigital/tsconfig": "^0.3.1",
     "isoscribe": "^0.1.4",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   }
 }
