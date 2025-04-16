@@ -59,7 +59,7 @@ export class TemplateMakeColor extends Template {
 export type ColorAndVariants = keyof typeof colorAndVariants;
 export type MakeColorOptions = { opacity?: number };
 
-${this._createDocsDescription("ts")};
+${this._createDocsDescription("ts")}
 export function ${
       this._name
     }<T extends ColorAndVariants>(tokenName: T, options?: MakeColorOptions): string {

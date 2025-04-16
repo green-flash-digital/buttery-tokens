@@ -8,7 +8,7 @@ import { input } from "@inquirer/prompts";
 import { writeFileRecursive } from "ts-jolt/node";
 
 import { ConfigSchema, type ButteryTokensConfig } from "./schemas/schema.js";
-import { TemplateMakeColor } from "./templates/Template2.makeColor.js";
+import { TemplateMakeColor } from "./templates/Template.make-color.js";
 
 export type TokensConfigDirectories = {
   generated: string;
@@ -138,32 +138,62 @@ export class ButteryTokens {
    * easily interface it
    */
   async build() {
-    const config = await this._getConfig();
-    this._log.debug("Building buttery tokens");
+    try {
+      const config = await this._getConfig();
+      this._log.debug("Building buttery tokens");
 
-    const templates = [new TemplateMakeColor(config)];
+      const templates = [new TemplateMakeColor(config)];
 
-    // Build all of the utils
-    const templatePromises = templates.map(async (template) => {
+      // Set the prefix for all of the templates
+      const templateNames = [];
+      for (const template of templates) {
+        template.setPrefix(config.config.runtime.prefix);
+        templateNames.push(template.getName());
+      }
+
+      // Create the template barrel files
+      const barrelPathTs = path.resolve(config.dirs.ts, "./index.ts");
+      const barrelContentTs = templateNames
+        .map((templateName) => `export * from "./${templateName}.ts"`)
+        .join(";\n")
+        .concat(";\n");
+      const barrelPathScss = path.resolve(config.dirs.scss, "./_index.scss");
+      const barrelContentScss = templateNames
+        .map((templateName) => `@import "./${templateName}"`)
+        .join(";\n")
+        .concat(";\n");
       await Promise.all([
-        writeFileRecursive(path.resolve(config.dirs.ts), template.makeUtilTS()),
-        writeFileRecursive(
-          path.resolve(config.dirs.scss),
-          template.makeUtilSCSS()
-        ),
+        writeFileRecursive(barrelPathTs, barrelContentTs),
+        writeFileRecursive(barrelPathScss, barrelContentScss),
       ]);
-    });
-    await Promise.all(templatePromises);
 
-    // Build the :root CSS
-    let cssProperties: string[] = [];
-    for (const template of templates) {
-      cssProperties = cssProperties.concat(template.makeCSSProperties());
+      // Build all of the utils (ts | scss)
+      const createTemplateUtils = templates.map(async (template) => {
+        await Promise.all([
+          writeFileRecursive(
+            path.resolve(config.dirs.ts, `${template.getName()}.ts`),
+            template.makeUtilTS()
+          ),
+          writeFileRecursive(
+            path.resolve(config.dirs.scss, `_${template.getName()}.scss`),
+            template.makeUtilSCSS()
+          ),
+        ]);
+      });
+      await Promise.all(createTemplateUtils);
+
+      // Build the :root CSS
+      let cssProperties: string[] = [];
+      for (const template of templates) {
+        cssProperties = cssProperties.concat(template.makeCSSProperties());
+      }
+      const rootCSSContent = `:root { ${cssProperties.join(`;`)} }`;
+      await writeFileRecursive(
+        path.resolve(config.dirs.generated, "./root.css"),
+        rootCSSContent
+      );
+    } catch (error) {
+      this._handleError(error);
     }
-    const rootCSSContent = `:root { ${cssProperties.join(`;`)} }`;
-    await writeFileRecursive(
-      path.resolve(config.dirs.generated, "./root.css"),
-      rootCSSContent
-    );
   }
 }

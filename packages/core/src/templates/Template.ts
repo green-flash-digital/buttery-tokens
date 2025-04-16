@@ -19,6 +19,10 @@ export class Template {
     this._namespace = options.namespace;
   }
 
+  getName() {
+    return this._name;
+  }
+
   setPrefix(prefix: string) {
     this._prefix = prefix;
   }
@@ -56,10 +60,8 @@ export class Template {
     switch (type) {
       case "ts":
         return `/**
-* # ${this._name};
-*
-* ## Description
-* ${this._description};
+* ## \`${this._name}\`
+* ${this._description}
 */`;
 
       case "scss":
