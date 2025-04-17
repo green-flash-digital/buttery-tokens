@@ -152,6 +152,7 @@ export class ButteryTokens {
       }
 
       // Create the template barrel files
+      this._log.debug("Generating util barrel files...");
       const barrelPathTs = path.resolve(config.dirs.ts, "./index.ts");
       const barrelContentTs = templateNames
         .map((templateName) => `export * from "./${templateName}.ts"`)
@@ -166,8 +167,10 @@ export class ButteryTokens {
         writeFileRecursive(barrelPathTs, barrelContentTs),
         writeFileRecursive(barrelPathScss, barrelContentScss),
       ]);
+      this._log.debug("Generating util barrel files... done.");
 
       // Build all of the utils (ts | scss)
+      this._log.debug("Generating css utils...");
       const createTemplateUtils = templates.map(async (template) => {
         await Promise.all([
           writeFileRecursive(
@@ -181,8 +184,10 @@ export class ButteryTokens {
         ]);
       });
       await Promise.all(createTemplateUtils);
+      this._log.debug("Generating css utils... done.");
 
       // Build the :root CSS
+      this._log.debug("Generating css :root...");
       let cssProperties: string[] = [];
       for (const template of templates) {
         cssProperties = cssProperties.concat(template.makeCSSProperties());
@@ -192,6 +197,7 @@ export class ButteryTokens {
         path.resolve(config.dirs.generated, "./root.css"),
         rootCSSContent
       );
+      this._log.debug("Generating css :root... done.");
     } catch (error) {
       this._handleError(error);
     }
