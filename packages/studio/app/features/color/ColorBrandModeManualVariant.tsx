@@ -5,7 +5,7 @@ import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { css } from "@linaria/core";
 import { useToggle } from "react-hook-primitives";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { ColorBlob, useColorBlob } from "~/components/ColorBlob";
 import { InputGroup } from "~/components/InputGroup";
 import { VariantContainer } from "~/components/VariantContainer";

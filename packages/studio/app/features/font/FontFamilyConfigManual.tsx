@@ -3,7 +3,7 @@ import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { manualFontStyles } from "@buttery/core/schemas";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { InputLabel } from "~/components/InputLabel";
 import { InputText } from "~/components/InputText";
 import { InputGroup } from "~/components/InputGroup";

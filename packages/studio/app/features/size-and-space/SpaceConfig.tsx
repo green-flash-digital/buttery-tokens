@@ -3,7 +3,7 @@ import { useCallback, useMemo } from "react";
 import { match } from "ts-pattern";
 import { css } from "@linaria/core";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { InputLabel } from "~/components/InputLabel";
 import { InputRadioCard } from "~/components/InputRadioCard";
 import { InputSection } from "~/components/InputSection";

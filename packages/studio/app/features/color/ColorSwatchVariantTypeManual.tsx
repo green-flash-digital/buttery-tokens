@@ -4,7 +4,7 @@ import { generateGUID } from "ts-jolt/isomorphic";
 import { useImmer } from "use-immer";
 import { css } from "@linaria/core";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 
 import { ColorSwatchVariantAdd } from "./ColorSwatchVariantAdd";
 import { ColorSwatchVariantRemove } from "./ColorSwatchVariantRemove";

@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeCustom, makeRem } from "@tokens";
+import { makeCustom, makeRem } from "@buttery/studio-tokens";
 
 export type ModalFooterPropsNative = JSX.IntrinsicElements["footer"];
 export type ModalFooterProps = ModalFooterPropsNative;

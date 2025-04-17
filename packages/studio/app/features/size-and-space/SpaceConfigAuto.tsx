@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { css } from "@linaria/core";
 import { calculateSpaceVariantAutoValue } from "@buttery/core";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { InputGroup } from "~/components/InputGroup";
 import { InputLabel } from "~/components/InputLabel";
 import { InputCheckbox } from "~/components/InputCheckbox";

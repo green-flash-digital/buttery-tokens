@@ -6,8 +6,13 @@ import {
 } from "@buttery/core";
 import { Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
+import {
+  makeColor,
+  makeFontFamily,
+  makeFontWeight,
+  makeRem,
+} from "@buttery/studio-tokens";
 
-import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
 import { IconTick01 } from "~/icons/IconTick01";
 import { IconCancel } from "~/icons/IconCancel";
 

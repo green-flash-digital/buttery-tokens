@@ -1,7 +1,6 @@
 {
   "$schema": "../../core/dist/buttery-tokens.json",
   "runtime": {
-    "namespace": "studio-test",
     "prefix": "studio-test",
     "strict": true,
     "suppressStrictWarnings": false

@@ -1,7 +1,7 @@
 import { useModal } from "react-hook-primitives";
 import { css } from "@linaria/core";
 
-import { makeColor, makeRem } from "@tokens";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 import { Button } from "~/components/Button";
 import { ModalHeader } from "~/components/ModalHeader";
 import { Modal } from "~/components/Modal";

@@ -3,7 +3,7 @@ import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { generateGUID } from "ts-jolt/isomorphic";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { VariantAdd } from "~/components/VariantAdd";
 import { VariantEmpty } from "~/components/VariantEmpty";
 import { VariantList } from "~/components/VariantList";

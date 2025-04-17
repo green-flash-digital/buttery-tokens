@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { forwardRef } from "react";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 
 import type { InputRangePropsNative } from "./InputRange";
 import { InputRange } from "./InputRange";

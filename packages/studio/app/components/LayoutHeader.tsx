@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeColor, makeCustom, makeRem } from "@tokens";
+import { makeColor, makeCustom, makeRem } from "@buttery/studio-tokens";
 
 export type LayoutHeaderPropsNative = JSX.IntrinsicElements["header"];
 export type LayoutHeaderProps = LayoutHeaderPropsNative;

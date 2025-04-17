@@ -4,7 +4,7 @@ import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import { match } from "ts-pattern";
 import { manualFontStyles } from "@buttery/core/schemas";
 
-import { makeRem, makeReset } from "@tokens";
+import { makeRem, makeReset } from "@buttery/studio-tokens";
 import { VariantEmpty } from "~/components/VariantEmpty";
 import { VariantAdd } from "~/components/VariantAdd";
 import { LOG } from "~/utils/util.logger";

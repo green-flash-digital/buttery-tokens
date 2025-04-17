@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDropdownMenu, useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
 
-import { makeColor, makePx, makeRem, makeReset } from "@tokens";
+import { makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
 import { VariantContainerBarActions } from "~/components/VariantContainerBarActions";
 import { VariantContainerBarTitle } from "~/components/VariantContainerBarTitle";
 import { VariantContainerBar } from "~/components/VariantContainerBar";

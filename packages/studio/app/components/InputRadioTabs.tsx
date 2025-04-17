@@ -8,7 +8,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
 
-import { makeColor, makePx, makeRem } from "@tokens";
+import { makeColor, makePx, makeRem } from "@buttery/studio-tokens";
 
 export type InputRadioTabsPropsNative = JSX.IntrinsicElements["div"];
 export type InputRadioTabsProps = InputRadioTabsPropsNative;

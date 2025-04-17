@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeColor, makeRem } from "@tokens";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 import { IconTick04Solid } from "~/icons/IconTick04Solid";
 
 export type InputCheckboxPropsNative = Omit<

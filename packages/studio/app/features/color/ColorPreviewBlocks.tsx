@@ -6,7 +6,12 @@ import {
 } from "@buttery/core";
 import { classes } from "react-hook-primitives";
 
-import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
+import {
+  makeColor,
+  makeFontFamily,
+  makeFontWeight,
+  makeRem,
+} from "@buttery/studio-tokens";
 import { IconTick01 } from "~/icons/IconTick01";
 import { IconCancel } from "~/icons/IconCancel";
 

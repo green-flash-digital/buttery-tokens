@@ -6,7 +6,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "react-router";
-import "@tokens/css";
+import "@buttery/studio-tokens/root.css";
 import type { LinksFunction } from "react-router";
 
 import { LayoutHeader } from "./components/LayoutHeader";

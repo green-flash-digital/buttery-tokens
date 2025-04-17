@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import { css } from "@linaria/core";
 
-import { makeRem, makeReset } from "@tokens";
+import { makeRem, makeReset } from "@buttery/studio-tokens";
 import { VariantEmpty } from "~/components/VariantEmpty";
 import { VariantAdd } from "~/components/VariantAdd";
 

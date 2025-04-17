@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { useMemo } from "react";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { ButtonGroup } from "~/components/ButtonGroup";
 import { Button } from "~/components/Button";
 import { IconLeftToRightListNumber } from "~/icons/IconLeftToRightListNumber";

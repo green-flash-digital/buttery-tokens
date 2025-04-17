@@ -3,7 +3,7 @@ import { useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 
-import { makeColor, makeRem } from "@tokens";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 import { VariantContainer } from "~/components/VariantContainer";
 import { VariantContainerBar } from "~/components/VariantContainerBar";
 import { VariantContainerBarTitle } from "~/components/VariantContainerBarTitle";

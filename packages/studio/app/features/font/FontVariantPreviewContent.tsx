@@ -2,7 +2,12 @@ import { css } from "@linaria/core";
 import type { ManualFontStylesValue } from "@buttery/core/schemas";
 import { manualFontStyles } from "@buttery/core/schemas";
 
-import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
+import {
+  makeColor,
+  makeFontWeight,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 
 import { getFontConfigFromState } from "./font.utils";
 

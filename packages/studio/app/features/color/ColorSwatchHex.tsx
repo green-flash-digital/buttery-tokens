@@ -1,7 +1,7 @@
 import { useCallback, useRef, type ChangeEventHandler } from "react";
 import { css } from "@linaria/core";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { InputLabel } from "~/components/InputLabel";
 import { InputText } from "~/components/InputText";
 

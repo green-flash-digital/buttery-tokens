@@ -3,8 +3,8 @@ import { css } from "@linaria/core";
 import type { JSX, RefCallback } from "react";
 import { forwardRef, useCallback, useId } from "react";
 import { match } from "ts-pattern";
+import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 
-import { makeColor, makeRem, makeReset } from "@tokens";
 import type { IconBrush } from "~/icons/IconBrush";
 
 import type { ButtonSharedProps } from "./button.utils";

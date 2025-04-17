@@ -4,7 +4,7 @@ import type { ModalRef, UseModalOptions } from "react-hook-primitives";
 import { classes, ModalProvider, useModalDialog } from "react-hook-primitives";
 import { css } from "@linaria/core";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 
 export type ModalDrawerPropsNative = Omit<
   JSX.IntrinsicElements["dialog"],

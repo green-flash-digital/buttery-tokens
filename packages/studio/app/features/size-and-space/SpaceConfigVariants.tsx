@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef } from "react";
 import { classes, useToggle } from "react-hook-primitives";
 import { debounce } from "ts-jolt/browser";
 
-import { makeColor, makeRem } from "@tokens";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 import { Button } from "~/components/Button";
 import { IconPencilEdit01 } from "~/icons/IconPencilEdit01";
 import { IconTick01 } from "~/icons/IconTick01";

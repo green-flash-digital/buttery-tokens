@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeCustom } from "@tokens";
+import { makeCustom } from "@buttery/studio-tokens";
 
 export type ModalBodyPropsNative = JSX.IntrinsicElements["div"];
 export type ModalBodyPropsCustom = {

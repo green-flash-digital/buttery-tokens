@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { css } from "@linaria/core";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { CodeBlock } from "~/components/CodeBlock";
 
 import { useConfigurationContext } from "../Config.context";

@@ -15,7 +15,7 @@ import { hexToHsb } from "@buttery/core";
 import { match, P } from "ts-pattern";
 import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 
-import { makeRem, makeColor, makeFontWeight } from "@tokens";
+import { makeRem, makeColor, makeFontWeight } from "@buttery/studio-tokens";
 import { InputColor } from "~/components/InputColor";
 import { InputLabel } from "~/components/InputLabel";
 import { Button } from "~/components/Button";

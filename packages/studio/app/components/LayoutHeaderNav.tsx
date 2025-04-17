@@ -3,7 +3,12 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
+import {
+  makeColor,
+  makeFontWeight,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 
 export type LayoutHeaderNavPropsNative = JSX.IntrinsicElements["nav"];
 export type LayoutHeaderNavProps = LayoutHeaderNavPropsNative;

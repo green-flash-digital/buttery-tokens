@@ -17,7 +17,8 @@
     "build"
   ],
   "dependencies": {
-    "@buttery/core": "0.2.0",
+    "@buttery/core": "workspace:^",
+    "@buttery/studio-tokens": "workspace:^",
     "@linaria/server": "^6.3.0",
     "@monaco-editor/react": "4.7.0",
     "@react-router/express": "7.5.0",
@@ -42,6 +43,9 @@
     "zod": "3.24.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.27.0",
     "@chromatic-com/storybook": "3.2.6",
     "@cloudflare/workers-types": "4.20250416.0",
     "@linaria/core": "6.3.0",
@@ -53,6 +57,7 @@
     "@storybook/react": "8.6.12",
     "@storybook/react-vite": "8.6.12",
     "@storybook/test": "8.6.12",
+    "@types/babel__core": "^7",
     "@types/express": "5.0.1",
     "@types/node": "^22.14.1",
     "@types/react": "19.1.2",

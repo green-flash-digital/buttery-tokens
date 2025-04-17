@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeRem, makeColor, makeReset } from "@tokens";
+import { makeRem, makeColor, makeReset } from "@buttery/studio-tokens";
 
 export type InputTextPropsNative = Omit<JSX.IntrinsicElements["input"], "type">;
 export type InputTextPropsCustom = {

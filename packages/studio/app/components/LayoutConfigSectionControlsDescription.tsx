@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 
 export type LayoutConfigSectionControlsDescriptionPropsNative =
   JSX.IntrinsicElements["p"];

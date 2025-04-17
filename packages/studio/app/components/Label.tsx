@@ -10,7 +10,7 @@ import {
   makeFontWeight,
   makeRem,
   type ColorAndVariants,
-} from "@tokens";
+} from "@buttery/studio-tokens";
 import type { IconArrowDown } from "~/icons/IconArrowDown";
 
 export type LabelPropsNative = JSX.IntrinsicElements["span"];

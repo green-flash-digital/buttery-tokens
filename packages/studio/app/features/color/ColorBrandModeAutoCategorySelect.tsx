@@ -3,7 +3,12 @@ import { css } from "@linaria/core";
 import { useCallback } from "react";
 import { classes } from "react-hook-primitives";
 
-import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
+import {
+  makeColor,
+  makeFontWeight,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 import { IconBrush } from "~/icons/IconBrush";
 import { IconColors } from "~/icons/IconColors";
 import type { IconCopy } from "~/icons/IconCopy";

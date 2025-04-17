@@ -3,7 +3,13 @@ import type { MouseEventHandler, RefCallback } from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { classes } from "react-hook-primitives";
 
-import { makeColor, makeFontWeight, makePx, makeRem, makeReset } from "@tokens";
+import {
+  makeColor,
+  makeFontWeight,
+  makePx,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 
 import type { ConfigurationStateResponseBreakpointValue } from "./response.utils";
 

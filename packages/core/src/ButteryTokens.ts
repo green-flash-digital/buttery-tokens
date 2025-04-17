@@ -173,7 +173,7 @@ export class ButteryTokens {
       this._log.debug("Generating util barrel files...");
       const barrelPathTs = path.resolve(config.dirs.ts, "./index.ts");
       const barrelContentTs = templateNames
-        .map((templateName) => `export * from "./${templateName}.ts"`)
+        .map((templateName) => `export * from "./${templateName}.js"`)
         .join(";\n")
         .concat(";\n");
       const barrelPathScss = path.resolve(config.dirs.scss, "./_index.scss");
@@ -220,4 +220,6 @@ export class ButteryTokens {
       this._handleError(error);
     }
   }
+
+  async studio() {}
 }

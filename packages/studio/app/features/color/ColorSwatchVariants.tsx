@@ -9,7 +9,7 @@ import type { ChangeEventHandler, JSX } from "react";
 import { useMemo, forwardRef } from "react";
 import { match } from "ts-pattern";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 import { InputRadioTab } from "~/components/InputRadioTab";
 import { InputRadioTabs } from "~/components/InputRadioTabs";
 

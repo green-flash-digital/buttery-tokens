@@ -9,7 +9,7 @@ import {
   makeFontWeight,
   makeRem,
   makeReset,
-} from "@tokens";
+} from "@buttery/studio-tokens";
 
 export type InputRadioTabPropsNative = JSX.IntrinsicElements["input"];
 export type InputRadioTabPropsCustom = {

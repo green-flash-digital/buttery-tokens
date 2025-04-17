@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX, MouseEventHandler } from "react";
 import { forwardRef } from "react";
 
-import { makeColor, makeRem } from "@tokens";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 import { IconDelete } from "~/icons/IconDelete";
 import { IconPencilEdit01 } from "~/icons/IconPencilEdit01";
 import { IconTick01 } from "~/icons/IconTick01";

@@ -9,7 +9,7 @@ import {
   useRef,
 } from "react";
 
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 
 export type ColorBlobPropsNative = Omit<
   JSX.IntrinsicElements["div"],

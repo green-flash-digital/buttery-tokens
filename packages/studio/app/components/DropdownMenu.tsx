@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeReset, makeRem } from "@tokens";
+import { makeReset, makeRem } from "@buttery/studio-tokens";
 
 export type DropdownMenuPropsNative = JSX.IntrinsicElements["ul"];
 export type DropdownMenuProps = DropdownMenuPropsNative;

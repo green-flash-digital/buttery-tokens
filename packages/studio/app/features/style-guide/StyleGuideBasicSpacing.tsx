@@ -3,7 +3,12 @@ import { match } from "ts-pattern";
 import type { JSX } from "react";
 import { classes } from "react-hook-primitives";
 
-import { makeColor, makeFontFamily, makePx, makeRem } from "@tokens";
+import {
+  makeColor,
+  makeFontFamily,
+  makePx,
+  makeRem,
+} from "@buttery/studio-tokens";
 
 import { StyleGuidePage } from "./StyleGuidePage";
 import { StyleGuidePageLeft } from "./StyleGuidePageLeft";

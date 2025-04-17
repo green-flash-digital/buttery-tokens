@@ -4,7 +4,12 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
+import {
+  makeColor,
+  makeFontWeight,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 import type { IconCopy } from "~/icons/IconCopy";
 
 export type InputRadioPropsNative = Omit<

@@ -2,7 +2,7 @@ import { css } from "@linaria/core";
 import { match } from "ts-pattern";
 import { manualFontStyles } from "@buttery/core/schemas";
 
-import { makeColor, makeRem, makeReset } from "@tokens";
+import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 import { InputTextarea } from "~/components/InputTextarea";
 
 import { useFontFamilyPreviewContext } from "./FontFamilyPreview.context";

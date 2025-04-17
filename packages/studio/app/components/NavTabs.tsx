@@ -8,7 +8,13 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
 
-import { makeColor, makeFontWeight, makePx, makeRem, makeReset } from "@tokens";
+import {
+  makeColor,
+  makeFontWeight,
+  makePx,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 
 import { NavTabsContextProvider } from "./NavTabs.context";
 

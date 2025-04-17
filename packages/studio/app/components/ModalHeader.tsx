@@ -10,7 +10,7 @@ import {
   makeFontWeight,
   makeRem,
   makeReset,
-} from "@tokens";
+} from "@buttery/studio-tokens";
 import { IconCancel } from "~/icons/IconCancel";
 
 export type ModalHeaderPropsNative = Omit<

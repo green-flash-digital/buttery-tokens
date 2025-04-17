@@ -3,7 +3,12 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 
-import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
+import {
+  makeColor,
+  makeFontFamily,
+  makeFontWeight,
+  makeRem,
+} from "@buttery/studio-tokens";
 
 export type InputLabelPropsNative = JSX.IntrinsicElements["label"];
 export type InputLabelPropsCustom = {
