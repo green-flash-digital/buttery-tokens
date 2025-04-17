@@ -1,43 +1,35 @@
-import { type CompileFunction, MakeTemplate } from "./MakeTemplate.js";
+import { Template } from "./Template.js";
 
-const template: CompileFunction = ({ methods, docs, functionName }) => {
-  const resetUnion = methods.createTypeUnion([
-    "ul",
-    "button",
-    "body",
-    "anchor",
-    "input",
-  ]);
+import type { TokensConfig } from "../ButteryTokens.js";
 
-  return `export type MakeReset = (element: ${resetUnion}) => string;
+export class TemplateMakeReset extends Template {
+  private _resetUnion: string;
+
+  constructor(config: TokensConfig) {
+    super({
+      prefix: config.config.runtime.prefix,
+      name: "makeReset",
+      namespace: "reset",
+      description: "Returns some CSS resets for any given elements",
+    });
+
+    this._resetUnion = this._createUnionType([
+      "ul",
+      "button",
+      "body",
+      "anchor",
+      "input",
+    ]);
+  }
+
+  makeUtilTS(): string {
+    return `export type MakeReset = (element: ${this._resetUnion}) => string;
 
 const matchGuard = (_: never): never => {
   throw new Error(\`Forgot to include an \${_} in the switch statement\`);
 };
 
-/**
- * ## Description
- * ${docs.description}
- *
- * ## Usage
- * ### css-in-ts
- * \`\`\`ts
- * import { css } from "@linaria/core";
- * ${docs.importClause}
- *
- * const aClassName = css\`
- *   ul {
- *     \${${functionName}("ul")};
- * 
- *     li {
- *       height: 24px;
- *       width: 24px;
- *     }
- *   }
- * \`
- * \`\`\`
- */
-export const ${functionName}: MakeReset = (element) => {
+export const ${this._name}: MakeReset = (element) => {
     switch(element) {
       case "ul":
         return \`
@@ -114,14 +106,13 @@ export const ${functionName}: MakeReset = (element) => {
     }
 };
 `;
-};
+  }
 
-const css: CompileFunction = () => "";
+  makeUtilSCSS(): string {
+    return "";
+  }
 
-export const MakeTemplateReset = new MakeTemplate({
-  functionName: "makeReset",
-  functionDescription: "Returns some CSS resets for any given elements",
-  variableBody: "",
-  template,
-  css,
-});
+  makeCSSProperties(): string[] {
+    return [""];
+  }
+}

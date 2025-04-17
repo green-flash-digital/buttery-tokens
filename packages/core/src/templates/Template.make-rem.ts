@@ -19,7 +19,7 @@ export class TemplateMakeRem extends Template {
   makeUtilTS(): string {
     const { baseFontSize } = this._config.config.sizeAndSpace;
     return `${this._createDocsDescription("ts")}
-export const ${this._name} = (px: number) => \`\${pixel / ${baseFontSize}}rem\`;
+export const ${this._name} = (px: number) => \`\${px / ${baseFontSize}}rem\`;
     `;
   }
 

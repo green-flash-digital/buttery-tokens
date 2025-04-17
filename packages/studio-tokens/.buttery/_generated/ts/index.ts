@@ -5,3 +5,5 @@ export * from "./makeFontFamily.ts";
 export * from "./makeFontWeight.ts";
 export * from "./makePx.ts";
 export * from "./makeRem.ts";
+export * from "./makeReset.ts";
+export * from "./makeResponsive.ts";

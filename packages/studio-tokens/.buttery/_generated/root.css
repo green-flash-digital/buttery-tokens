@@ -1,1 +1,1 @@
-:root { --studio-font-base: 16;; }
+:root { --studio-font-base: 16;;;;--studio-breakpoint-mobile: 480px;--studio-breakpoint-tablet: 768px;--studio-breakpoint-laptop: 1024px;--studio-breakpoint-desktop: 1280px;--studio-breakpoint-ultraWide: 1536px }

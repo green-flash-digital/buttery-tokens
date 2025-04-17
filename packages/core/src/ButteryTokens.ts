@@ -15,6 +15,8 @@ import { TemplateMakeFontFamily } from "./templates/Template.make-font-family.js
 import { TemplateMakeFontWeight } from "./templates/Template.make-font-weight.js";
 import { TemplateMakePx } from "./templates/Template.make-px.js";
 import { TemplateMakeRem } from "./templates/Template.make-rem.js";
+import { TemplateMakeReset } from "./templates/Template.make-reset.js";
+import { TemplateMakeResponsive } from "./templates/Template.make-responsive.js";
 
 export type TokensConfigDirectories = {
   generated: string;
@@ -156,6 +158,8 @@ export class ButteryTokens {
         new TemplateMakeFontWeight(config), // font weight
         new TemplateMakePx(config), // pixel
         new TemplateMakeRem(config), // rem
+        new TemplateMakeReset(config), // reset
+        new TemplateMakeResponsive(config), // reset
       ];
 
       // Set the prefix for all of the templates
@@ -189,11 +193,11 @@ export class ButteryTokens {
         await Promise.all([
           writeFileRecursive(
             path.resolve(config.dirs.ts, `${template.getName()}.ts`),
-            template.makeUtilTS()
+            `${template.makeWatermark()}\n${template.makeUtilTS()}`
           ),
           writeFileRecursive(
             path.resolve(config.dirs.scss, `_${template.getName()}.scss`),
-            template.makeUtilSCSS()
+            `${template.makeWatermark()}\n${template.makeUtilSCSS()}`
           ),
         ]);
       });
