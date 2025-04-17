@@ -6,15 +6,86 @@
 //
 //  Generated on Thu Apr 17 2025
 // -------------------------------------------------------
-export const colorAndVariants = {};
+export const colorAndVariants = {
+  "primary-50": "#91a0ff",
+  "primary-100": "#7a8bea",
+  "primary-200": "#6377d4",
+  "primary-300": "#4b63c0",
+  "primary-400": "#3050ab",
+  "primary-500": "#1c3f96",
+  "primary-600": "#143081",
+  "primary-700": "#0b216d",
+  "primary-800": "#021259",
+  "primary-900": "#000045",
+  primary: "#2047a1",
+  "secondary-50": "#ffda7e",
+  "secondary-100": "#eac469",
+  "secondary-200": "#d5ae54",
+  "secondary-300": "#c09940",
+  "secondary-400": "#ab842b",
+  "secondary-500": "#96701d",
+  "secondary-600": "#805c16",
+  "secondary-700": "#6b4a0f",
+  "secondary-800": "#563709",
+  "secondary-900": "#432600",
+  secondary: "#a17a20",
+  "brand3-50": "#a3ff82",
+  "brand3-100": "#8cea6d",
+  "brand3-200": "#75d458",
+  "brand3-300": "#5ec042",
+  "brand3-400": "#45ab2c",
+  "brand3-500": "#32961c",
+  "brand3-600": "#258014",
+  "brand3-700": "#196b0c",
+  "brand3-800": "#0b5705",
+  "brand3-900": "#004400",
+  brand3: "#38a120",
+  "brand4-50": "#ff8580",
+  "brand4-100": "#ea706c",
+  "brand4-200": "#d55a59",
+  "brand4-300": "#c04446",
+  "brand4-400": "#ab2d34",
+  "brand4-500": "#951c27",
+  "brand4-600": "#7f141f",
+  "brand4-700": "#690b17",
+  "brand4-800": "#54040e",
+  "brand4-900": "#400000",
+  brand4: "#a1202b",
+  "brand5-50": "#ffa677",
+  "brand5-100": "#ea9163",
+  "brand5-200": "#d57c4f",
+  "brand5-300": "#c0673c",
+  "brand5-400": "#ab5329",
+  "brand5-500": "#96411d",
+  "brand5-600": "#7f3118",
+  "brand5-700": "#6a2112",
+  "brand5-800": "#55100c",
+  "brand5-900": "#410000",
+  brand5: "#a14920",
+  "neutral-50": "#f9f9f9",
+  "neutral-100": "#e0e0e0",
+  "neutral-200": "#c7c7c7",
+  "neutral-300": "#aeaeae",
+  "neutral-400": "#969696",
+  "neutral-500": "#7f7f7f",
+  "neutral-600": "#686868",
+  "neutral-700": "#525252",
+  "neutral-800": "#3e3e3e",
+  neutral: "#969696",
+  "background-50": "#f5f5f5",
+  background: "#F5F5F5",
+};
 export type ColorAndVariants = keyof typeof colorAndVariants;
 export type MakeColorOptions = { opacity?: number };
 
 /**
-* ## `makeColor`
-* A utility that allows you to safely incorporate brand color into your apps by easily adding the design token along with optional adjustments & variants.
-*/
-export function makeColor<T extends ColorAndVariants>(tokenName: T, options?: MakeColorOptions): string {
+ * ## `makeColor`
+ * A utility that allows you to safely incorporate brand color into your apps by easily adding the design token along with optional adjustments & variants.
+ */
+export function makeColor<T extends ColorAndVariants>(
+  tokenName: T,
+  options?: MakeColorOptions,
+): string {
   const opacity = options?.opacity ?? 1;
   return `rgba(var(studio-${tokenName}-rgb), ${opacity})`;
 }

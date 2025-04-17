@@ -6,10 +6,18 @@
 //
 //  Generated on Thu Apr 17 2025
 // -------------------------------------------------------
-export type Breakpoints = "mobile" | "tablet" | "laptop" | "desktop" | "ultraWide";
-export type MakeResponsive = (params: { from?: Breakpoints, to?: Breakpoints }) => string;
-  
-  /**
+export type Breakpoints =
+  | "mobile"
+  | "tablet"
+  | "laptop"
+  | "desktop"
+  | "ultraWide";
+export type MakeResponsive = (params: {
+  from?: Breakpoints;
+  to?: Breakpoints;
+}) => string;
+
+/**
 * ## `makeResponsive`
 * A utility that enables you to easily create a `@media`
 string that can be interpolated in CSS-in-JS syntax.
@@ -26,6 +34,5 @@ export const makeResponsive: MakeResponsive = (params) => {
   if (to && !from) {
     return `@media (max-width: ${to})`;
   }
-  throw new Error("You must provide a to or from parameter.")
+  throw new Error("You must provide a to or from parameter.");
 };
-  

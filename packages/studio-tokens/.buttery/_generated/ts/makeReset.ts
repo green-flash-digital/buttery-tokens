@@ -6,16 +6,18 @@
 //
 //  Generated on Thu Apr 17 2025
 // -------------------------------------------------------
-export type MakeReset = (element: "ul" | "button" | "body" | "anchor" | "input") => string;
+export type MakeReset = (
+  element: "ul" | "button" | "body" | "anchor" | "input",
+) => string;
 
 const matchGuard = (_: never): never => {
   throw new Error(`Forgot to include an ${_} in the switch statement`);
 };
 
 export const makeReset: MakeReset = (element) => {
-    switch(element) {
-      case "ul":
-        return `
+  switch (element) {
+    case "ul":
+      return `
           margin: 0;
           padding: 0;
 
@@ -26,22 +28,22 @@ export const makeReset: MakeReset = (element) => {
           }
         `;
 
-      case "button":
-        return `
+    case "button":
+      return `
           margin: 0;
           padding: 0;
           border: none;
           background: none;
         `;
 
-      case "body":
-        return `
+    case "body":
+      return `
           margin: 0;
           padding: 0;
         `;
 
-      case "anchor":
-        return `
+    case "anchor":
+      return `
           text-decoration: none;
           color: inherit;
 
@@ -50,8 +52,8 @@ export const makeReset: MakeReset = (element) => {
           }
         `;
 
-      case "input":
-        return `
+    case "input":
+      return `
           margin: 0;
           padding: 0;
           border: none;
@@ -84,7 +86,7 @@ export const makeReset: MakeReset = (element) => {
           }
         `;
 
-      default:
-        return matchGuard(element);
-    }
+    default:
+      return matchGuard(element);
+  }
 };

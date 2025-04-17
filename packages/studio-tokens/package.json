@@ -9,7 +9,8 @@
   },
   "scripts": {
     "tokens:build": "yarn tsx ./scripts/build-studio-tokens.ts",
-    "build": "yarn tokens:build && yarn tsc --project tsconfig.build.json"
+    "build": "yarn tokens:build && yarn tsc --project tsconfig.build.json",
+    "dev": "yarn tsx ./scripts/dev-studio-tokens.ts"
   },
   "repository": {
     "type": "git",

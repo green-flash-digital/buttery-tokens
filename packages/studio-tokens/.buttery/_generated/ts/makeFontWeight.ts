@@ -6,14 +6,24 @@
 //
 //  Generated on Thu Apr 17 2025
 // -------------------------------------------------------
-export type FontFamilyAndWeight = "";
+export type FontFamilyAndWeight =
+  | "heading-regular"
+  | "heading-semiBold"
+  | "heading-bold"
+  | "body-regular"
+  | "body-medium"
+  | "body-semiBold"
+  | "formal-regular"
+  | "formal-medium"
+  | "formal-semiBold"
+  | "formal-bold"
+  | "formal-black";
 export type MakeFontWeight = (fontWeightName: FontFamilyAndWeight) => string;
 
 /**
-* ## `makeFontWeight`
-* A utility that returns the CSS variable assigned to keys of the `font.family`
-*/
+ * ## `makeFontWeight`
+ * A utility that returns the CSS variable assigned to keys of the `font.family`
+ */
 export const makeFontWeight: MakeFontWeight = (fontFamilyAndWeight) => {
-    return `var(studio-${fontFamilyAndWeight})`
+  return `var(studio-${fontFamilyAndWeight})`;
 };
-  

@@ -27,9 +27,12 @@
   "homepage": "https://github.com/drewdecarme/buttery-tools#readme",
   "dependencies": {
     "@inquirer/prompts": "^7.4.1",
+    "chokidar": "^4.0.3",
     "chroma-js": "3.1.2",
     "dotdir": "^0.3.1",
+    "globby": "^14.1.0",
     "isoscribe": "^0.1.4",
+    "prettier": "^3.5.3",
     "ts-jolt": "^0.2.2",
     "ts-pattern": "^5.7.0",
     "zod": "3.24.2"

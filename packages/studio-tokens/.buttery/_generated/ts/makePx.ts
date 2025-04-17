@@ -7,7 +7,7 @@
 //  Generated on Thu Apr 17 2025
 // -------------------------------------------------------
 /**
-* ## `makePx`
-* A utility that concatenates 'px' onto the end of the provided value
-*/
+ * ## `makePx`
+ * A utility that concatenates 'px' onto the end of the provided value
+ */
 export const makePx = (val: number) => `${val}px`;

@@ -1,11 +1,15 @@
 import path from "node:path";
+import { watch } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
 
 import { DotDir, type DotDirResponse } from "dotdir";
 import type { IsoScribeLogLevel } from "isoscribe";
-import { Isoscribe } from "isoscribe";
+import { Isoscribe, printAsBullets } from "isoscribe";
 import { tryHandle } from "ts-jolt/isomorphic";
 import { input } from "@inquirer/prompts";
 import { writeFileRecursive } from "ts-jolt/node";
+import prettier from "prettier";
+import { globby } from "globby";
 
 import { ConfigSchema, type ButteryTokensConfig } from "./schemas/schema.js";
 import { TemplateMakeColor } from "./templates/Template.make-color.js";
@@ -25,6 +29,14 @@ export type TokensConfigDirectories = {
 };
 export type TokensConfig = DotDirResponse<ButteryTokensConfig> & {
   dirs: TokensConfigDirectories;
+};
+
+type GetConfigOptions = {
+  /**
+   * Add this option if you wish to not use the cached config
+   * but instead get a new one.
+   */
+  noCache?: boolean;
 };
 
 export class ButteryTokens {
@@ -63,10 +75,12 @@ export class ButteryTokens {
     };
   }
 
-  private async _getConfig(): Promise<TokensConfig> {
+  private async _getConfig(options?: GetConfigOptions): Promise<TokensConfig> {
+    const shouldGetNew = options?.noCache ?? false;
+
     // 1. Return the config
     // Return the config if it already exists
-    if (this._config) return this._config;
+    if (this._config && !shouldGetNew) return this._config;
 
     // 2. Get an existing configuration
     // Get the configuration from the .buttery directory
@@ -145,9 +159,9 @@ export class ButteryTokens {
    * Builds the :root CSS file and the utilities that
    * easily interface it
    */
-  async build() {
+  async build(options?: GetConfigOptions) {
     try {
-      const config = await this._getConfig();
+      const config = await this._getConfig(options);
       this._log.debug("Building buttery tokens");
 
       const templates = [
@@ -216,10 +230,73 @@ export class ButteryTokens {
         rootCSSContent
       );
       this._log.debug("Generating css :root... done.");
+
+      // Format the directories
+      await this._formatGeneratedFiles();
     } catch (error) {
       this._handleError(error);
     }
   }
 
+  /**
+   * Formats all of the generated files with the default prettier
+   * configuration
+   */
+  private async _formatGeneratedFiles() {
+    this._log.debug("Formatting generated files...");
+    const config = await this._getConfig();
+
+    const dirToFormat = config.dirs.generated;
+
+    const prettierConfig = await prettier.resolveConfig(dirToFormat);
+    const files = await globby(
+      [`${config.dirs.generated}/**/*.{js,ts,jsx,tsx,json,css,md}`],
+      {
+        cwd: dirToFormat,
+        absolute: true,
+        gitignore: true,
+      }
+    );
+
+    for (const file of files) {
+      const content = await readFile(file, "utf8");
+      const formatted = await prettier.format(content, {
+        ...prettierConfig,
+        filepath: file, // important for parser inference
+      });
+
+      if (formatted !== content) {
+        await writeFile(file, formatted, "utf8");
+      }
+    }
+
+    this._log.debug("Formatting generated files... done.");
+    this._log.debug(`Successfully formatted ${files.length} files.`);
+  }
+
   async studio() {}
+
+  async dev() {
+    await this.build({ noCache: true });
+    let counter = 1;
+
+    const config = await this._getConfig();
+    const watcher = watch(config.meta.filePath);
+    const watchedFileButteryConfig = path.relative(
+      process.cwd(),
+      config.meta.filePath
+    );
+    this._log.watch(`Starting compilation in watch mode.
+      
+Watching for changes in the following files:${printAsBullets([
+      watchedFileButteryConfig,
+    ])}      
+`);
+    watcher.on("change", async (file) => {
+      const relPath = path.relative(process.cwd(), file);
+      counter++;
+      this._log.watch(`"${relPath}" changed. Rebuilding.... (${counter}x)`);
+      this.build({ noCache: true });
+    });
+  }
 }
