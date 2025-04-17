@@ -9,6 +9,12 @@ import { writeFileRecursive } from "ts-jolt/node";
 
 import { ConfigSchema, type ButteryTokensConfig } from "./schemas/schema.js";
 import { TemplateMakeColor } from "./templates/Template.make-color.js";
+import { TemplateMakeCustom } from "./templates/Template.make-custom.js";
+import { TemplateMakeFontBaseSize } from "./templates/Template.make-font-base-size.js";
+import { TemplateMakeFontFamily } from "./templates/Template.make-font-family.js";
+import { TemplateMakeFontWeight } from "./templates/Template.make-font-weight.js";
+import { TemplateMakePx } from "./templates/Template.make-px.js";
+import { TemplateMakeRem } from "./templates/Template.make-rem.js";
 
 export type TokensConfigDirectories = {
   generated: string;
@@ -142,7 +148,15 @@ export class ButteryTokens {
       const config = await this._getConfig();
       this._log.debug("Building buttery tokens");
 
-      const templates = [new TemplateMakeColor(config)];
+      const templates = [
+        new TemplateMakeColor(config), // color
+        new TemplateMakeCustom(config), // custom
+        new TemplateMakeFontBaseSize(config), // font base size
+        new TemplateMakeFontFamily(config), // font family
+        new TemplateMakeFontWeight(config), // font weight
+        new TemplateMakePx(config), // pixel
+        new TemplateMakeRem(config), // rem
+      ];
 
       // Set the prefix for all of the templates
       const templateNames = [];

@@ -47,13 +47,14 @@ export class Template {
   }
 
   protected _createUnionType(arr: string[]): string {
-    return arr.reduce<string>((accum, val, i, origArr) => {
+    const union = arr.reduce<string>((accum, val, i, origArr) => {
       accum.concat(`"${val}"`);
       if (i < origArr.length - 1) {
         return accum.concat(`"${val}" | `);
       }
       return accum.concat(`"${val}"`);
     }, "");
+    return union || `""`;
   }
 
   protected _createDocsDescription(type: TemplateTypes) {

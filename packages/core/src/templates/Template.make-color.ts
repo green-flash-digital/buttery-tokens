@@ -10,6 +10,7 @@ import {
 
 export class TemplateMakeColor extends Template {
   private _config: TokensConfig;
+
   constructor(config: TokensConfig) {
     super({
       prefix: config.config.runtime.prefix,
