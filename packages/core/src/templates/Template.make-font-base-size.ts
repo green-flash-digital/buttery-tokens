@@ -18,14 +18,13 @@ export class TemplateMakeFontBaseSize extends Template {
 
   makeUtilTS(): string {
     const functionName = this.getName();
-    const prefix = this.getPrefix();
+    const propertyBase = this._createCSSProperty();
 
     return `export type MakeFontBaseSize = (token: number) => string;
 
-  
   ${this._createDocsDescription("ts")}
 export const ${functionName}: MakeFontBaseSize = (value) => {
-    return \`var(${prefix}-\${value})\`
+    return \`var(${propertyBase}-\${value})\`
 };
   `;
   }

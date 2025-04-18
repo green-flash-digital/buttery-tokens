@@ -21,13 +21,14 @@ export class TemplateMakeCustom extends Template {
   makeUtilTS(): string {
     const customTokenNames = Object.keys(this._config.config.custom);
     const customTokenUnion = this._createUnionType(customTokenNames);
+    const propertyBase = this._createCSSProperty();
 
     return `export type CustomTokens = ${customTokenUnion};
 export type MakeCustom = (tokenName: CustomTokens) => string | number;
 
 ${this._createDocsDescription("ts")}
 export const ${this._name}: MakeCustom = (value) => {
-  return \`var(${this.getPrefix()}-\${value})\`
+  return \`var(${propertyBase}-\${value})\`
 };
 `;
   }

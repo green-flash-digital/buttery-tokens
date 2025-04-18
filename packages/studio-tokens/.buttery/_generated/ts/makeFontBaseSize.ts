@@ -13,5 +13,5 @@ export type MakeFontBaseSize = (token: number) => string;
  * Returns the token used to set the base font size of the document body.
  */
 export const makeFontBaseSize: MakeFontBaseSize = (value) => {
-  return `var(studio-${value})`;
+  return `var(--studio-font-base-${value})`;
 };

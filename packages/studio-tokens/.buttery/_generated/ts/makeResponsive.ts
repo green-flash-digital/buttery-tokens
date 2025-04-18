@@ -18,8 +18,12 @@ export type MakeResponsive = (params: {
 string that can be interpolated in CSS-in-JS syntax.
 */
 export const makeResponsive: MakeResponsive = (params) => {
-  const from = params?.from ? `var(studio-${params.from})` : undefined;
-  const to = params?.to ? `calc(var(studio-${params.to}) - 1px)` : undefined;
+  const from = params?.from
+    ? `var(--studio-breakpoint-${params.from})`
+    : undefined;
+  const to = params?.to
+    ? `calc(var(--studio-breakpoint-${params.to}) - 1px)`
+    : undefined;
   if (from && to) {
     return `@media (min-width: ${from}) and @media (max-width:${to})`;
   }

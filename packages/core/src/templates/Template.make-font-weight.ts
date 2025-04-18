@@ -43,14 +43,14 @@ export class TemplateMakeFontWeight extends Template {
     const familyNameAndWeightName = this._getFamilyAndWeights();
     const fontWeightUnion = this._createUnionType(familyNameAndWeightName);
     const functionName = this._name;
-    const prefix = this._prefix;
+    const propertyBase = this._createCSSProperty();
 
     return `export type FontFamilyAndWeight = ${fontWeightUnion};
 export type MakeFontWeight = (fontWeightName: FontFamilyAndWeight) => string;
 
 ${this._createDocsDescription("ts")}
 export const ${functionName}: MakeFontWeight = (fontFamilyAndWeight) => {
-    return \`var(${prefix}-\${fontFamilyAndWeight})\`
+    return \`var(${propertyBase}-\${fontFamilyAndWeight})\`
 };
   `;
   }

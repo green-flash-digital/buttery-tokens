@@ -55,6 +55,7 @@ export class TemplateMakeColor extends Template {
   makeUtilTS(): string {
     const manifest = this._createColorManifest();
     const colorAndVariants = JSON.stringify(manifest, null, 2);
+    const propertyBase = this._createCSSProperty();
 
     return `export const colorAndVariants = ${colorAndVariants};
 export type ColorAndVariants = keyof typeof colorAndVariants;
@@ -65,7 +66,7 @@ export function ${
       this._name
     }<T extends ColorAndVariants>(tokenName: T, options?: MakeColorOptions): string {
   const opacity = options?.opacity ?? 1;
-  return \`rgba(var(${this.getPrefix()}-\${tokenName}-rgb), \${opacity})\`;
+  return \`rgba(var(${propertyBase}-\${tokenName}-rgb), \${opacity})\`;
 }
 `;
   }

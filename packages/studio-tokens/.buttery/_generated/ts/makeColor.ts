@@ -70,5 +70,5 @@ export function makeColor<T extends ColorAndVariants>(
   options?: MakeColorOptions,
 ): string {
   const opacity = options?.opacity ?? 1;
-  return `rgba(var(studio-${tokenName}-rgb), ${opacity})`;
+  return `rgba(var(--studio-color-${tokenName}-rgb), ${opacity})`;
 }

@@ -24,18 +24,15 @@ string that can be interpolated in CSS-in-JS syntax.`,
   makeUtilTS(): string {
     const breakpointNames = Object.keys(this._breakpoints);
     const breakpointUnion = this._createUnionType(breakpointNames);
+    const propertyBase = this._createCSSProperty();
 
     return `export type Breakpoints = ${breakpointUnion};
 export type MakeResponsive = (params: { from?: Breakpoints, to?: Breakpoints }) => string;
   
   ${this._createDocsDescription("ts")}
 export const ${this._name}: MakeResponsive = (params) => {
-  const from = params?.from ? \`var(${
-    this._prefix
-  }-\${params.from})\` : undefined;
-  const to = params?.to ? \`calc(var(${
-    this._prefix
-  }-\${params.to}) - 1px)\` : undefined;
+  const from = params?.from ? \`var(${propertyBase}-\${params.from})\` : undefined;
+  const to = params?.to ? \`calc(var(${propertyBase}-\${params.to}) - 1px)\` : undefined;
   if (from && to) {
     return \`@media (min-width: \${from}) and @media (max-width:\${to})\`;
   }

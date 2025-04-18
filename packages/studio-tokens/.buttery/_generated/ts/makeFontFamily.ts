@@ -14,5 +14,5 @@ export type MakeFontFamily = (fontFamilyName: FontFamily) => string;
  * A utility that returns the CSS variable assigned to the font-family`
  */
 export const makeFontFamily: MakeFontFamily = (value) => {
-  return `var(studio-${value})`;
+  return `var(--studio-font-family-${value})`;
 };

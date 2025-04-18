@@ -34,5 +34,5 @@ export type MakeFontWeight = (fontWeightName: FontFamilyAndWeight) => string;
  * A utility that returns the CSS variable assigned to keys of the `font.family`
  */
 export const makeFontWeight: MakeFontWeight = (fontFamilyAndWeight) => {
-  return `var(studio-${fontFamilyAndWeight})`;
+  return `var(--studio-font-weight-${fontFamilyAndWeight})`;
 };

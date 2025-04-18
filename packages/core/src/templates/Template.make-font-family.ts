@@ -20,7 +20,7 @@ export class TemplateMakeFontFamily extends Template {
 
   makeUtilTS(): string {
     const functionName = this._name;
-    const prefix = this.getPrefix();
+    const propertyBase = this._createCSSProperty();
     const fontFamilyNames = match(this._config.config.font)
       .with({ source: "manual" }, (state) => {
         return Object.keys(state.families);
@@ -35,7 +35,7 @@ export type MakeFontFamily = (fontFamilyName: FontFamily) => string;
   
   ${this._createDocsDescription("ts")}
 export const ${functionName}: MakeFontFamily = (value) => {
-    return \`var(${prefix}-\${value})\`
+    return \`var(${propertyBase}-\${value})\`
 };
 `;
   }
