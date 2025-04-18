@@ -1,6 +1,5 @@
 import { css } from "@linaria/core";
 import { Fragment } from "react/jsx-runtime";
-
 import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import type { ConfigurationStateSizeAndSpace_SpaceVariants } from "./size-and-space.utils.js";

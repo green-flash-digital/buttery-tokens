@@ -2,8 +2,8 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-
 import { makeRem, makeColor, makeReset } from "@buttery/studio-tokens";
+
 import { IconArrowDown } from "~/icons/IconArrowDown";
 
 export type InputSelectPropsNative = JSX.IntrinsicElements["select"];

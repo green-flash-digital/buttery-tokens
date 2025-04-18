@@ -1,7 +1,6 @@
 import type { ManualFontStylesValue } from "@buttery/core/schemas";
 import { manualFontStyles } from "@buttery/core/schemas";
 import { css } from "@linaria/core";
-
 import { makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { StyleGuidePage } from "./StyleGuidePage";

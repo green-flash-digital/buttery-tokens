@@ -1,16 +1,16 @@
 import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { css } from "@linaria/core";
-import { calculateSpaceVariantAutoValue } from "@buttery/core";
-
+import { calculateSpaceVariantAutoValue } from "@buttery/core/utils";
 import { makeRem } from "@buttery/studio-tokens";
+
 import { InputGroup } from "~/components/InputGroup";
 import { InputLabel } from "~/components/InputLabel";
 import { InputCheckbox } from "~/components/InputCheckbox";
 import { InputSelect } from "~/components/InputSelect";
 
-import { SpaceConfigVariants } from "./SpaceConfigVariants";
 import { type ConfigurationStateSizeAndSpace_SpaceAuto } from "./size-and-space.utils.js";
+import { SpaceConfigVariants } from "./SpaceConfigVariants";
 
 import type { ConfigurationContextType } from "../Config.context.js";
 

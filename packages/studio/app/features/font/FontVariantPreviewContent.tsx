@@ -1,7 +1,6 @@
 import { css } from "@linaria/core";
 import type { ManualFontStylesValue } from "@buttery/core/schemas";
 import { manualFontStyles } from "@buttery/core/schemas";
-
 import {
   makeColor,
   makeFontWeight,

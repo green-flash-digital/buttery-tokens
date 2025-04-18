@@ -1,7 +1,7 @@
 import { useModal } from "react-hook-primitives";
 import { css } from "@linaria/core";
-
 import { makeColor, makeRem } from "@buttery/studio-tokens";
+
 import { Button } from "~/components/Button";
 import { ModalHeader } from "~/components/ModalHeader";
 import { Modal } from "~/components/Modal";
@@ -12,8 +12,8 @@ import { InputRadio } from "~/components/InputRadio";
 import { InputSection } from "~/components/InputSection";
 import { IconLayout01 } from "~/icons/IconLayout01";
 
-import { StyleGuideBasic } from "./style-guide/StyleGuideBasic";
 import { StyleGuideControlBar } from "./style-guide/StyleGuideControlBar";
+import { StyleGuideBasic } from "./style-guide/StyleGuideBasic";
 
 const styles = css`
   height: 100%;

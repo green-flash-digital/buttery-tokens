@@ -1,6 +1,5 @@
 import { css } from "@linaria/core";
 import { match, P } from "ts-pattern";
-
 import { makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { StyleGuidePage } from "./StyleGuidePage";

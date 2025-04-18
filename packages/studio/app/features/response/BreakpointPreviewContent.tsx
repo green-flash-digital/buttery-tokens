@@ -2,7 +2,6 @@ import { css } from "@linaria/core";
 import type { MouseEventHandler, RefCallback } from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { classes } from "react-hook-primitives";
-
 import {
   makeColor,
   makeFontWeight,

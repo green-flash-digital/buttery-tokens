@@ -13,8 +13,8 @@ import { DropdownMenu } from "~/components/DropdownMenu";
 import { DropdownMenuItem } from "~/components/DropdownMenuItem";
 import { IconTimeManagement } from "~/icons/IconTimeManagement";
 
-import { ConfigSaveDiff } from "./ConfigSaveDiff";
 import { useSaveConfig } from "./config.useSave";
+import { ConfigSaveDiff } from "./ConfigSaveDiff";
 
 const modalBodyStyles = css`
   display: grid;

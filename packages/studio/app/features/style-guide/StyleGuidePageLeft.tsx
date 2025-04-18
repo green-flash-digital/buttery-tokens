@@ -2,7 +2,6 @@ import type { JSX } from "react";
 import { forwardRef } from "react";
 import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
-
 import { makeRem, makeColor } from "@buttery/studio-tokens";
 
 export type StyleGuidePageLeftPropsNative = JSX.IntrinsicElements["article"];

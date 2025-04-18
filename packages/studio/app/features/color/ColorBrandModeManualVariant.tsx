@@ -4,8 +4,8 @@ import type { ColorVariantTypes } from "@buttery/core/schemas";
 import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { css } from "@linaria/core";
 import { useToggle } from "react-hook-primitives";
-
 import { makeRem } from "@buttery/studio-tokens";
+
 import { ColorBlob, useColorBlob } from "~/components/ColorBlob";
 import { InputGroup } from "~/components/InputGroup";
 import { VariantContainer } from "~/components/VariantContainer";
@@ -15,11 +15,11 @@ import { VariantContainerBarText } from "~/components/VariantContainerBarText";
 import { VariantContainerBarTitle } from "~/components/VariantContainerBarTitle";
 import { VariantContainerContent } from "~/components/VariantContainerContent";
 
-import { ColorSwatchHex } from "./ColorSwatchHex";
-import type { ColorSwatchVariantsPropsCustom } from "./ColorSwatchVariants";
-import { ColorSwatchVariants } from "./ColorSwatchVariants";
-import { ColorSwatchName } from "./ColorSwatchName";
 import type { ConfigurationStateColorsManual } from "./color.utils";
+import { ColorSwatchName } from "./ColorSwatchName";
+import { ColorSwatchVariants } from "./ColorSwatchVariants";
+import type { ColorSwatchVariantsPropsCustom } from "./ColorSwatchVariants";
+import { ColorSwatchHex } from "./ColorSwatchHex";
 
 import type { ConfigurationContextType } from "../Config.context";
 

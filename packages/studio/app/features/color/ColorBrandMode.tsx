@@ -2,18 +2,18 @@ import { css } from "@linaria/core";
 import { useCallback, useMemo } from "react";
 import type { ChangeEventHandler } from "react";
 import { match } from "ts-pattern";
-
 import { makeRem } from "@buttery/studio-tokens";
-import { InputRadioCard } from "~/components/InputRadioCard";
-import { IconPencil } from "~/icons/IconPencil";
+
 import { IconMagicWand01 } from "~/icons/IconMagicWand01";
+import { IconPencil } from "~/icons/IconPencil";
+import { InputRadioCard } from "~/components/InputRadioCard";
+import { InputLabel } from "~/components/InputLabel";
+import { InputSection } from "~/components/InputSection";
 
 import { ColorBrandModeManual } from "./ColorBrandModeManual";
 import { ColorBrandModeAuto } from "./ColorBrandModeAuto";
 
 import { useConfigurationContext } from "../Config.context";
-import { InputLabel } from "../../components/InputLabel";
-import { InputSection } from "../../components/InputSection";
 
 const groupStyles = css`
   display: flex;

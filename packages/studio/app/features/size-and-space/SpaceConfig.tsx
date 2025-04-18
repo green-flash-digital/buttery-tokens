@@ -2,16 +2,16 @@ import type { ChangeEventHandler } from "react";
 import { useCallback, useMemo } from "react";
 import { match } from "ts-pattern";
 import { css } from "@linaria/core";
-
 import { makeRem } from "@buttery/studio-tokens";
+
 import { InputLabel } from "~/components/InputLabel";
 import { InputRadioCard } from "~/components/InputRadioCard";
 import { InputSection } from "~/components/InputSection";
 import { IconMagicWand01 } from "~/icons/IconMagicWand01";
 import { IconPencil } from "~/icons/IconPencil";
 
-import { SpaceConfigAuto } from "./SpaceConfigAuto";
 import { SpaceConfigManual } from "./SpaceConfigManual";
+import { SpaceConfigAuto } from "./SpaceConfigAuto";
 
 import { useConfigurationContext } from "../Config.context";
 

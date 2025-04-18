@@ -13,8 +13,8 @@ import {
   makeRem,
 } from "@buttery/studio-tokens";
 
-import { IconTick01 } from "~/icons/IconTick01";
 import { IconCancel } from "~/icons/IconCancel";
+import { IconTick01 } from "~/icons/IconTick01";
 
 import { StyleGuidePage } from "./StyleGuidePage";
 import { StyleGuidePageRight } from "./StyleGuidePageRight";

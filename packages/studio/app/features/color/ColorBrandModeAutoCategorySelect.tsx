@@ -2,22 +2,21 @@ import type { ButteryTokensColorBrandTypeAuto } from "@buttery/core/schemas";
 import { css } from "@linaria/core";
 import { useCallback } from "react";
 import { classes } from "react-hook-primitives";
-
 import {
   makeColor,
   makeFontWeight,
   makeRem,
   makeReset,
 } from "@buttery/studio-tokens";
+
 import { IconBrush } from "~/icons/IconBrush";
 import { IconColors } from "~/icons/IconColors";
 import type { IconCopy } from "~/icons/IconCopy";
 import { IconEarth } from "~/icons/IconEarth";
 import { IconGem } from "~/icons/IconGem";
 import { IconIdea01 } from "~/icons/IconIdea01";
-
-import { InputDropdownSelect } from "../../components/InputDropdownSelect";
-import { useInputDropdownSelectContext } from "../../components/InputDropdownSelect.context";
+import { useInputDropdownSelectContext } from "~/components/InputDropdownSelect.context";
+import { InputDropdownSelect } from "~/components/InputDropdownSelect";
 
 type ColorCategoryDef = {
   display: string;

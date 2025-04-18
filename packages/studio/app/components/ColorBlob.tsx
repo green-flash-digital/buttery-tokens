@@ -8,7 +8,6 @@ import {
   useMemo,
   useRef,
 } from "react";
-
 import { makeRem } from "@buttery/studio-tokens";
 
 export type ColorBlobPropsNative = Omit<

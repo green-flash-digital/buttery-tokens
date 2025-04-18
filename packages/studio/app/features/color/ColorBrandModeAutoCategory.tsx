@@ -22,14 +22,14 @@ import { Button } from "~/components/Button";
 import { IconTick01 } from "~/icons/IconTick01";
 import { IconTickDouble01 } from "~/icons/IconTickDouble01";
 
-import {
-  ColorBrandModeAutoCategorySelect,
-  colorCategories,
-} from "./ColorBrandModeAutoCategorySelect";
 import type {
   ConfigurationStateColor,
   ConfigurationStateColorBrandAuto,
 } from "./color.utils";
+import {
+  ColorBrandModeAutoCategorySelect,
+  colorCategories,
+} from "./ColorBrandModeAutoCategorySelect";
 
 const categoryContainerStyles = css`
   padding: ${makeRem(16)};

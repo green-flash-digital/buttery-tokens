@@ -9,9 +9,9 @@ import { VariantList } from "~/components/VariantList";
 import { VariantAdd } from "~/components/VariantAdd";
 import { VariantEmpty } from "~/components/VariantEmpty";
 
-import { useRecalculateSpaceVariants } from "./space.useRecalculateSpaceVariants";
-import type { SizeConfigVariantPropsCustom } from "./SizeConfigVariant";
 import { SizeConfigVariant } from "./SizeConfigVariant";
+import type { SizeConfigVariantPropsCustom } from "./SizeConfigVariant";
+import { useRecalculateSpaceVariants } from "./space.useRecalculateSpaceVariants";
 
 import { useConfigurationContext } from "../Config.context";
 

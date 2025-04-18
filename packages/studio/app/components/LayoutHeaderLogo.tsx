@@ -2,7 +2,6 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX, ReactNode } from "react";
 import { forwardRef } from "react";
-
 import {
   makeCustom,
   makeFontFamily,

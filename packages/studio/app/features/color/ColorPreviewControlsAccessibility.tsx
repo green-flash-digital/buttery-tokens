@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-
 import { makeColor, makeRem } from "@buttery/studio-tokens";
+
 import { InputRange } from "~/components/InputRange";
 import { InputColor } from "~/components/InputColor";
 import { Tooltip, useTooltip } from "~/components/Tooltip";

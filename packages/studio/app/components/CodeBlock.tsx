@@ -3,8 +3,8 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import type { CodeToHastOptions, BundledLanguage, BundledTheme } from "shiki";
-
 import { makeFontFamily, makeRem } from "@buttery/studio-tokens";
+
 import { useHighlightCode } from "~/hooks/hook.useHighlightCode";
 
 const styles = css`

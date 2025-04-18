@@ -2,7 +2,6 @@ import { css } from "@linaria/core";
 import { match } from "ts-pattern";
 import type { JSX } from "react";
 import { classes } from "react-hook-primitives";
-
 import {
   makeColor,
   makeFontFamily,

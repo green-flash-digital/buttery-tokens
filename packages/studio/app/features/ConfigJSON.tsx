@@ -1,7 +1,7 @@
 import { useModal } from "react-hook-primitives";
 import { css } from "@linaria/core";
-
 import { makeCustom } from "@buttery/studio-tokens";
+
 import { Button } from "~/components/Button";
 import { ModalDrawer } from "~/components/ModalDrawer";
 import { ModalHeader } from "~/components/ModalHeader";

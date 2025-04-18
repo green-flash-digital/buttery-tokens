@@ -2,11 +2,11 @@ import { css } from "@linaria/core";
 import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { manualFontStyles } from "@buttery/core/schemas";
-
 import { makeRem } from "@buttery/studio-tokens";
-import { InputLabel } from "~/components/InputLabel";
-import { InputText } from "~/components/InputText";
+
 import { InputGroup } from "~/components/InputGroup";
+import { InputText } from "~/components/InputText";
+import { InputLabel } from "~/components/InputLabel";
 
 import { FontFamilyConfigVariant } from "./FontFamilyConfigVariant";
 import type { FontFamilyConfigVariantProps } from "./FontFamilyConfigVariant";
