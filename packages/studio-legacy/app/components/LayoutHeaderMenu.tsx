@@ -96,6 +96,7 @@ const styles = css`
 
 export function LayoutHeaderMenu() {
   const { openModal, modalRef, closeModal } = useModal();
+  console.log(modalRef);
 
   /**
    * Callback ref to add a listener to all of the links

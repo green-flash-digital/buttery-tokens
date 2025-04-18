@@ -10,7 +10,7 @@ import { InputCheckbox } from "~/components/InputCheckbox";
 import { InputSelect } from "~/components/InputSelect";
 
 import { type ConfigurationStateSizeAndSpace_SpaceAuto } from "./size-and-space.utils.js";
-import { SpaceConfigVariants } from "./SpaceConfigVariants";
+import { SpaceConfigVariants } from "./SpaceConfigVariants.js";
 
 import type { ConfigurationContextType } from "../Config.context.js";
 

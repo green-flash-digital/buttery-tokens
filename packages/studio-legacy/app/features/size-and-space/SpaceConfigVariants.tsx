@@ -22,7 +22,7 @@ import {
   orderSpaceVariants,
   type ConfigurationStateSizeAndSpace_SpaceVariants,
 } from "./size-and-space.utils.js";
-import { useRecalculateSpaceVariants } from "./space.useRecalculateSpaceVariants";
+import { useRecalculateSpaceVariants } from "./space.useRecalculateSpaceVariants.js";
 
 import type { ConfigurationContextType } from "../Config.context.js";
 
