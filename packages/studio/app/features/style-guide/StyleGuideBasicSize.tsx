@@ -1,6 +1,5 @@
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
-
 import {
   makeColor,
   makeFontFamily,
@@ -106,7 +105,7 @@ export function StyleGuideBasicSize(props: StyleGuideSharedProps) {
             <tr>
               <th>token name</th>
               <th>height</th>
-              <th></th>
+              <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>

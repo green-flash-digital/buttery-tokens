@@ -18,18 +18,18 @@
     "url": "https://github.com/green-flash-digital/buttery-tokens/issues"
   },
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
-  "packageManager": "yarn@4.7.0",
+  "packageManager": "yarn@4.9.1",
   "workspaces": {
     "packages": [
       "./packages/*"
     ]
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.1",
-    "@gfdigital/eslint-config": "^0.4.2",
-    "@gfdigital/tsconfig": "^0.3.1",
-    "eslint": "^9.24.0",
-    "turbo": "^2.5.0",
-    "typescript": "^5.8.3"
+    "@changesets/cli": "2.29.2",
+    "@gfdigital/eslint-config": "0.4.2",
+    "@gfdigital/tsconfig": "0.3.1",
+    "eslint": "9.24.0",
+    "turbo": "2.5.0",
+    "typescript": "5.8.3"
   }
 }
