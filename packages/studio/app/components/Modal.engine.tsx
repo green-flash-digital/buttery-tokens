@@ -23,7 +23,7 @@ export class ModalEngine<S extends DialogState = DialogState>
   extends DialogEngine<S>
   implements ModalProperties
 {
-  constructor(args?: ModalOptions) {
+  constructor(args?: Partial<ModalOptions>) {
     super(args);
     this._isOpen = args?.openOnMount ?? false;
     this.open = this.open.bind(this);
@@ -65,6 +65,13 @@ export class ModalEngine<S extends DialogState = DialogState>
     node.addEventListener("cancel", this._onCancel);
     node.addEventListener("close", this._onClose);
     node.addEventListener("click", this._onBackdropClick);
+
+    return () => {
+      // Attach event listeners once
+      node.removeEventListener("cancel", this._onCancel);
+      node.removeEventListener("close", this._onClose);
+      node.removeEventListener("click", this._onBackdropClick);
+    };
   }
 
   /**

@@ -1,4 +1,3 @@
-import { useModal } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import { NavLink } from "react-router";
 import type { RefCallback } from "react";
@@ -14,9 +13,10 @@ import { IconMenu11 } from "~/icons/IconMenu11";
 import { IconSettings05 } from "~/icons/IconSettings05";
 import { IconDashboardSquare3 } from "~/icons/IconDashboardSquare3";
 
-import { ModalDrawer } from "./ModalDrawer";
 import { ModalHeader } from "./ModalHeader";
 import { ModalBody } from "./ModalBody";
+import { MenuModal } from "./LayoutHeaderMenu.modal";
+import { Modal } from "./Modal";
 
 const styles = css`
   justify-self: end;
@@ -95,35 +95,30 @@ const styles = css`
 `;
 
 export function LayoutHeaderMenu() {
-  const { openModal, modalRef, closeModal } = useModal();
-  console.log(modalRef);
-
   /**
    * Callback ref to add a listener to all of the links
    * to close the modal once clicked
    */
-  const ref = useCallback<RefCallback<HTMLDivElement>>(
-    (node) => {
-      if (!node) return;
-      const anchors = node.getElementsByTagName("a");
-      for (const anchor of anchors) {
-        anchor.addEventListener("click", closeModal);
-      }
+  const ref = useCallback<RefCallback<HTMLDivElement>>((node) => {
+    if (!node) return;
+    const anchors = node.getElementsByTagName("a");
+    for (const anchor of anchors) {
+      anchor.addEventListener("click", MenuModal.close);
+    }
 
-      return () => {
-        for (const anchor of anchors) {
-          anchor.removeEventListener("click", closeModal);
-        }
-      };
-    },
-    [closeModal]
-  );
+    return () => {
+      for (const anchor of anchors) {
+        anchor.removeEventListener("click", MenuModal.close);
+      }
+    };
+  }, []);
+
   return (
     <div className={styles}>
-      <button className="menu" onClick={openModal}>
+      <button className="menu" onClick={MenuModal.open}>
         <IconMenu11 dxSize={24} />
       </button>
-      <ModalDrawer ref={modalRef} dxVariant="right-to-left">
+      <Modal dxEngine={MenuModal} dxType="drawer" dxVariant="right-to-left">
         <ModalHeader>Options</ModalHeader>
         <ModalBody ref={ref}>
           <ul>
@@ -163,7 +158,7 @@ export function LayoutHeaderMenu() {
             </li>
           </ul>
         </ModalBody>
-      </ModalDrawer>
+      </Modal>
     </div>
   );
 }

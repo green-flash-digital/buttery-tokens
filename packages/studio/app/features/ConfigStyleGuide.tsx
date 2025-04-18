@@ -1,19 +1,19 @@
-import { useModal } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import { makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { Button } from "~/components/Button";
 import { ModalHeader } from "~/components/ModalHeader";
-import { Modal } from "~/components/Modal";
 import { IconPaintBoard } from "~/icons/IconPaintBoard";
 import { ModalBody } from "~/components/ModalBody";
 import { InputLabel } from "~/components/InputLabel";
 import { InputRadio } from "~/components/InputRadio";
 import { InputSection } from "~/components/InputSection";
 import { IconLayout01 } from "~/icons/IconLayout01";
+import { Modal } from "~/components/Modal";
 
 import { StyleGuideControlBar } from "./style-guide/StyleGuideControlBar";
 import { StyleGuideBasic } from "./style-guide/StyleGuideBasic";
+import { ConfigStyleGuideModal } from "./ConfigStyleGuide.modal";
 
 const styles = css`
   height: 100%;
@@ -67,20 +67,19 @@ const bodyStyles = css`
 `;
 
 export function ConfigStyleGuide() {
-  const { openModal, modalRef } = useModal();
-
   return (
     <>
       <Button
         dxVariant="outlined"
         DXIconStart={IconPaintBoard}
-        onClick={openModal}
+        onClick={ConfigStyleGuideModal.open}
       >
         Style Guide
       </Button>
       <Modal
-        ref={modalRef}
-        dxVariant="contain"
+        dxEngine={ConfigStyleGuideModal}
+        dxType="default"
+        dxLayout="contain"
         dxSize="full"
         className={styles}
       >
