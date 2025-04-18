@@ -1,7 +1,11 @@
 import { reactRouter } from "@react-router/dev/vite";
-import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig, mergeConfig } from "vite";
+import baseConfig from "./vite.config.base";
 
-export default defineConfig({
-  plugins: [reactRouter(), tsconfigPaths()],
-});
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
+    clearScreen: false,
+    plugins: [reactRouter()],
+  })
+);

@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, mergeConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import wyw from "@wyw-in-js/vite";
 
