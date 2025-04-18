@@ -4,14 +4,9 @@
 //  Any edits that are made will be overwritten the next time the
 //  buttery-tokens CLI is run.
 //
-//  Generated on Thu Apr 17 2025
+//  Generated on Fri Apr 18 2025
 // -------------------------------------------------------
-export type Breakpoints =
-  | "mobile"
-  | "tablet"
-  | "laptop"
-  | "desktop"
-  | "ultraWide";
+export type Breakpoints = "phone" | "tablet" | "desktop";
 export type MakeResponsive = (params: {
   from?: Breakpoints;
   to?: Breakpoints;

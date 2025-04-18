@@ -4,9 +4,14 @@
 //  Any edits that are made will be overwritten the next time the
 //  buttery-tokens CLI is run.
 //
-//  Generated on Thu Apr 17 2025
+//  Generated on Fri Apr 18 2025
 // -------------------------------------------------------
-export type CustomTokens = "";
+export type CustomTokens =
+  | "layout-header-height"
+  | "layout-max-width"
+  | "layout-gutters"
+  | "layout-section-title-height"
+  | "modal-gutters";
 export type MakeCustom = (tokenName: CustomTokens) => string | number;
 
 /**

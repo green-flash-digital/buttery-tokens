@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { css } from "@linaria/core";
-
 import { makeRem } from "@buttery/studio-tokens";
+
 import { CodeBlock } from "~/components/CodeBlock";
 
 import { useConfigurationContext } from "../Config.context";
@@ -14,19 +14,8 @@ const styles = css`
 
 export function SettingsPreviewContent() {
   const {
-    settings: { namespace, prefix },
+    settings: { prefix },
   } = useConfigurationContext();
-
-  const namespaceCode = useMemo(() => {
-    return `// Namespace
-
-// When 'buttery tokens build' is run, the tokens are built to a directory inside
-// of the "@buttery/tokens" distribution directory and exported using the "exports"
-// key in the s"package.json". This allows the tokens to be built and then
-// absolutely imported without a lot of alias gymnastics
-
-import { makeColor, makeSize, makeRem } from "@buttery/tokens/${namespace}"`;
-  }, [namespace]);
 
   const prefixCode = useMemo(() => {
     return `/* Prefix
@@ -53,9 +42,6 @@ import { makeColor, makeSize, makeRem } from "@buttery/tokens/${namespace}"`;
 
   return (
     <div className={styles}>
-      <div>
-        <CodeBlock dxCode={namespaceCode} dxOptions={{ lang: "typescript" }} />
-      </div>
       <div>
         <CodeBlock dxCode={prefixCode} dxOptions={{ lang: "css" }} />
       </div>

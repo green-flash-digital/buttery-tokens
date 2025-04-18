@@ -4,20 +4,29 @@
 //  Any edits that are made will be overwritten the next time the
 //  buttery-tokens CLI is run.
 //
-//  Generated on Thu Apr 17 2025
+//  Generated on Fri Apr 18 2025
 // -------------------------------------------------------
 export type FontFamilyAndWeight =
-  | "heading-regular"
-  | "heading-semiBold"
-  | "heading-bold"
-  | "body-regular"
-  | "body-medium"
-  | "body-semiBold"
-  | "formal-regular"
-  | "formal-medium"
-  | "formal-semiBold"
-  | "formal-bold"
-  | "formal-black";
+  | "Poppins-bold"
+  | "Poppins-semiBold"
+  | "Poppins-medium"
+  | "Poppins-regular"
+  | "Poppins-light"
+  | "Inter-bold"
+  | "Inter-semiBold"
+  | "Inter-medium"
+  | "Inter-regular"
+  | "Inter-light"
+  | "Mulish-bold"
+  | "Mulish-semiBold"
+  | "Mulish-medium"
+  | "Mulish-regular"
+  | "Mulish-light"
+  | "Consolas-bold"
+  | "Consolas-semiBold"
+  | "Consolas-medium"
+  | "Consolas-regular"
+  | "Consolas-light";
 export type MakeFontWeight = (fontWeightName: FontFamilyAndWeight) => string;
 
 /**

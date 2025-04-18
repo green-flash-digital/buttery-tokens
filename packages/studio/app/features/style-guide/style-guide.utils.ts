@@ -1,7 +1,6 @@
 import { css } from "@linaria/core";
 import type { JSX } from "react";
-import { getAccessibleTextColor } from "@buttery/core";
-
+import { getAccessibleTextColor } from "@buttery/core/utils";
 import { makeRem } from "@buttery/studio-tokens";
 
 import { StyleGuideBasicColor } from "./StyleGuideBasicColor";
