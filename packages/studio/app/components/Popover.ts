@@ -1,5 +1,6 @@
 import { Isoscribe } from "isoscribe";
 
+import type { SetAsyncStateQueueState } from "./AsyncStateQueue";
 import { AsyncStateQueue } from "./AsyncStateQueue";
 
 export type PopoverTargetAction = "show" | "hide" | "toggle";
@@ -74,11 +75,18 @@ type PopoverState = {
   offset: number;
 };
 
-export class Popover extends AsyncStateQueue<PopoverState> {
+export class Popover {
   private _popover: HTMLElement | null = null;
   private _popoverTarget: HTMLButtonElement | null = null;
   private _popoverTargetAction: PopoverTargetAction;
   private _popoverType: PopoverType;
+  private _log = new Isoscribe({
+    name: "PopoverEngine",
+    pillColor: "#cf275b",
+    logLevel: "debug",
+  });
+  protected _queue: AsyncStateQueue<PopoverState>;
+  setState: SetAsyncStateQueueState<PopoverState>;
 
   constructor(options?: Partial<PopoverOptions>) {
     const initState: PopoverState = {
@@ -86,24 +94,19 @@ export class Popover extends AsyncStateQueue<PopoverState> {
       origin: options?.popoverOrigin ?? "top-right",
       offset: 0,
     };
-    const log = new Isoscribe({
-      name: "PopoverEngine",
-      pillColor: "#cf275b",
-      logLevel: "debug",
-    });
-    super(initState, log);
-    this._log = log;
+    this._queue = new AsyncStateQueue(initState, this._log);
     this._popoverTargetAction = options?.popoverTargetAction ?? "toggle";
     this._popoverType = "auto";
-    this._state = {
-      position: options?.popoverPosition,
-      origin: options?.popoverOrigin ?? "top-right",
-      offset: 0,
-    };
+
     this.setPopover = this.setPopover.bind(this);
     this.setPopoverTarget = this.setPopoverTarget.bind(this);
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
+    this.setState = this._queue.setState;
+  }
+
+  protected get _state() {
+    return this._queue.getState();
   }
 
   protected _getPopover() {
@@ -139,6 +142,16 @@ export class Popover extends AsyncStateQueue<PopoverState> {
     return popover.matches(":popover-open");
   }
 
+  private _calculatePosition() {
+    if (!this._state.position) {
+      this._log.debug("No position set. Skipping positional calculations");
+    }
+  }
+
+  getQueue() {
+    return this._queue;
+  }
+
   setPopover(node: HTMLElement | null) {
     if (!node) return;
     this._popover = node;
@@ -163,7 +176,7 @@ export class Popover extends AsyncStateQueue<PopoverState> {
   show() {
     if (this._isOpen()) return;
     const popover = this._getPopover();
-    // this._calculatePosition();
+    this._calculatePosition();
     popover.showPopover();
   }
 

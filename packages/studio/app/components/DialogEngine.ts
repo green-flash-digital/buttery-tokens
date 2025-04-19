@@ -1,6 +1,7 @@
 import type { MouseEvent } from "react";
 import { Isoscribe } from "isoscribe";
 
+import type { SetAsyncStateQueueState } from "./AsyncStateQueue";
 import { AsyncStateQueue } from "./AsyncStateQueue";
 
 export type DialogState = Record<string, unknown>;
@@ -29,24 +30,30 @@ export type DialogProperties<T extends DialogState = DialogState> = {
   close: () => void;
 };
 
-export class DialogEngine<
-  T extends DialogState = DialogState,
-> extends AsyncStateQueue<T> {
+export class DialogEngine<T extends DialogState = DialogState> {
   protected _dialogNode: HTMLDialogElement | null = null;
   protected _options: DialogOptions;
   protected _isOpen: boolean = false;
+  private _log = new Isoscribe({
+    name: "DialogEngine",
+    pillColor: "#2bac99",
+    logLevel: "debug",
+  });
+  protected _queue: AsyncStateQueue<T>;
+  setState: SetAsyncStateQueueState<T>;
 
   constructor(options?: Partial<DialogOptions>) {
-    const log = new Isoscribe({
-      name: "DialogEngine",
-      pillColor: "#2bac99",
-      logLevel: "debug",
-    });
-    super({} as T, log);
+    const initState: T = {} as T;
+    this._queue = new AsyncStateQueue(initState, this._log);
+    this.setState = this._queue.setState;
     this._options = {
       closeOnBackdropClick: options?.closeOnBackdropClick ?? false,
       disableCloseOnEscapePress: options?.disableCloseOnEscapePress ?? false,
     };
+  }
+
+  protected get _state() {
+    return this._queue.getState();
   }
 
   protected _setNode(node: HTMLDialogElement) {
@@ -62,5 +69,9 @@ export class DialogEngine<
   protected _closeDialog() {
     const dialog = this._getDialog();
     dialog.close();
+  }
+
+  getQueue() {
+    return this._queue;
   }
 }

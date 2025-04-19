@@ -2,14 +2,18 @@ import type { Draft } from "immer";
 import { produce } from "immer";
 import type { Isoscribe } from "isoscribe";
 
+export type SetAsyncStateQueueState<T extends Record<string, unknown>> = (
+  fn: (draft: Draft<T>) => void,
+  options?: { shouldLog?: boolean }
+) => void;
+
 export class AsyncStateQueue<T> implements AsyncIterable<T> {
   private _queue: T[] = [];
   private _resolvers: ((value: IteratorResult<T>) => void)[] = [];
   private _listeners = new Set<() => void>();
   private _closed = false;
-  protected _log: Isoscribe;
-
-  protected _state: T;
+  private _log: Isoscribe;
+  private _state: T;
 
   constructor(initialState: T, log: Isoscribe) {
     this._state = initialState;
@@ -18,15 +22,15 @@ export class AsyncStateQueue<T> implements AsyncIterable<T> {
     this.getSnapshot = this.getSnapshot.bind(this);
   }
 
-  protected _setState(
+  setState(
     fn: (draft: Draft<typeof this._state>) => void,
     options?: { shouldLog?: boolean }
   ) {
     this._state = produce(this._state, fn);
-    this._dispatchState("state::mutation", options);
+    this.dispatchState("state::mutation", options);
   }
 
-  protected _dispatchState(name: string, options?: { shouldLog?: boolean }) {
+  dispatchState(name: string, options?: { shouldLog?: boolean }) {
     // Queue the state update
     const shouldLog = options?.shouldLog ?? true;
     if (shouldLog) {
@@ -58,7 +62,7 @@ export class AsyncStateQueue<T> implements AsyncIterable<T> {
     this._listeners.forEach((fn) => fn());
   }
 
-  close() {
+  private _close() {
     this._closed = true;
     while (this._resolvers.length > 0) {
       this._resolvers.shift()!({ value: undefined as unknown, done: true });
