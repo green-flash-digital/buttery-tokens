@@ -1,6 +1,4 @@
 import type { MouseEvent } from "react";
-import type { Draft } from "immer";
-import { produce } from "immer";
 import { Isoscribe } from "isoscribe";
 
 import { AsyncStateQueue } from "./AsyncStateQueue";
@@ -31,18 +29,20 @@ export type DialogProperties<T extends DialogState = DialogState> = {
   close: () => void;
 };
 
-export class DialogEngine<T extends DialogState = DialogState> {
+export class DialogEngine<
+  T extends DialogState = DialogState,
+> extends AsyncStateQueue<T> {
   protected _dialogNode: HTMLDialogElement | null = null;
   protected _options: DialogOptions;
   protected _isOpen: boolean = false;
-  protected _log: Isoscribe = new Isoscribe({
-    name: "DialogEngine",
-    pillColor: "#2bac99",
-  });
-  private _state: T = {} as T;
-  private _queue = new AsyncStateQueue<T>(this._state);
 
   constructor(options?: Partial<DialogOptions>) {
+    const log = new Isoscribe({
+      name: "DialogEngine",
+      pillColor: "#2bac99",
+      logLevel: "debug",
+    });
+    super({} as T, log);
     this._options = {
       closeOnBackdropClick: options?.closeOnBackdropClick ?? false,
       disableCloseOnEscapePress: options?.disableCloseOnEscapePress ?? false,
@@ -51,31 +51,6 @@ export class DialogEngine<T extends DialogState = DialogState> {
 
   protected _setNode(node: HTMLDialogElement) {
     this._dialogNode = node;
-  }
-
-  getQueue() {
-    return this._queue;
-  }
-
-  setState(
-    fn: (draft: Draft<typeof this._state>) => void,
-    options?: { shouldLog?: boolean }
-  ) {
-    this._state = produce(this._state, fn);
-    this._dispatchState("state::mutation", options);
-  }
-
-  protected _dispatchState(name: string, options?: { shouldLog?: boolean }) {
-    // Queue the state update
-    const shouldLog = options?.shouldLog ?? true;
-    if (shouldLog) {
-      this._log.debug(`state::dispatch::${name}`, this._state);
-    }
-    this._queue.enqueue(this._state);
-  }
-
-  getState() {
-    return this._state;
   }
 
   protected _getDialog() {

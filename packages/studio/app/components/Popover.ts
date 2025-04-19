@@ -1,7 +1,32 @@
 import { Isoscribe } from "isoscribe";
 
+import { AsyncStateQueue } from "./AsyncStateQueue";
+
 export type PopoverTargetAction = "show" | "hide" | "toggle";
-export type PopoverState = "auto" | "manual";
+export type PopoverType = "auto" | "manual" | "hint";
+export type PopoverPosition =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "right-top"
+  | "right-middle"
+  | "right-bottom"
+  | "bottom-right"
+  | "bottom-center"
+  | "bottom-left"
+  | "left-bottom"
+  | "left-middle"
+  | "left-top";
+export type PopoverOrigin =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "right-center"
+  | "bottom-right"
+  | "bottom-center"
+  | "bottom-left"
+  | "left-center";
+export type PopoverOffset = number;
 
 export type PopoverOptions = {
   popoverTargetAction: PopoverTargetAction;
@@ -21,28 +46,60 @@ export type PopoverOptions = {
    *
    * @default auto
    */
-  popoverState: PopoverState;
+  popoverState: PopoverType;
+  /**
+   * Positions the popover relative to place on target
+   *
+   * This API abstracts some of the nuance associated with position the element and attempts to
+   * bridge the knowledge gap with human readable semantics without having to do a lot of CSS / JS
+   * gymnastics
+   *
+   * The API reads... "Position the popover's` `<popover-origin>` at/on the target's `<popover-position>`":
+   * @default `right-top`
+   */
+  popoverPosition: PopoverPosition;
+  /**
+   * The point on the popover that should be aligned with the position. This option will only take effect
+   * if a position is set on the popover.
+   *
+   * The API reads... "Position the popover's` <popover-origin>` at/on the target's `<popover-position>`":
+   * @default `top-right`
+   */
+  popoverOrigin: PopoverOrigin;
 };
 
-type EventPopoverToggle = Event & {
-  newState: "open" | "closed";
-  oldState: "open" | "closed";
+type PopoverState = {
+  position: PopoverPosition | undefined;
+  origin: PopoverOrigin;
+  offset: number;
 };
 
-export class PopoverEngine {
+export class Popover extends AsyncStateQueue<PopoverState> {
   private _popover: HTMLElement | null = null;
   private _popoverTarget: HTMLButtonElement | null = null;
   private _popoverTargetAction: PopoverTargetAction;
-
-  private _popoverState: PopoverState;
-  private _log = new Isoscribe({
-    name: "PopoverEngine",
-    pillColor: "#cf275b",
-  });
+  private _popoverType: PopoverType;
 
   constructor(options?: Partial<PopoverOptions>) {
+    const initState: PopoverState = {
+      position: options?.popoverPosition,
+      origin: options?.popoverOrigin ?? "top-right",
+      offset: 0,
+    };
+    const log = new Isoscribe({
+      name: "PopoverEngine",
+      pillColor: "#cf275b",
+      logLevel: "debug",
+    });
+    super(initState, log);
+    this._log = log;
     this._popoverTargetAction = options?.popoverTargetAction ?? "toggle";
-    this._popoverState = "auto";
+    this._popoverType = "auto";
+    this._state = {
+      position: options?.popoverPosition,
+      origin: options?.popoverOrigin ?? "top-right",
+      offset: 0,
+    };
     this.setPopover = this.setPopover.bind(this);
     this.setPopoverTarget = this.setPopoverTarget.bind(this);
     this.show = this.show.bind(this);
@@ -63,14 +120,16 @@ export class PopoverEngine {
   }
 
   private _onToggle = (e: Event) => {
-    const event = e as EventPopoverToggle;
+    const event = e as ToggleEvent;
     const popover = this._getPopover();
 
     if (event.newState === "open") {
+      this._log.debug("Showing popover");
       popover.ariaExpanded = "true";
     }
 
     if (event.newState === "closed") {
+      this._log.debug("Hiding popover");
       popover.ariaExpanded = "false";
     }
   };
@@ -83,7 +142,8 @@ export class PopoverEngine {
   setPopover(node: HTMLElement | null) {
     if (!node) return;
     this._popover = node;
-    this._popover.popover = this._popoverState;
+    this._popover.popover = this._popoverType;
+    this._log.debug("Setting popover node", node);
 
     this._popover.addEventListener("toggle", this._onToggle);
 
@@ -97,11 +157,13 @@ export class PopoverEngine {
     if (!node) return;
     this._popoverTarget = node;
     this._popoverTarget.popoverTargetAction = this._popoverTargetAction;
+    this._log.debug("Setting popover target node", node);
   }
 
   show() {
     if (this._isOpen()) return;
     const popover = this._getPopover();
+    // this._calculatePosition();
     popover.showPopover();
   }
 
@@ -111,3 +173,29 @@ export class PopoverEngine {
     popover.hidePopover();
   }
 }
+
+export const popoverPosition: PopoverPosition[] = [
+  "bottom-center",
+  "bottom-left",
+  "bottom-right",
+  "left-bottom",
+  "left-middle",
+  "left-top",
+  "right-bottom",
+  "right-middle",
+  "right-top",
+  "top-center",
+  "top-left",
+  "top-right",
+];
+
+export const popoverOrigin: PopoverOrigin[] = [
+  "bottom-center",
+  "bottom-left",
+  "bottom-right",
+  "left-center",
+  "right-center",
+  "top-center",
+  "top-left",
+  "top-right",
+];

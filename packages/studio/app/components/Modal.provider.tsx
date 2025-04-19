@@ -23,11 +23,10 @@ export function ModalProvider<S extends ModalState>({
   children,
   dxEngine,
 }: ModalProviderProps<S>) {
-  const queue = dxEngine.getQueue();
   const state = useSyncExternalStore(
-    queue.subscribe,
-    queue.getSnapshot,
-    queue.getSnapshot
+    dxEngine.subscribe,
+    dxEngine.getSnapshot,
+    dxEngine.getSnapshot
   );
 
   const value = useMemo(

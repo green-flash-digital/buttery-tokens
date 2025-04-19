@@ -1,22 +1,50 @@
+import type { Draft } from "immer";
+import { produce } from "immer";
+import type { Isoscribe } from "isoscribe";
+
 export class AsyncStateQueue<T> implements AsyncIterable<T> {
   private _queue: T[] = [];
   private _resolvers: ((value: IteratorResult<T>) => void)[] = [];
   private _listeners = new Set<() => void>();
   private _closed = false;
-  protected _latest: T;
+  protected _log: Isoscribe;
 
-  constructor(baseState: T) {
-    this._latest = baseState;
+  protected _state: T;
+
+  constructor(initialState: T, log: Isoscribe) {
+    this._state = initialState;
+    this._log = log;
     this.subscribe = this.subscribe.bind(this);
     this.getSnapshot = this.getSnapshot.bind(this);
   }
 
-  setLatest(state: T) {
-    this._latest = state;
+  protected _setState(
+    fn: (draft: Draft<typeof this._state>) => void,
+    options?: { shouldLog?: boolean }
+  ) {
+    this._state = produce(this._state, fn);
+    this._dispatchState("state::mutation", options);
   }
 
-  enqueue(item: T) {
-    this._latest = item;
+  protected _dispatchState(name: string, options?: { shouldLog?: boolean }) {
+    // Queue the state update
+    const shouldLog = options?.shouldLog ?? true;
+    if (shouldLog) {
+      this._log.debug(`state::dispatch::${name}`, this._state);
+    }
+    this._enqueue(this._state);
+  }
+
+  getQueue() {
+    return this._queue;
+  }
+
+  getState() {
+    return this._state;
+  }
+
+  private _enqueue(item: T) {
+    this._state = item;
 
     // For async consumers
     if (this._resolvers.length > 0) {
@@ -39,7 +67,7 @@ export class AsyncStateQueue<T> implements AsyncIterable<T> {
   }
 
   getSnapshot(): T {
-    return this._latest;
+    return this._state;
   }
 
   subscribe(callback: () => void): () => void {
