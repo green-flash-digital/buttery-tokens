@@ -1,4 +1,5 @@
 import { Isoscribe } from "isoscribe";
+import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 
 import type { SetAsyncStateQueueState } from "./AsyncStateQueue";
 import { AsyncStateQueue } from "./AsyncStateQueue";
@@ -6,25 +7,29 @@ import { AsyncStateQueue } from "./AsyncStateQueue";
 export type PopoverTargetAction = "show" | "hide" | "toggle";
 export type PopoverType = "auto" | "manual" | "hint";
 export type PopoverPosition =
+  | "top"
   | "top-left"
-  | "top-center"
   | "top-right"
-  | "right-top"
-  | "right-middle"
-  | "right-bottom"
+  | "top-span-right"
+  | "top-span-left"
+  | "right"
+  | "right-span-top"
+  | "right-span-bottom"
   | "bottom-right"
-  | "bottom-center"
+  | "bottom"
   | "bottom-left"
-  | "left-bottom"
-  | "left-middle"
-  | "left-top";
+  | "bottom-span-right"
+  | "bottom-span-left"
+  | "left"
+  | "left-span-top"
+  | "left-span-bottom";
 export type PopoverOrigin =
   | "top-left"
-  | "top-center"
+  | "top"
   | "top-right"
   | "right-center"
   | "bottom-right"
-  | "bottom-center"
+  | "bottom"
   | "bottom-left"
   | "left-center";
 export type PopoverOffset = number;
@@ -105,7 +110,7 @@ export class Popover {
     this.setState = this._queue.setState;
   }
 
-  protected get _state() {
+  protected get _currentState() {
     return this._queue.getState();
   }
 
@@ -120,11 +125,13 @@ export class Popover {
     if (!this._popoverTarget) {
       throw "Cannot get the popover target. Popover target has not been set.";
     }
+    return this._popoverTarget;
   }
 
   private _onToggle = (e: Event) => {
     const event = e as ToggleEvent;
     const popover = this._getPopover();
+    const popoverTarget = this._getPopoverTarget();
 
     if (event.newState === "open") {
       this._log.debug("Showing popover");
@@ -134,6 +141,9 @@ export class Popover {
     if (event.newState === "closed") {
       this._log.debug("Hiding popover");
       popover.ariaExpanded = "false";
+      popoverTarget.style.removeProperty("anchorName");
+      popoverTarget.style.removeProperty("fixed");
+      popoverTarget.style.removeProperty("positionAnchor");
     }
   };
 
@@ -142,10 +152,100 @@ export class Popover {
     return popover.matches(":popover-open");
   }
 
+  private _browserSupportsPositionArea() {
+    const popover = this._getPopover();
+    const supportsPositionArea = "positionArea" in popover.style;
+    return supportsPositionArea;
+  }
+
   private _calculatePosition() {
-    if (!this._state.position) {
+    if (!this._currentState.position) {
       this._log.debug("No position set. Skipping positional calculations");
     }
+    const popover = this._getPopover();
+    const popoverTarget = this._getPopoverTarget();
+    const canUseCSS = this._browserSupportsPositionArea();
+
+    if (canUseCSS) {
+      const anchorName = `--${generateGUID()}`;
+      popoverTarget.style.anchorName = anchorName;
+      popover.style.margin = 0;
+      popover.style.position = "fixed";
+      popover.style.positionAnchor = anchorName;
+    }
+
+    switch (this._currentState.position) {
+      case "top-left":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "top span-right";
+        break;
+
+      case "top-right":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "top span-left";
+        break;
+
+      case "top":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "top";
+        break;
+
+      case "bottom":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "bottom";
+        break;
+
+      case "bottom-left":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "bottom span-right";
+        break;
+
+      case "bottom-right":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "bottom span-left";
+        break;
+
+      case "left-bottom":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "bottom right";
+        break;
+
+      case "left":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "left";
+        break;
+
+      case "left-top":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "left";
+        break;
+
+      case "right":
+        if (!canUseCSS) return;
+        popover.style.positionArea = "right";
+        break;
+
+      default:
+        exhaustiveMatchGuard(this._currentState.position);
+    }
+  }
+
+  setPosition(position: PopoverPosition) {
+    this.setState((draft) => {
+      draft.position = position;
+    });
+  }
+
+  setOrigin(origin: PopoverOrigin) {
+    this.setState((draft) => {
+      draft.origin = origin;
+    });
+  }
+
+  setOffset(offset: number) {
+    this.setState((draft) => {
+      draft.offset = offset;
+    });
   }
 
   getQueue() {
@@ -185,30 +285,38 @@ export class Popover {
     const popover = this._getPopover();
     popover.hidePopover();
   }
+
+  getState() {
+    return this._queue.getState();
+  }
 }
 
 export const popoverPosition: PopoverPosition[] = [
-  "bottom-center",
+  "bottom",
   "bottom-left",
   "bottom-right",
-  "left-bottom",
-  "left-middle",
-  "left-top",
-  "right-bottom",
-  "right-middle",
-  "right-top",
-  "top-center",
+  "bottom-span-left",
+  "bottom-span-right",
+  "left",
+  "left-span-bottom",
+  "left-span-top",
+  "right",
+  "right-span-bottom",
+  "right-span-top",
+  "top",
   "top-left",
   "top-right",
+  "top-span-left",
+  "top-span-right",
 ];
 
 export const popoverOrigin: PopoverOrigin[] = [
-  "bottom-center",
+  "bottom",
   "bottom-left",
   "bottom-right",
   "left-center",
   "right-center",
-  "top-center",
+  "top",
   "top-left",
   "top-right",
 ];

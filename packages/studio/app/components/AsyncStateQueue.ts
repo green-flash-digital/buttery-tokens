@@ -20,6 +20,7 @@ export class AsyncStateQueue<T> implements AsyncIterable<T> {
     this._log = log;
     this.subscribe = this.subscribe.bind(this);
     this.getSnapshot = this.getSnapshot.bind(this);
+    this.setState = this.setState.bind(this);
   }
 
   setState(

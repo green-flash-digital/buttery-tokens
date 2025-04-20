@@ -57,6 +57,8 @@ const styles = css`
           color: ${makeColor("neutral-dark")};
         }
         &-secondary {
+          background: ${makeColor("secondary")};
+          color: ${makeColor("neutral-dark")};
         }
       }
     }
