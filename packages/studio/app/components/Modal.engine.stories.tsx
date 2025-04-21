@@ -6,7 +6,7 @@ import { ModalHeader } from "./ModalHeader";
 import { Modal } from "./Modal";
 
 const meta: Meta = {
-  title: "ModalEngine",
+  title: "Dialog / Modal / Engine",
 } satisfies Meta<typeof meta>;
 
 export default meta;

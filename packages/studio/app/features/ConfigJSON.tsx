@@ -1,12 +1,12 @@
-import { useModal } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import { makeCustom } from "@buttery/studio-tokens";
 
 import { Button } from "~/components/Button";
-import { ModalDrawer } from "~/components/ModalDrawer";
 import { ModalHeader } from "~/components/ModalHeader";
 import { CodeBlock } from "~/components/CodeBlock";
 import { IconCode } from "~/icons/IconCode";
+import { useModal } from "~/components/Modal.useModal";
+import { Modal } from "~/components/Modal";
 
 import { useConfigurationContext } from "./Config.context";
 
@@ -27,17 +27,19 @@ const styles = css`
 `;
 
 export function ConfigJSON() {
-  const { openModal, modalRef } = useModal();
+  const modal = useModal();
   const { getConfigFromState } = useConfigurationContext();
   const config = getConfigFromState();
 
   return (
     <>
-      <Button dxVariant="outlined" DXIconStart={IconCode} onClick={openModal}>
+      <Button dxVariant="outlined" DXIconStart={IconCode} onClick={modal.open}>
         JSON
       </Button>
-      <ModalDrawer
-        ref={modalRef}
+      <Modal
+        ref={modal.onMount}
+        dxType="drawer"
+        dxEngine={modal}
         dxVariant="right-to-left"
         dxSize="md"
         className={styles}
@@ -50,7 +52,7 @@ export function ConfigJSON() {
           dxCode={JSON.stringify(config, null, 2)}
           dxOptions={{ lang: "json" }}
         />
-      </ModalDrawer>
+      </Modal>
     </>
   );
 }

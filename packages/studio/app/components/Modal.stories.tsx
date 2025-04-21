@@ -6,7 +6,7 @@ import { Modal } from "./Modal";
 import { ModalEngine } from "./Modal.engine";
 
 const meta: Meta = {
-  title: "Modal",
+  title: "Dialog / Modal / Variants",
   component: Modal,
   parameters: {
     layout: "centered",

@@ -51,8 +51,10 @@ export type PopoverOptions = {
    * bridge the knowledge gap with human readable semantics without having to do a lot of CSS / JS
    * gymnastics
    *
-   * The API reads... "Position the popover's` `<popover-origin>` at/on the target's `<popover-position>`":
-   * @default `right-top`
+   * Regardless of the browser support, this API follows the `position-area` semantics set fourth
+   * in the following MDN Document: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning/Using#setting_a_position-area
+   * Another follow up document: https://css-tricks.com/almanac/properties/p/position-anchor/#aa-method-2-position-area-property
+   * @default `bottom`
    */
   popoverPosition: PopoverPosition;
   /**
