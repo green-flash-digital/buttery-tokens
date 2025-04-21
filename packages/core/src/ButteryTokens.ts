@@ -39,6 +39,8 @@ type GetConfigOptions = {
   noCache?: boolean;
 };
 
+export type LogLevel = IsoScribeLogLevel;
+
 export class ButteryTokens {
   private _log: Isoscribe;
   private _config: TokensConfig | undefined = undefined;
@@ -162,7 +164,7 @@ export class ButteryTokens {
   async build(options?: GetConfigOptions) {
     try {
       const config = await this._getConfig(options);
-      this._log.debug("Building buttery tokens");
+      this._log.info("Building buttery tokens");
 
       const templates = [
         new TemplateMakeColor(config), // color
@@ -233,6 +235,11 @@ export class ButteryTokens {
 
       // Format the directories
       await this._formatGeneratedFiles();
+
+      // Success message
+      this._log.success(
+        `Alright, alright alright! Successfully built the "${this._config?.config.runtime.prefix}" tokens & utilities`
+      );
     } catch (error) {
       this._handleError(error);
     }
@@ -286,7 +293,7 @@ export class ButteryTokens {
       process.cwd(),
       config.meta.filePath
     );
-    this._log.watch(`Starting compilation in watch mode.
+    this._log.watch(`Running subsequent builds in watch mode
       
 Watching for changes in the following files:${printAsBullets([
       watchedFileButteryConfig,

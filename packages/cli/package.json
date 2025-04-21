@@ -25,5 +25,8 @@
   "type": "module",
   "bin": {
     "buttery": "./bin/index.js"
+  },
+  "dependencies": {
+    "@buttery/core": "workspace:^"
   }
 }

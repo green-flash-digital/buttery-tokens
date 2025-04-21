@@ -580,7 +580,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@buttery/core@npm:0.2.0, @buttery/core@workspace:, @buttery/core@workspace:packages/core":
+"@buttery/core@npm:0.2.0, @buttery/core@workspace:, @buttery/core@workspace:^, @buttery/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@buttery/core@workspace:packages/core"
   dependencies:
@@ -610,6 +610,7 @@ __metadata:
   dependencies:
     "@buttery/core": "npm:0.2.0"
     "@gfdigital/tsconfig": "npm:0.3.1"
+    buttery-tokens: "workspace:^"
     isoscribe: "npm:0.1.4"
     tsx: "npm:4.19.3"
     typescript: "npm:5.8.3"
@@ -5446,10 +5447,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buttery-tokens@workspace:packages/cli":
+"buttery-tokens@workspace:^, buttery-tokens@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "buttery-tokens@workspace:packages/cli"
   dependencies:
+    "@buttery/core": "workspace:^"
     "@gfdigital/tsconfig": "npm:0.3.1"
     fizmoo: "npm:0.1.2"
     typescript: "npm:5.8.3"

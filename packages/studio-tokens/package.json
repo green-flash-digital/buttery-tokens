@@ -8,7 +8,7 @@
     "./root.css": "./.buttery/_generated/root.css"
   },
   "scripts": {
-    "tokens:build": "yarn tsx ./scripts/build-studio-tokens.ts",
+    "tokens:build": "yarn buttery build",
     "build": "yarn tokens:build && yarn tsc --project tsconfig.build.json",
     "dev": "yarn tsx ./scripts/dev-studio-tokens.ts"
   },
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@buttery/core": "0.2.0",
     "@gfdigital/tsconfig": "0.3.1",
+    "buttery-tokens": "workspace:^",
     "isoscribe": "0.1.4",
     "tsx": "4.19.3",
     "typescript": "5.8.3"
