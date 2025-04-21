@@ -109,7 +109,7 @@ const posStyles = css`
 `;
 
 export const Positioning = () => {
-  const popover = usePopover();
+  const popover = usePopover({ popoverOffset: 10 });
 
   return (
     <div className={posStyles}>

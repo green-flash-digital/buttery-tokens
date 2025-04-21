@@ -210,7 +210,6 @@ export class Popover {
 
       case "bottom-span-right":
         positionArea = "bottom span-right";
-
         top = rect.bottom + offset;
         left = rect.left;
         break;
@@ -218,31 +217,36 @@ export class Popover {
       case "top":
         positionArea = "top";
         left = rect.left + rect.width / 2;
+        top = rect.top - offset;
         translateX = "-50%";
         translateY = "-100%";
         break;
 
       case "top-left":
         positionArea = "top left";
+        top = rect.top - offset;
         translateY = "-100%";
         translateX = "-100%";
         break;
 
       case "top-right":
         positionArea = "top right";
+        top = rect.top - offset;
         left = rect.right;
         translateY = "-100%";
         break;
 
       case "top-span-left":
         positionArea = "top span-left";
-        translateY = "-100%";
+        top = rect.top - offset;
         left = rect.right;
+        translateY = "-100%";
         translateX = "-100%";
         break;
 
       case "top-span-right":
         positionArea = "top span-right";
+        top = rect.top - offset;
         translateY = "-100%";
         break;
 
@@ -278,13 +282,13 @@ export class Popover {
 
       case "right-span-bottom":
         positionArea = "right span-bottom";
-        left = rect.right;
+        left = rect.right + offset;
         break;
 
       case "right-span-top":
         positionArea = "right span-top";
-        top = rect.bottom + offset;
-        left = rect.right;
+        top = rect.bottom;
+        left = rect.right + offset;
         translateY = "-100%";
         break;
 
@@ -308,6 +312,7 @@ export class Popover {
     }
 
     // Fallback to using JS
+    popover.style.margin = "0px";
     popover.style.position = "fixed";
     popover.style.top = `${top}px`;
     popover.style.left = `${left}px`;
