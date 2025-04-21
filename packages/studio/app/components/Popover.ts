@@ -23,15 +23,6 @@ export type PopoverPosition =
   | "left"
   | "left-span-top"
   | "left-span-bottom";
-export type PopoverOrigin =
-  | "top-left"
-  | "top"
-  | "top-right"
-  | "right-center"
-  | "bottom-right"
-  | "bottom"
-  | "bottom-left"
-  | "left-center";
 export type PopoverOffset = number;
 
 export type PopoverOptions = {
@@ -65,20 +56,35 @@ export type PopoverOptions = {
    */
   popoverPosition: PopoverPosition;
   /**
-   * The point on the popover that should be aligned with the position. This option will only take effect
-   * if a position is set on the popover.
-   *
-   * The API reads... "Position the popover's` <popover-origin>` at/on the target's `<popover-position>`":
-   * @default `top-right`
+   * The amount of space between the popover and it's associated target
+   * @default 0
    */
-  popoverOrigin: PopoverOrigin;
+  popoverOffset: number;
 };
 
 type PopoverState = {
-  position: PopoverPosition | undefined;
-  origin: PopoverOrigin;
+  position: PopoverPosition;
   offset: number;
 };
+
+export const popoverPosition: PopoverPosition[] = [
+  "bottom",
+  "bottom-left",
+  "bottom-right",
+  "bottom-span-left",
+  "bottom-span-right",
+  "left",
+  "left-span-bottom",
+  "left-span-top",
+  "right",
+  "right-span-bottom",
+  "right-span-top",
+  "top",
+  "top-left",
+  "top-right",
+  "top-span-left",
+  "top-span-right",
+];
 
 export class Popover {
   private _popover: HTMLElement | null = null;
@@ -95,9 +101,8 @@ export class Popover {
 
   constructor(options?: Partial<PopoverOptions>) {
     const initState: PopoverState = {
-      position: options?.popoverPosition,
-      origin: options?.popoverOrigin ?? "top-right",
-      offset: 0,
+      position: options?.popoverPosition ?? "bottom",
+      offset: options?.popoverOffset ?? 0,
     };
     this._queue = new AsyncStateQueue(initState, this._log);
     this._popoverTargetAction = options?.popoverTargetAction ?? "toggle";
@@ -164,84 +169,165 @@ export class Popover {
     }
     const popover = this._getPopover();
     const popoverTarget = this._getPopoverTarget();
-    const canUseCSS = this._browserSupportsPositionArea();
+    const supportsCSS = this._browserSupportsPositionArea();
+    const rect = popoverTarget.getBoundingClientRect();
+    const offset = this._currentState.offset;
 
-    if (canUseCSS) {
-      const anchorName = `--${generateGUID()}`;
-      popoverTarget.style.anchorName = anchorName;
-      popover.style.margin = 0;
-      popover.style.position = "fixed";
-      popover.style.positionAnchor = anchorName;
-    }
+    let top = rect.top;
+    let left = rect.left;
+    let translateX: string | 0 = 0;
+    let translateY: string | 0 = 0;
+    let positionArea: string = this._currentState.position;
 
     switch (this._currentState.position) {
-      case "top-left":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "top span-right";
-        break;
-
-      case "top-right":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "top span-left";
-        break;
-
-      case "top":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "top";
-        break;
-
       case "bottom":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "bottom";
+        positionArea = "bottom";
+        top = rect.bottom + offset;
+        left = rect.left + rect.width / 2;
+        translateX = "-50%";
+        translateY = 0;
         break;
 
       case "bottom-left":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "bottom span-right";
+        positionArea = "bottom right";
+        top = rect.bottom + offset;
+        left = rect.left;
+        translateX = "-100%";
         break;
 
       case "bottom-right":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "bottom span-left";
+        positionArea = "bottom left";
+        top = rect.bottom + offset;
+        left = rect.right;
         break;
 
-      case "left-bottom":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "bottom right";
+      case "bottom-span-left":
+        positionArea = "bottom span-left";
+        top = rect.bottom + offset;
+        left = rect.right;
+        translateX = "-100%";
+        break;
+
+      case "bottom-span-right":
+        positionArea = "bottom span-right";
+
+        top = rect.bottom + offset;
+        left = rect.left;
+        break;
+
+      case "top":
+        positionArea = "top";
+        left = rect.left + rect.width / 2;
+        translateX = "-50%";
+        translateY = "-100%";
+        break;
+
+      case "top-left":
+        positionArea = "top left";
+        translateY = "-100%";
+        translateX = "-100%";
+        break;
+
+      case "top-right":
+        positionArea = "top right";
+        left = rect.right;
+        translateY = "-100%";
+        break;
+
+      case "top-span-left":
+        positionArea = "top span-left";
+        translateY = "-100%";
+        left = rect.right;
+        translateX = "-100%";
+        break;
+
+      case "top-span-right":
+        positionArea = "top span-right";
+        translateY = "-100%";
         break;
 
       case "left":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "left";
+        positionArea = "left";
+        top = rect.top + rect.height / 2;
+        left = rect.left - popover.offsetWidth - offset;
+        translateX = "-100%";
+        translateY = "-50%";
         break;
 
-      case "left-top":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "left";
+      case "left-span-bottom":
+        positionArea = "left span-bottom";
+        left = rect.left - popover.offsetWidth - offset;
+        translateX = "-100%";
+        break;
+
+      case "left-span-top":
+        positionArea = "left span-top";
+        top = rect.bottom + offset;
+        left = rect.left - popover.offsetWidth - offset;
+        translateX = "-100%";
+        translateY = "-100%";
         break;
 
       case "right":
-        if (!canUseCSS) return;
-        popover.style.positionArea = "right";
+        positionArea = "right";
+        top = rect.top + rect.height / 2;
+        left = rect.right + offset;
+        translateX = 0;
+        translateY = "-50%";
+        break;
+
+      case "right-span-bottom":
+        positionArea = "right span-bottom";
+        left = rect.right;
+        break;
+
+      case "right-span-top":
+        positionArea = "right span-top";
+        top = rect.bottom + offset;
+        left = rect.right;
+        translateY = "-100%";
         break;
 
       default:
         exhaustiveMatchGuard(this._currentState.position);
     }
+
+    // Handle positioning using CSS
+    if (supportsCSS) {
+      const anchorName = `--${generateGUID()}`;
+      // @ts-expect-error This API isn't baseline and should also be used with a Polyfill
+      popoverTarget.style.anchorName = anchorName;
+      popover.style.position = "fixed";
+      // @ts-expect-error This API isn't baseline and should also be used with a Polyfill
+      popover.style.positionAnchor = anchorName;
+      // @ts-expect-error This API isn't baseline and should also be used with a Polyfill
+      popover.style.positionArea = positionArea;
+      popover.style.margin = `${this._currentState.offset}px`;
+
+      return;
+    }
+
+    // Fallback to using JS
+    popover.style.position = "fixed";
+    popover.style.top = `${top}px`;
+    popover.style.left = `${left}px`;
+    popover.style.transform = `translate(${translateX}, ${translateY})`;
   }
 
+  /**
+   * Imperatively sets the position of where the popover
+   * shows up relative to it's associated target
+   */
   setPosition(position: PopoverPosition) {
     this.setState((draft) => {
       draft.position = position;
     });
   }
 
-  setOrigin(origin: PopoverOrigin) {
-    this.setState((draft) => {
-      draft.origin = origin;
-    });
-  }
-
+  /**
+   * Imperatively sets the offset or the space between the popover
+   * and it's associated target
+   */
   setOffset(offset: number) {
     this.setState((draft) => {
       draft.offset = offset;
@@ -290,33 +376,3 @@ export class Popover {
     return this._queue.getState();
   }
 }
-
-export const popoverPosition: PopoverPosition[] = [
-  "bottom",
-  "bottom-left",
-  "bottom-right",
-  "bottom-span-left",
-  "bottom-span-right",
-  "left",
-  "left-span-bottom",
-  "left-span-top",
-  "right",
-  "right-span-bottom",
-  "right-span-top",
-  "top",
-  "top-left",
-  "top-right",
-  "top-span-left",
-  "top-span-right",
-];
-
-export const popoverOrigin: PopoverOrigin[] = [
-  "bottom",
-  "bottom-left",
-  "bottom-right",
-  "left-center",
-  "right-center",
-  "top",
-  "top-left",
-  "top-right",
-];

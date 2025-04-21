@@ -27,7 +27,7 @@ const styles = css`
   // Closed styles
   opacity: 0;
   transform: scale(0.9);
-  transition: all 0.1s allow-discrete;
+  transition: all 0.5s allow-discrete;
 
   @starting-style {
     &:popover-open {
@@ -137,18 +137,25 @@ export const Positioning = () => {
       <div style={{ gridArea: "side" }}>
         <h2>Offset</h2>
         <p>The space in between the popover and the target</p>
-        <input type="number" defaultValue={popover.getState().offset} />
+        <input
+          type="number"
+          defaultValue={popover.getState().offset}
+          onChange={({ currentTarget: { value } }) => {
+            popover.setOffset(Number(value));
+          }}
+        />
         <h2>Positioning</h2>
         <p>The position that the popover will render relative to the target</p>
         {popoverPosition.map((position) => (
-          <div>
+          <div key={position}>
             <label>
               <input
                 type="radio"
                 name="position"
-                key={position}
                 value={position}
+                defaultChecked={popover.getState().position === position}
                 onChange={({ currentTarget: { value } }) => {
+                  popover.hide();
                   popover.setPosition(value as PopoverPosition);
                   popover.show();
                 }}
