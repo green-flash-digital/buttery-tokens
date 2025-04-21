@@ -3,7 +3,7 @@ import { classes } from "react-hook-primitives";
 
 import type { ModalState } from "./Modal.engine";
 import { ModalProvider, type ModalProviderProps } from "./Modal.provider";
-import { modalStyles } from "./Modal.styles";
+import { modalBaseStyles, modalStyles } from "./Modal.styles";
 
 export type ModalType = "default" | "drawer";
 export type ModalSize = "sm" | "md" | "lg" | "xl" | "full";
@@ -25,7 +25,7 @@ export type ModalProps<S extends ModalState> = ModalProviderProps<S> &
       }
     | {
         dxType?: Extract<ModalType, "drawer">;
-        dxVariant: "right-to-left";
+        dxVariant: "right";
       }
   );
 
@@ -53,6 +53,7 @@ export function Modal<S extends ModalState>({
         id={id}
         ref={handleOnMount}
         className={classes(
+          modalBaseStyles,
           modalStyles[props.dxType ?? "default"],
           { [`s-${dxSize}`]: dxSize },
           props.dxType === "default" && {

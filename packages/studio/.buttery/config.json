@@ -1,5 +1,5 @@
 {
-  "$schema": "../../core/dist/buttery-tokens.json",
+  "$schema": "https://schemas.greenflash.digital/buttery-tokens.json",
   "runtime": {
     "prefix": "studio-test",
     "strict": true,
@@ -26,12 +26,20 @@
       "heading": {
         "family": "Montserrat",
         "fallback": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
-        "styles": ["regular-400", "semiBold-600", "bold-700"]
+        "styles": [
+          "regular-400",
+          "semiBold-600",
+          "bold-700"
+        ]
       },
       "body": {
         "family": "Lato",
         "fallback": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
-        "styles": ["regular-400", "medium-500", "semiBold-600"]
+        "styles": [
+          "regular-400",
+          "medium-500",
+          "semiBold-600"
+        ]
       },
       "formal": {
         "family": "Playfair Display",

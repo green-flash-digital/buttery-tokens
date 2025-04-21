@@ -4,8 +4,57 @@ import { css } from "@linaria/core";
 
 import type { ModalType } from "./Modal";
 
+export const modalBaseStyles = css`
+  // Open state of the dialog
+  &:open,
+  &[open] {
+    opacity: 1;
+    visibility: visible;
+
+    &::backdrop {
+      opacity: 1;
+      visibility: visible;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Closed state
+  padding: 0;
+  border: 0;
+  margin: 0;
+  border: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out allow-discrete;
+
+  &::backdrop {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out allow-discrete;
+  }
+
+  @starting-style {
+    &:open,
+    &[open] {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @starting-style {
+    &:open::backdrop,
+    &[open]::backdrop {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+`;
+
 const drawerStyles = css`
   --drawer-width: 0;
+  width: min-content;
+  position: fixed;
 
   &.s {
     &-sm {
@@ -26,83 +75,16 @@ const drawerStyles = css`
     }
   }
 
-  padding: 0;
-  border: 0;
-  transition: backdrop-filter 1s ease;
-  margin: 0;
-  border: 0;
+  &.v {
+    &-right {
+      border-top-left-radius: ${makeRem(4)};
+      border-bottom-left-radius: ${makeRem(4)};
+      left: 100%;
 
-  &::backdrop {
-    transition: backdrop-filter 1s ease;
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.4);
-  }
-
-  @keyframes fade-in {
-    0% {
-      opacity: 0;
-      visibility: hidden;
-    }
-    100% {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  @keyframes fade-out {
-    0% {
-      opacity: 1;
-      visibility: visible;
-    }
-    100% {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-
-  &.v-right-to-left {
-    @keyframes rtl-open {
-      0% {
-        opacity: 0;
-        transform: translateX(100%);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(--drawer-width);
-      }
-    }
-
-    @keyframes rtl-close {
-      0% {
-        opacity: 1;
-        transform: translateX(--drawer-width);
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(100%);
-      }
-    }
-
-    left: calc(100% - var(--drawer-width));
-    right: 0;
-    height: 100%;
-    max-height: 100%;
-    position: fixed;
-    border-top-left-radius: ${makeRem(4)};
-    border-bottom-left-radius: ${makeRem(4)};
-
-    @media (prefers-reduced-motion: no-preference) {
+      &:open,
       &[open] {
-        animation: rtl-open 0.2s ease-in-out forwards;
-        &::backdrop {
-          animation: fade-in 0.2s ease-in-out forwards;
-        }
-      }
-      &[data-close="true"] {
-        animation: rtl-close 0.2s ease-in-out forwards;
-        &::backdrop {
-          animation: fade-out 0.2s ease-in-out forwards;
-        }
+        display: grid;
+        translate: -100%;
       }
     }
   }

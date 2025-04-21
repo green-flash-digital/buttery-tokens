@@ -25,7 +25,7 @@ export function FontFamilyPreviewControlsHelp() {
         dxEngine={modal}
         ref={modal.onMount}
         dxType="drawer"
-        dxVariant="right-to-left"
+        dxVariant="right"
         dxSize="lg"
       >
         <ModalHeader>Font family help</ModalHeader>

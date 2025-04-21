@@ -40,7 +40,7 @@ export function ConfigJSON() {
         ref={modal.onMount}
         dxType="drawer"
         dxEngine={modal}
-        dxVariant="right-to-left"
+        dxVariant="right"
         dxSize="md"
         className={styles}
       >

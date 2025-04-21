@@ -25,7 +25,7 @@ export function FontVariantPreviewControlsHelp() {
         dxEngine={modal}
         ref={modal.onMount}
         dxType="drawer"
-        dxVariant="right-to-left"
+        dxVariant="right"
         dxSize="lg"
       >
         <ModalHeader>Typography variant help</ModalHeader>
