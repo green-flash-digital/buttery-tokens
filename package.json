@@ -28,7 +28,7 @@
     "@changesets/cli": "2.29.2",
     "@gfdigital/eslint-config": "0.4.2",
     "@gfdigital/tsconfig": "0.3.1",
-    "buttery-tokens": "workspace:^",
+    "buttery-tokens": "0.1.0",
     "eslint": "9.25.1",
     "turbo": "2.5.0",
     "typescript": "5.8.3"

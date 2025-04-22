@@ -28,7 +28,7 @@
     "buttery": "./bin/index.js"
   },
   "dependencies": {
-    "@buttery/core": "workspace:^",
-    "@buttery/studio": "workspace:^"
+    "@buttery/core": "0.2.0",
+    "@buttery/studio": "0.1.0"
   }
 }
