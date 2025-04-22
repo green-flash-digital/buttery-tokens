@@ -1,5 +1,11 @@
 # @buttery/studio-tokens
 
+## 0.2.3
+
+### Patch Changes
+
+- 20501e9: Adds public publish configuration to all packages
+
 ## 0.2.2
 
 ### Patch Changes
