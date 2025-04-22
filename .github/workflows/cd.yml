@@ -40,10 +40,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.GREEN_FLASH_CLOUDFLARE_API_TOKEN }}
-          command: |
-            r2 object put json-schemas/buttery-tokens.json
-            --file=./packages/core/dist/buttery-tokens.json
-            --content-type=application/json
+          command: r2 object put json-schemas/buttery-tokens.json --file=./packages/core/dist/buttery-tokens.json --content-type=application/json
 
       - name: Create a Release PR --or-- Publish to NPM
         id: changesets
