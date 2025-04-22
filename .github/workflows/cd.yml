@@ -36,17 +36,15 @@ jobs:
       - name: Build Project
         run: yarn build
 
-      # Builds & deploys storybook to CF Pages
-      # - name: Build Storybook
-      #   run: yarn build-storybook
+      - name: Push JSON schema to R2
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.GREEN_FLASH_CLOUDFLARE_API_TOKEN }}
+          command: |
+            r2 object put json-schemas/buttery-tokens.json
+            --file=./packages/core/dist/buttery-tokens.json
+            --content-type=application/json
 
-      # - name: Deploy Storybook
-      #   uses: cloudflare/wrangler-action@v3
-      #   with:
-      #     apiToken: ${{ secrets.GREEN_FLASH_CLOUDFLARE_API_TOKEN }}
-      #     command: pages deploy ./storybook-static --project-name=react-hook-primitives-storybook
-
-      # Creates a Release PR or Publishes to NPM
       - name: Create a Release PR --or-- Publish to NPM
         id: changesets
         uses: changesets/action@v1
