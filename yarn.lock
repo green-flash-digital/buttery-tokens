@@ -587,14 +587,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@buttery/core@workspace:, @buttery/core@workspace:^, @buttery/core@workspace:packages/core":
+"@buttery/core@workspace:^, @buttery/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@buttery/core@workspace:packages/core"
   dependencies:
-    "@buttery/studio": "workspace:^"
     "@gfdigital/tsconfig": "npm:0.3.1"
     "@inquirer/prompts": "npm:7.4.1"
-    "@react-router/express": "npm:^7.5.1"
     "@types/chroma-js": "npm:3.1.1"
     "@types/express": "npm:^5.0.1"
     "@types/node": "npm:^22.14.1"
@@ -619,6 +617,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@buttery/studio-tokens@workspace:packages/studio-tokens"
   dependencies:
+    "@buttery/core": "workspace:^"
     "@gfdigital/tsconfig": "npm:0.3.1"
     isoscribe: "npm:0.1.4"
     tsx: "npm:4.19.3"
@@ -633,13 +632,14 @@ __metadata:
     "@babel/core": "npm:7.26.10"
     "@babel/preset-react": "npm:7.26.3"
     "@babel/preset-typescript": "npm:7.27.0"
-    "@buttery/core": "workspace:"
     "@buttery/studio-tokens": "workspace:"
     "@chromatic-com/storybook": "npm:3.2.6"
+    "@gfdigital/tsconfig": "npm:^0.3.1"
     "@linaria/core": "npm:6.3.0"
     "@linaria/server": "npm:6.3.0"
     "@monaco-editor/react": "npm:4.7.0"
     "@react-router/dev": "npm:7.5.1"
+    "@react-router/express": "npm:^7.5.1"
     "@react-router/fs-routes": "npm:7.5.1"
     "@react-router/node": "npm:7.5.1"
     "@react-router/serve": "npm:7.5.1"
@@ -651,11 +651,13 @@ __metadata:
     "@storybook/react-vite": "npm:8.6.12"
     "@storybook/test": "npm:8.6.12"
     "@types/babel__core": "npm:7.20.5"
-    "@types/node": "npm:22.14.1"
+    "@types/express": "npm:^5.0.1"
+    "@types/node": "npm:^22.14.1"
     "@types/react": "npm:19.1.2"
     "@types/react-dom": "npm:19.1.2"
     "@wyw-in-js/vite": "npm:^0.6.0"
     eslint: "npm:9.25.1"
+    express: "npm:^5.1.0"
     immer: "npm:10.1.1"
     isbot: "npm:5.1.26"
     isoscribe: "npm:0.1.4"
@@ -670,6 +672,7 @@ __metadata:
     storybook: "npm:8.6.12"
     ts-jolt: "npm:0.2.2"
     ts-pattern: "npm:5.7.0"
+    tsx: "npm:^4.19.3"
     typescript: "npm:5.8.3"
     use-immer: "npm:0.11.0"
     vite: "npm:6.3.2"
@@ -1831,7 +1834,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gfdigital/tsconfig@npm:0.3.1":
+"@gfdigital/tsconfig@npm:0.3.1, @gfdigital/tsconfig@npm:^0.3.1":
   version: 0.3.1
   resolution: "@gfdigital/tsconfig@npm:0.3.1"
   checksum: 10c0/eeb95f2303bae296a24393f46f3a498bef64d3844a0814ae75ad48c21b7ca6658a76247e35266a0da1474152aca5e6d60b74bca8739a1455fdf199c14378a21a
@@ -4425,19 +4428,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.14.1, @types/node@npm:^22.14.1":
+"@types/node@npm:^12.7.1":
+  version: 12.20.55
+  resolution: "@types/node@npm:12.20.55"
+  checksum: 10c0/3b190bb0410047d489c49bbaab592d2e6630de6a50f00ba3d7d513d59401d279972a8f5a598b5bb8ddc1702f8a2f4ec57a65d93852f9c329639738e7053637d1
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.14.1":
   version: 22.14.1
   resolution: "@types/node@npm:22.14.1"
   dependencies:
     undici-types: "npm:~6.21.0"
   checksum: 10c0/d49c4d00403b1c2348cf0701b505fd636d80aabe18102105998dc62fdd36dcaf911e73c7a868c48c21c1022b825c67b475b65b1222d84b704d8244d152bb7f86
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^12.7.1":
-  version: 12.20.55
-  resolution: "@types/node@npm:12.20.55"
-  checksum: 10c0/3b190bb0410047d489c49bbaab592d2e6630de6a50f00ba3d7d513d59401d279972a8f5a598b5bb8ddc1702f8a2f4ec57a65d93852f9c329639738e7053637d1
   languageName: node
   linkType: hard
 
@@ -11977,7 +11980,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:4.19.3":
+"tsx@npm:4.19.3, tsx@npm:^4.19.3":
   version: 4.19.3
   resolution: "tsx@npm:4.19.3"
   dependencies:

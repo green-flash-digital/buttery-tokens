@@ -10,8 +10,8 @@ import { LOG } from "./util.logger";
 export function getLocalConfigVars() {
   LOG.debug("Fetching local configuration variables");
   const vars = {
-    CONFIG_PATH: String(process.env.BUTTERY_TOKENS_PG_CONFIG_PATH),
-    VERSION_DIR: String(process.env.BUTTERY_TOKENS_PG_VERSION_DIR),
+    CONFIG_PATH: String(process.env.BUTTERY_TOKENS_STUDIO_CONFIG_PATH),
+    VERSION_DIR: String(process.env.BUTTERY_TOKENS_STUDIO_VERSION_DIR),
   };
   LOG.debug(JSON.stringify(vars, null, 2));
 
@@ -27,16 +27,16 @@ export function getLocalConfigVars() {
 }
 
 export function getIsLocalConfig() {
-  const isLocal = process.env.BUTTERY_TOKENS_PG_IS_LOCAL;
+  const isLocal = process.env.BUTTERY_TOKENS_STUDIO_IS_LOCAL;
   return isLocal === "true";
 }
 
 async function getLocalConfig() {
-  const configPath = process.env.BUTTERY_TOKENS_PG_CONFIG_PATH;
+  const configPath = process.env.BUTTERY_TOKENS_STUDIO_CONFIG_PATH;
   if (!configPath) {
     throw errors.MISSING_ENV_VAR(
       "Unable to determine local path of `buttery-tokens.config.json`",
-      "BUTTERY_TOKENS_PG_CONFIG_PATH"
+      "BUTTERY_TOKENS_STUDIO_CONFIG_PATH"
     );
   }
   LOG.debug(`Fetching configuration from path ${configPath}`);

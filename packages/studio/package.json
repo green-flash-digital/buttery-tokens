@@ -3,7 +3,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "react-router build",
+    "build": "react-router build && yarn server:build",
     "deploy": "wrangler pages deploy ./build/client",
     "dev": "react-router dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
@@ -11,22 +11,25 @@
     "typecheck": "react-router typegen && tsc",
     "typegen": "wrangler types",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "server:build": "yarn tsc --project tsconfig.server.json",
+    "serve": "yarn tsx ./scripts/serve.ts"
   },
   "files": [
     "build"
   ],
   "exports": {
-    "./server": "./build/server/index.js",
-    "./client": "./build/client/*"
+    "./server": "./StudioServer.js"
   },
   "dependencies": {
     "@buttery/studio-tokens": "workspace:",
     "@linaria/server": "6.3.0",
     "@monaco-editor/react": "4.7.0",
+    "@react-router/express": "^7.5.1",
     "@react-router/fs-routes": "7.5.1",
     "@react-router/node": "7.5.1",
     "@react-router/serve": "7.5.1",
+    "express": "^5.1.0",
     "immer": "10.1.1",
     "isbot": "5.1.26",
     "isoscribe": "0.1.4",
@@ -48,6 +51,7 @@
     "@babel/preset-react": "7.26.3",
     "@babel/preset-typescript": "7.27.0",
     "@chromatic-com/storybook": "3.2.6",
+    "@gfdigital/tsconfig": "^0.3.1",
     "@linaria/core": "6.3.0",
     "@react-router/dev": "7.5.1",
     "@storybook/addon-essentials": "8.6.12",
@@ -58,13 +62,15 @@
     "@storybook/react-vite": "8.6.12",
     "@storybook/test": "8.6.12",
     "@types/babel__core": "7.20.5",
-    "@types/node": "22.14.1",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "@wyw-in-js/vite": "^0.6.0",
     "eslint": "9.25.1",
     "react-router-devtools": "1.1.10",
     "storybook": "8.6.12",
+    "tsx": "^4.19.3",
     "typescript": "5.8.3",
     "vite": "6.3.2",
     "vite-tsconfig-paths": "5.1.4",

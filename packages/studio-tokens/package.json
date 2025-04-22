@@ -8,9 +8,9 @@
     "./root.css": "./.buttery/_generated/root.css"
   },
   "scripts": {
-    "tokens:build": "yarn buttery build",
+    "tokens:build": "yarn tsx ./scripts/build-studio-tokens.ts",
     "build": "yarn tokens:build && yarn tsc --project tsconfig.build.json",
-    "dev": "yarn buttery dev"
+    "dev": "yarn tsx ./scripts/dev-studio-tokens.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
   "devDependencies": {
+    "@buttery/core": "workspace:^",
     "@gfdigital/tsconfig": "0.3.1",
     "isoscribe": "0.1.4",
     "tsx": "4.19.3",

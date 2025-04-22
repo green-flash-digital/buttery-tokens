@@ -1,6 +1,7 @@
 import { defineOptions, type Action, type Meta } from "fizmoo";
 import type { LogLevel } from "@buttery/core";
 import { ButteryTokens } from "@buttery/core";
+import { StudioServer } from "@buttery/studio/server";
 
 export const meta: Meta = {
   name: "studio",
@@ -33,5 +34,15 @@ export const action: Action<never, typeof options> = async ({ options }) => {
     autoInit: true,
   });
 
-  await tokens.studio({ port: options.port });
+  try {
+    const config = await tokens.getConfig();
+    const server = new StudioServer({
+      port: options.port,
+      configPath: config.meta.filePath,
+      versionsDir: config.dirs.versions,
+    });
+    server.listen();
+  } catch (error) {
+    tokens.printError(error);
+  }
 };

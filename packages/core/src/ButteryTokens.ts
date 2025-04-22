@@ -1,18 +1,15 @@
-import path, { dirname } from "node:path";
+import path from "node:path";
 import { watch } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 
 import { DotDir, type DotDirResponse } from "dotdir";
 import type { IsoScribeLogLevel } from "isoscribe";
 import { Isoscribe, printAsBullets } from "isoscribe";
-import { exhaustiveMatchGuard, tryHandle } from "ts-jolt/isomorphic";
+import { tryHandle } from "ts-jolt/isomorphic";
 import { input } from "@inquirer/prompts";
 import { writeFileRecursive } from "ts-jolt/node";
 import prettier from "prettier";
 import { globby } from "globby";
-import { createRequestHandler } from "@react-router/express";
-import express from "express";
 
 import { ConfigSchema, type ButteryTokensConfig } from "./schemas/schema.js";
 import { TemplateMakeColor } from "./templates/Template.make-color.js";
@@ -44,13 +41,6 @@ type GetConfigOptions = {
 };
 
 export type LogLevel = IsoScribeLogLevel;
-
-type EnvVars = {
-  BUTTERY_TOKENS_STUDIO_PORT: number;
-  BUTTERY_TOKENS_PG_IS_LOCAL: boolean;
-  BUTTERY_TOKENS_PG_CONFIG_PATH: string;
-  BUTTERY_TOKENS_PG_VERSION_DIR: string;
-};
 
 export class ButteryTokens {
   private _log: Isoscribe;
@@ -90,7 +80,7 @@ export class ButteryTokens {
     };
   }
 
-  private async _getConfig(options?: GetConfigOptions): Promise<TokensConfig> {
+  async getConfig(options?: GetConfigOptions): Promise<TokensConfig> {
     const shouldGetNew = options?.noCache ?? false;
 
     // 1. Return the config
@@ -152,7 +142,7 @@ export class ButteryTokens {
 
     // Recursively call the method again to return the config
     // and the directories associated with that config
-    const config = await this._getConfig();
+    const config = await this.getConfig();
 
     return config;
   }
@@ -160,7 +150,7 @@ export class ButteryTokens {
   /**
    * Central handler for handling errors
    */
-  private _handleError(error: string | Error | unknown) {
+  printError(error: string | Error | unknown) {
     if (error instanceof Error) {
       this._log.fatal(error);
     }
@@ -171,58 +161,12 @@ export class ButteryTokens {
   }
 
   /**
-   * Private method to resolve environment variables
-   * with overrides provided either by internal variables
-   * or variables from an external source
-   */
-  private _getEnvVar<T extends keyof EnvVars, K extends EnvVars[T]>(
-    envVar: T,
-    override: K | undefined
-  ) {
-    const value = override ?? process.env[envVar];
-
-    switch (envVar) {
-      case "BUTTERY_TOKENS_STUDIO_PORT":
-        return value ?? 5700;
-
-      case "BUTTERY_TOKENS_PG_IS_LOCAL":
-        return value ?? false;
-
-      case "BUTTERY_TOKENS_PG_CONFIG_PATH":
-      case "BUTTERY_TOKENS_PG_VERSION_DIR":
-        return value ?? "";
-
-      default:
-        return exhaustiveMatchGuard(envVar);
-    }
-  }
-
-  /**
-   * Set;s multiple environment vars at once
-   */
-  private _setEnvVars(envVars: Partial<EnvVars>) {
-    for (const [varName, varValue] of Object.entries(envVars)) {
-      this._setEnvVar(varName as keyof EnvVars, varValue);
-    }
-  }
-
-  /**
-   * Set's a value to the environment variable to be used later
-   */
-  private _setEnvVar<T extends keyof EnvVars, K extends EnvVars[T]>(
-    envVar: T,
-    value: K
-  ) {
-    process.env[envVar] = value.toString();
-  }
-
-  /**
    * Builds the buttery tokens utils and the :root css file
    * that they interface
    */
   async build(options?: GetConfigOptions) {
     try {
-      const config = await this._getConfig(options);
+      const config = await this.getConfig(options);
       this._log.info("Building buttery tokens");
 
       const templates = [
@@ -300,7 +244,7 @@ export class ButteryTokens {
         `Alright, alright alright! Successfully built the "${this._config?.config.runtime.prefix}" tokens & utilities`
       );
     } catch (error) {
-      this._handleError(error);
+      this.printError(error);
     }
   }
 
@@ -310,7 +254,7 @@ export class ButteryTokens {
    */
   private async _formatGeneratedFiles() {
     this._log.debug("Formatting generated files...");
-    const config = await this._getConfig();
+    const config = await this.getConfig();
 
     const dirToFormat = config.dirs.generated;
 
@@ -347,7 +291,7 @@ export class ButteryTokens {
     await this.build({ noCache: true });
     let counter = 1;
 
-    const config = await this._getConfig();
+    const config = await this.getConfig();
     const watcher = watch(config.meta.filePath);
     const watchedFileButteryConfig = path.relative(
       process.cwd(),
@@ -365,49 +309,5 @@ Watching for changes in the following files:${printAsBullets([
       this._log.watch(`"${relPath}" changed. Rebuilding.... (${counter}x)`);
       this.build({ noCache: true });
     });
-  }
-
-  /**
-   * Launch the tokens studio in a development environment
-   */
-  async studio(options?: { port: number }) {
-    try {
-      //Resolve variables
-      const config = await this._getConfig();
-      const port = this._getEnvVar("BUTTERY_TOKENS_STUDIO_PORT", options?.port);
-      this._setEnvVars({
-        BUTTERY_TOKENS_PG_IS_LOCAL: true,
-        BUTTERY_TOKENS_PG_CONFIG_PATH: config.meta.filePath,
-        BUTTERY_TOKENS_PG_VERSION_DIR: config.dirs.versions,
-      });
-
-      // Instantiate an express application
-      const app = express();
-
-      // Serve static files from the public directory
-      const studioPath = fileURLToPath(
-        import.meta.resolve("@buttery/studio/client")
-      );
-      const clientAssetsDir = dirname(studioPath);
-      app.use(express.static(clientAssetsDir));
-
-      // Middleware to handle React Router requests
-      app.use(
-        createRequestHandler({
-          // @ts-expect-error No types are created for a full application build
-          build: async () => import("@buttery/studio/server"),
-          mode: process.env.NODE_ENV,
-        })
-      );
-
-      // Launch the app
-      app.listen(port, () => {
-        console.log(
-          `🎨 The TokensStudio is running at http://localhost:${port}`
-        );
-      });
-    } catch (error) {
-      this._handleError(error);
-    }
   }
 }
