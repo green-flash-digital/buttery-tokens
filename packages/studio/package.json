@@ -3,6 +3,9 @@
   "version": "0.2.2",
   "sideEffects": false,
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "react-router build && yarn server:build",
     "deploy": "wrangler pages deploy ./build/client",

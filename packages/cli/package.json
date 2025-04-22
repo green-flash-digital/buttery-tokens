@@ -2,7 +2,9 @@
   "name": "buttery-tokens",
   "version": "0.2.2",
   "description": "Auto-generate TS functional utilities to easily recall & implement CSS design tokens",
-  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "yarn fizmoo dev",
     "build": "yarn fizmoo build"

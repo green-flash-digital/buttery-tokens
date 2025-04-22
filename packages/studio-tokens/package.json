@@ -3,6 +3,9 @@
   "version": "0.2.2",
   "description": "A standalone package to test the APIs in @buttery/core and to establish the tokens for the @buttery/studio",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": "./dist/index.js",
     "./root.css": "./.buttery/_generated/root.css"
