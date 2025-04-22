@@ -1,5 +1,13 @@
 # @buttery/studio
 
+## 0.2.2
+
+### Patch Changes
+
+- e46ee96: Bug fixes
+- Updated dependencies [e46ee96]
+  - @buttery/studio-tokens@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
