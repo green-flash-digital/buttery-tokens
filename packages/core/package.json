@@ -1,6 +1,6 @@
 {
   "name": "@buttery/core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "The JS API for the buttery-tokens package that is used to distribute schemas, utils, and the main ButteryTokens class.",
   "scripts": {
     "build:lib": "yarn tsc --project tsconfig.build.json",
