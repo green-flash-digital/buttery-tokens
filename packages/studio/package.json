@@ -20,7 +20,9 @@
     "serve": "yarn tsx ./scripts/serve.ts"
   },
   "files": [
-    "build"
+    "build",
+    "StudioServer.js",
+    "StudioServer.d.ts"
   ],
   "exports": {
     "./server": "./StudioServer.js"
