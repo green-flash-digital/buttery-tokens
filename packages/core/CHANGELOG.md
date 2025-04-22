@@ -1,5 +1,11 @@
 # @buttery/core
 
+## 0.2.2
+
+### Patch Changes
+
+- e46ee96: Bug fixes
+
 ## 0.2.1
 
 ### Patch Changes
