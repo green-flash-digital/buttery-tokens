@@ -6,8 +6,7 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx",
-    ".react-router/types/**/*",
-    "app/features/size-and-space/size-and-space.utils.ts"
+    ".react-router/types/**/*"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
@@ -25,9 +24,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
-      "@tokens": ["./.buttery/tokens/index.js"],
-      "@tokens/css": ["./.buttery/tokens/styles.css"]
+      "~/*": ["./app/*"]
     },
     "rootDirs": [".", "./.react-router/types"],
     // Vite takes care of building everything, not tsc.

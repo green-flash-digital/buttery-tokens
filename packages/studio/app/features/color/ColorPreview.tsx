@@ -2,8 +2,8 @@ import { useMemo, type ReactNode } from "react";
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
 
-import { LayoutConfigSectionPreview } from "~/components/LayoutConfigSectionPreview";
 import { LayoutConfigSectionPreviewTitle } from "~/components/LayoutConfigSectionPreviewTitle";
+import { LayoutConfigSectionPreview } from "~/components/LayoutConfigSectionPreview";
 
 import { ColorPreviewControls } from "./ColorPreviewControls";
 import {

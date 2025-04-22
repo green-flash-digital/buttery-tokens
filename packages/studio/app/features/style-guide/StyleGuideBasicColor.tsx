@@ -3,13 +3,18 @@ import { classes } from "react-hook-primitives";
 import {
   ColorAccessibilityChecker,
   getAccessibleTextColor,
-} from "@buttery/core";
+} from "@buttery/core/utils";
 import { Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
+import {
+  makeColor,
+  makeFontFamily,
+  makeFontWeight,
+  makeRem,
+} from "@buttery/studio-tokens";
 
-import { makeColor, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
-import { IconTick01 } from "~/icons/IconTick01";
 import { IconCancel } from "~/icons/IconCancel";
+import { IconTick01 } from "~/icons/IconTick01";
 
 import { StyleGuidePage } from "./StyleGuidePage";
 import { StyleGuidePageRight } from "./StyleGuidePageRight";

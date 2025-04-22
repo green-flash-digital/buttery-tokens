@@ -1,12 +1,13 @@
 {
-  "name": "buttery-tokens",
+  "name": "@green-flash/buttery-tokens",
   "version": "0.1.0",
   "description": "TBD",
   "type": "module",
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "lint": "eslint ./packages/core/src/* ./packages/studio/app/* --fix"
+    "lint": "eslint './packages/core/src/**' './packages/studio/app/**' --fix",
+    "release": "npx changeset publish"
   },
   "repository": {
     "type": "git",
@@ -18,17 +19,22 @@
     "url": "https://github.com/green-flash-digital/buttery-tokens/issues"
   },
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
-  "packageManager": "yarn@4.7.0",
+  "packageManager": "yarn@4.9.1",
   "workspaces": {
     "packages": [
       "./packages/*"
     ]
   },
+  "resolutions": {
+    "ts-jolt": "0.2.3"
+  },
   "devDependencies": {
-    "@changesets/cli": "^2.28.1",
-    "eslint": "^9.21.0",
-    "eslint-config-greenflash": "^0.2.1",
-    "turbo": "^2.4.4",
-    "typescript": "^5.8.2"
+    "@changesets/cli": "2.29.2",
+    "@gfdigital/eslint-config": "0.4.2",
+    "@gfdigital/tsconfig": "0.3.1",
+    "buttery-tokens": "0.1.0",
+    "eslint": "9.25.1",
+    "turbo": "2.5.0",
+    "typescript": "5.8.3"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
+  "changelog": ["./changelog.js", { "repo": "@green-flash/buttery-tokens" }],
+  "commit": false,
+  "fixed": [
+    [
+      "buttery-tokens",
+      "@buttery/core",
+      "@buttery/studio",
+      "@buttery/studio-tokens"
+    ]
+  ],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}

@@ -8,10 +8,8 @@ import { css } from "@linaria/core";
 import type { ChangeEventHandler, JSX } from "react";
 import { useMemo, forwardRef } from "react";
 import { match } from "ts-pattern";
+import { makeRem } from "@buttery/studio-tokens";
 
-import { makeRem } from "@tokens";
-import { InputRadioTab } from "~/components/InputRadioTab";
-import { InputRadioTabs } from "~/components/InputRadioTabs";
 
 import { ColorSwatchVariantTypeAuto } from "./ColorSwatchVariantTypeAuto";
 import type { ColorSwatchVariantTypeNamedProps } from "./ColorSwatchVariantTypeNamed";
@@ -20,6 +18,9 @@ import type { ColorSwatchVariantTypeManualProps } from "./ColorSwatchVariantType
 import { ColorSwatchVariantTypeManual } from "./ColorSwatchVariantTypeManual";
 
 import { InputLabel } from "../../components/InputLabel";
+
+import { InputRadioTabs } from "~/components/InputRadioTabs";
+import { InputRadioTab } from "~/components/InputRadioTab";
 
 export type ColorSwatchVariantsPropsNative = JSX.IntrinsicElements["div"];
 export type ColorSwatchVariantsPropsCustom = {

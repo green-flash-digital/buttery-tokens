@@ -1,7 +1,6 @@
 import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
-
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 
 const dropdownStyles = css`
   opacity: 0;

@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 
-import { makeColor, makeRem } from "@tokens";
 import { Table } from "~/components/Table";
 import { TableHead } from "~/components/TableHead";
 import { TableHeadCell } from "~/components/TableHeadCell";

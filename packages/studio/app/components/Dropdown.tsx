@@ -2,8 +2,7 @@ import type { JSX } from "react";
 import { forwardRef } from "react";
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
-
-import { makeRem } from "@tokens";
+import { makeRem } from "@buttery/studio-tokens";
 
 export type DropdownPropsNative = JSX.IntrinsicElements["div"];
 export type DropdownProps = DropdownPropsNative;

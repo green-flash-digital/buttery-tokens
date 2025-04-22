@@ -2,8 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-
-import { makeRem, makeReset } from "@tokens";
+import { makeRem, makeReset } from "@buttery/studio-tokens";
 
 export type InputColorPropsNative = Omit<
   JSX.IntrinsicElements["input"],

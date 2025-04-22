@@ -7,8 +7,8 @@ import {
   useForwardedRef,
 } from "react-hook-primitives";
 import { css } from "@linaria/core";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 
-import { makeColor, makeRem } from "@tokens";
 import { IconArrowDown } from "~/icons/IconArrowDown";
 
 import type { InputTextPropsCustom } from "./InputText";

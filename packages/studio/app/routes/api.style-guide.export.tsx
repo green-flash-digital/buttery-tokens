@@ -2,10 +2,8 @@ import path from "node:path";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 
 import puppeteer from "puppeteer";
-// import { json } from "@remix-run/node";
 import type { ButteryTokensConfig } from "@buttery/core/schemas";
 import { renderToString } from "react-dom/server";
-// import React from "react";
 import type { ActionFunctionArgs } from "react-router";
 import { collect } from "@linaria/server";
 

@@ -12,23 +12,6 @@ export function SettingsConfig() {
     <>
       <InputSection dxSize="dense">
         <InputLabel
-          dxLabel="Namespace"
-          dxHelp="A string that will be appended to the import of the buttery tokens package. Avoids potential import conflicts while auto reconciling the module resolution."
-        >
-          <InputText
-            dxSize="normal"
-            value={settings.namespace}
-            onChange={({ currentTarget: { value } }) =>
-              setSettings((draft) => {
-                if (!value) return;
-                draft.namespace = value;
-              })
-            }
-          />
-        </InputLabel>
-      </InputSection>
-      <InputSection dxSize="dense">
-        <InputLabel
           dxLabel="Prefix"
           dxHelp="A string that will prefix the generated CSS custom properties to ensure there aren't any conflicts with other 3rd party CSS custom properties"
         >

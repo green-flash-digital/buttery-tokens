@@ -1,9 +1,9 @@
 import { generateGUID } from "ts-jolt/isomorphic";
 import { useCallback } from "react";
 
-import { VariantList } from "~/components/VariantList";
-import { VariantEmpty } from "~/components/VariantEmpty";
 import { VariantAdd } from "~/components/VariantAdd";
+import { VariantEmpty } from "~/components/VariantEmpty";
+import { VariantList } from "~/components/VariantList";
 
 import { ColorBrandModeManualVariant } from "./ColorBrandModeManualVariant";
 import type { ConfigurationStateColorBrandManual } from "./color.utils";

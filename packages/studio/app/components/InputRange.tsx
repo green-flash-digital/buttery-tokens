@@ -2,8 +2,12 @@ import { classes, useForwardedRef } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { ChangeEventHandler, JSX } from "react";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
-
-import { makeColor, makeFontFamily, makeRem, makeReset } from "@tokens";
+import {
+  makeColor,
+  makeFontFamily,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 
 import { InputNumber } from "./InputNumber";
 

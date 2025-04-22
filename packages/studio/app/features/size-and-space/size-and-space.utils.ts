@@ -1,8 +1,8 @@
-import type { SpaceVariantsRecord } from "@buttery/core";
+import type { SpaceVariantsRecord } from "@buttery/core/utils";
 import {
   calculateSpaceVariantsAuto,
   calculateSpaceVariantsManual,
-} from "@buttery/core";
+} from "@buttery/core/utils";
 import type {
   ButteryTokensConfig,
   SpaceAuto,

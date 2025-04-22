@@ -3,14 +3,14 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import { match } from "ts-pattern";
-
 import {
   makeColor,
   makeFontFamily,
   makeFontWeight,
   makeRem,
   type ColorAndVariants,
-} from "@tokens";
+} from "@buttery/studio-tokens";
+
 import type { IconArrowDown } from "~/icons/IconArrowDown";
 
 export type LabelPropsNative = JSX.IntrinsicElements["span"];

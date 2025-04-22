@@ -2,8 +2,7 @@ import type { JSX } from "react";
 import { forwardRef } from "react";
 import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
-
-import { makeColor, makeCustom, makeRem } from "@tokens";
+import { makeColor, makeCustom, makeRem } from "@buttery/studio-tokens";
 
 export type LayoutFooterPropsNative = JSX.IntrinsicElements["footer"];
 export type LayoutFooterProps = LayoutFooterPropsNative;

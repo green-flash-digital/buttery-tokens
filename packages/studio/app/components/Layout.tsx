@@ -2,8 +2,7 @@ import { classes } from "react-hook-primitives";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import { css } from "@linaria/core";
-
-import { makeFontFamily } from "@tokens";
+import { makeFontFamily } from "@buttery/studio-tokens";
 
 export type LayoutPropsNative = JSX.IntrinsicElements["body"];
 export type LayoutProps = LayoutPropsNative;

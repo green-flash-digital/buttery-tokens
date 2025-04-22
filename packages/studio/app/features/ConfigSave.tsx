@@ -1,7 +1,5 @@
-import { useModal } from "react-hook-primitives";
 import { css } from "@linaria/core";
 
-import { Modal } from "~/components/Modal";
 import { ModalBody } from "~/components/ModalBody";
 import { ModalHeader } from "~/components/ModalHeader";
 import { IconFloppyDisk } from "~/icons/IconFloppyDisk";
@@ -12,9 +10,11 @@ import { IconInspectCode } from "~/icons/IconInspectCode";
 import { DropdownMenu } from "~/components/DropdownMenu";
 import { DropdownMenuItem } from "~/components/DropdownMenuItem";
 import { IconTimeManagement } from "~/icons/IconTimeManagement";
+import { useModal } from "~/components/Modal.useModal";
+import { Modal } from "~/components/Modal";
 
-import { ConfigSaveDiff } from "./ConfigSaveDiff";
 import { useSaveConfig } from "./config.useSave";
+import { ConfigSaveDiff } from "./ConfigSaveDiff";
 
 const modalBodyStyles = css`
   display: grid;
@@ -23,12 +23,12 @@ const modalBodyStyles = css`
 `;
 
 export function ConfigSave() {
-  const { openModal, modalRef, closeModal } = useModal();
+  const modal = useModal();
   const { saveConfig } = useSaveConfig();
 
   function saveAndClose() {
     saveConfig();
-    closeModal();
+    modal.close();
   }
 
   return (
@@ -46,7 +46,7 @@ export function ConfigSave() {
               dxSubtitle="Review a side-by-side comparison of changes"
               DXIcon={IconInspectCode}
               dxTheme="primary"
-              onClick={openModal}
+              onClick={modal.open}
             />
           </li>
           <li>
@@ -55,12 +55,17 @@ export function ConfigSave() {
               dxSubtitle="Compare, review, or revert to earlier versions."
               DXIcon={IconTimeManagement}
               dxTheme="secondary"
-              onClick={openModal}
+              onClick={modal.open}
             />
           </li>
         </DropdownMenu>
       </ButtonDropdown>
-      <Modal ref={modalRef} dxSize="full" dxVariant="contain">
+      <Modal
+        dxEngine={modal}
+        ref={modal.onMount}
+        dxType="default"
+        dxSize="full"
+      >
         <ModalHeader dxSubtitle="View your modified config next to the original & make any changes necessary. Once complete, click the 'save' button at the bottom right hand of the screen.">
           View Diff & Save
         </ModalHeader>
@@ -72,7 +77,7 @@ export function ConfigSave() {
             dxColor="primary"
             dxSize="big"
             dxVariant="outlined"
-            onClick={closeModal}
+            onClick={modal.close}
           >
             Cancel
           </Button>

@@ -2,8 +2,7 @@ import { classes, useDropdownTooltip } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-
-import { makeColor, makeFontFamily, makeRem } from "@tokens";
+import { makeColor, makeFontFamily, makeRem } from "@buttery/studio-tokens";
 import "react-hook-primitives/styles";
 
 export type TooltipVariant = "light" | "dark";

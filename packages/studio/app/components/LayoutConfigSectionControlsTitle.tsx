@@ -2,8 +2,13 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
+import {
+  makeRem,
+  makeCustom,
+  makeReset,
+  makeFontWeight,
+} from "@buttery/studio-tokens";
 
-import { makeRem, makeCustom, makeReset, makeFontWeight } from "@tokens";
 import { InformationCircleIcon } from "~/icons/IconInformationCircle";
 
 export type LayoutConfigSectionControlsTitlePropsNative =

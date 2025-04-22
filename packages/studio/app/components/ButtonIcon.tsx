@@ -3,8 +3,8 @@ import { css } from "@linaria/core";
 import type { JSX, RefCallback } from "react";
 import { forwardRef, useCallback, useId } from "react";
 import { match } from "ts-pattern";
+import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 
-import { makeColor, makeRem, makeReset } from "@tokens";
 import type { IconBrush } from "~/icons/IconBrush";
 
 import type { ButtonSharedProps } from "./button.utils";
@@ -92,29 +92,29 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
     },
     forwardedRef
   ) {
-    const { setTargetRef, setTooltipRef } = useTooltip({
-      dxType: "tooltip",
-      dxPosition: "top-center",
-      dxArrow: { size: 8 },
-    });
-    const ref = useForwardedRef(forwardedRef);
+    // const { setTargetRef, setTooltipRef } = useTooltip({
+    //   dxType: "tooltip",
+    //   dxPosition: "top-center",
+    //   dxArrow: { size: 8 },
+    // });
+    // const ref = useForwardedRef(forwardedRef);
     const id = useId();
 
-    const refCallback = useCallback<RefCallback<HTMLButtonElement>>(
-      (node) => {
-        if (!node) return;
-        ref.current = node;
-        setTargetRef(node);
-      },
-      [ref, setTargetRef]
-    );
+    // const refCallback = useCallback<RefCallback<HTMLButtonElement>>(
+    //   (node) => {
+    //     if (!node) return;
+    //     ref.current = node;
+    //     setTargetRef(node);
+    //   },
+    //   [ref, setTargetRef]
+    // );
 
     return (
       <>
         <button
           {...restProps}
           type={type}
-          ref={refCallback}
+          // ref={refCallback}
           aria-labelledby={id}
           className={classes(styles, className, {
             [`s-${dxSize}`]: dxSize,
@@ -129,11 +129,11 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
               .exhaustive()}
           />
         </button>
-        {dxHelp && (
+        {/* {dxHelp && (
           <Tooltip ref={setTooltipRef} id={id}>
             {dxHelp}
           </Tooltip>
-        )}
+        )} */}
       </>
     );
   }

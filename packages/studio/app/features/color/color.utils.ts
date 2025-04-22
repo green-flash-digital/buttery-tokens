@@ -18,7 +18,10 @@ import type { Updater } from "use-immer";
 import { useImmer } from "use-immer";
 import type { z, ZodUnionDef, ZodLiteral } from "zod";
 import { match } from "ts-pattern";
-import { createBrandVariants, createNeutralVariants } from "@buttery/core";
+import {
+  createBrandVariants,
+  createNeutralVariants,
+} from "@buttery/core/utils";
 
 import type { ColorPreviewThemeMode } from "./ColorPreview.context";
 

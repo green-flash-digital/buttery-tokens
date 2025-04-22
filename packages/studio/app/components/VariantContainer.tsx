@@ -2,8 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-
-import { makeColor, makeRem } from "@tokens";
+import { makeColor, makeRem } from "@buttery/studio-tokens";
 
 export type VariantContainerPropsNative = JSX.IntrinsicElements["div"];
 export type VariantContainerPropsCustom = {

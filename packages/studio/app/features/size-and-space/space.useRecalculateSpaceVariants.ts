@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { calculateSpaceVariantAutoValue } from "@buttery/core";
+import { calculateSpaceVariantAutoValue } from "@buttery/core/utils";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 
 import { useConfigurationContext } from "../Config.context";

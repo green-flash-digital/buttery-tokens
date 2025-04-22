@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
+import { makeRem } from "@buttery/studio-tokens";
 
-import { makeRem } from "@tokens";
 import { Button } from "~/components/Button";
 import { IconDownload05 } from "~/icons/IconDownload05";
 import { IconFloppyDisk } from "~/icons/IconFloppyDisk";

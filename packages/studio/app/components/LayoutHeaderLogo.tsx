@@ -2,8 +2,12 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX, ReactNode } from "react";
 import { forwardRef } from "react";
-
-import { makeCustom, makeFontFamily, makeFontWeight, makeRem } from "@tokens";
+import {
+  makeCustom,
+  makeFontFamily,
+  makeFontWeight,
+  makeRem,
+} from "@buttery/studio-tokens";
 
 export type LayoutHeaderLogoPropsNative = JSX.IntrinsicElements["div"];
 export type LayoutHeaderLogoPropsCustom = {

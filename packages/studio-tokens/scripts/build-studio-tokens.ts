@@ -1,20 +1,3 @@
-import { createButteryTokens } from "@buttery/core";
+import { StudioTokens } from "./tokens.js";
 
-import { LOG } from "./scripts.utils";
-
-async function buildStudioTokens() {
-  try {
-    LOG.debug("Building...");
-    const butteryTokens = await createButteryTokens({
-      logLevel: "trace",
-      env: "development",
-      autoInit: true,
-    });
-    if (!butteryTokens) return;
-    await butteryTokens.build();
-  } catch (error) {
-    LOG.fatal(error);
-  }
-}
-
-buildStudioTokens();
+await StudioTokens.build();

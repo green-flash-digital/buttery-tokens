@@ -3,8 +3,13 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import { match } from "ts-pattern";
+import {
+  makeColor,
+  makeFontWeight,
+  makeRem,
+  makeReset,
+} from "@buttery/studio-tokens";
 
-import { makeColor, makeFontWeight, makeRem, makeReset } from "@tokens";
 import type { IconDashboardSquareAdd } from "~/icons/IconDashboardSquareAdd";
 
 import type { ButtonSharedProps } from "./button.utils";
@@ -52,6 +57,8 @@ const styles = css`
           color: ${makeColor("neutral-dark")};
         }
         &-secondary {
+          background: ${makeColor("secondary")};
+          color: ${makeColor("neutral-dark")};
         }
       }
     }

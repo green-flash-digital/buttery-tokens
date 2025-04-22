@@ -6,17 +6,17 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "react-router";
-import "@tokens/css";
+import "@buttery/studio-tokens/root.css";
 import type { LinksFunction } from "react-router";
+import { css } from "@linaria/core";
+import { makeFontFamily } from "@buttery/studio-tokens";
 
 import { LayoutHeader } from "./components/LayoutHeader";
 import { LayoutHeaderLogo } from "./components/LayoutHeaderLogo";
 import { LayoutMain } from "./components/LayoutMain";
-import { Layout as Body } from "./components/Layout";
 import { LayoutFooter } from "./components/LayoutFooter";
 import { Label } from "./components/Label";
 import { getIsLocalConfig } from "./utils/util.getLocalConfig";
-import { LayoutHeaderMenu } from "./components/LayoutHeaderMenu";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -39,16 +39,28 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export async function loader() {
-  const isLocalConfig = getIsLocalConfig();
-  if (isLocalConfig) {
-    return { isLocal: true };
+const styles = css`
+  :global() {
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: ${makeFontFamily("Mulish")};
+
+      &::after,
+      &::before {
+        box-sizing: border-box;
+      }
+    }
   }
-  return { isLocal: false };
-}
+`;
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { isLocal } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -57,35 +69,51 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <Body>
-        <LayoutHeader>
-          <LayoutHeaderLogo
-            dxSrc="/images/buttery-logo-tokens.png"
-            dxAlt="buttery-tokens-logo"
-            dxLabel={
-              isLocal && (
-                <div>
-                  <Label dxSize="dense" dxColor="primary">
-                    LOCAL MODE
-                  </Label>
-                </div>
-              )
-            }
-          >
-            Buttery Tokens
-          </LayoutHeaderLogo>
-          <div />
-          <LayoutHeaderMenu />
-        </LayoutHeader>
-        <LayoutMain>{children}</LayoutMain>
-        <LayoutFooter>footer</LayoutFooter>
+      <body className={styles}>
+        {children}
         <ScrollRestoration />
         <Scripts />
-      </Body>
+      </body>
     </html>
   );
 }
 
+export async function loader() {
+  const isLocalConfig = getIsLocalConfig();
+  if (isLocalConfig) {
+    return { isLocal: true };
+  }
+  return { isLocal: false };
+}
+
 export default function App() {
-  return <Outlet />;
+  const { isLocal } = useLoaderData<typeof loader>();
+  return (
+    <>
+      <LayoutHeader>
+        <LayoutHeaderLogo
+          dxSrc="/images/buttery-logo-tokens.png"
+          dxAlt="buttery-tokens-logo"
+          dxLabel={
+            isLocal && (
+              <div>
+                <Label dxSize="dense" dxColor="primary">
+                  LOCAL MODE
+                </Label>
+              </div>
+            )
+          }
+        >
+          Buttery Tokens
+        </LayoutHeaderLogo>
+        <div />
+        {/* <LayoutHeaderMenu /> */}
+      </LayoutHeader>
+      <LayoutMain>
+        <Outlet />
+      </LayoutMain>
+      <LayoutFooter>footer</LayoutFooter>
+    </>
+  );
+  return;
 }

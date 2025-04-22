@@ -1,8 +1,7 @@
-import { classes, useModalContext } from "react-hook-primitives";
+import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-
 import {
   makeColor,
   makeCustom,
@@ -10,8 +9,11 @@ import {
   makeFontWeight,
   makeRem,
   makeReset,
-} from "@tokens";
+} from "@buttery/studio-tokens";
+
 import { IconCancel } from "~/icons/IconCancel";
+
+import { useModalContext } from "./Modal.provider";
 
 export type ModalHeaderPropsNative = Omit<
   JSX.IntrinsicElements["header"],
@@ -66,7 +68,7 @@ export const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>(
     { children, className, dxHideClose = false, dxSubtitle, ...restProps },
     ref
   ) {
-    const { closeModal } = useModalContext();
+    const { close } = useModalContext();
     return (
       <header {...restProps} className={classes(styles, className)} ref={ref}>
         <div>
@@ -74,7 +76,7 @@ export const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>(
           {dxSubtitle && <div className="subtitle">{dxSubtitle}</div>}
         </div>
         {!dxHideClose && (
-          <button onClick={closeModal} autoFocus>
+          <button onClick={close} autoFocus>
             <IconCancel dxSize={24} />
           </button>
         )}

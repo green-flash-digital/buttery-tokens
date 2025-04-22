@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/react";
-import "@tokens/css";
+import "@buttery/studio-tokens/root.css";
 
 const preview: Preview = {
   parameters: {

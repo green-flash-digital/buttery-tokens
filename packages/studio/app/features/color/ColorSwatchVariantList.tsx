@@ -2,8 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-
-import { makeReset, makeRem } from "@tokens";
+import { makeReset, makeRem } from "@buttery/studio-tokens";
 
 export type ColorSwatchVariantListPropsNative = JSX.IntrinsicElements["ul"];
 export type ColorSwatchVariantListProps = ColorSwatchVariantListPropsNative;
