@@ -454,7 +454,7 @@ __metadata:
     globby: "npm:14.1.0"
     isoscribe: "npm:0.1.4"
     prettier: "npm:3.5.3"
-    ts-jolt: "npm:0.2.2"
+    ts-jolt: "npm:0.2.3"
     ts-pattern: "npm:5.7.0"
     tsx: "npm:4.19.3"
     typescript: "npm:5.8.3"
@@ -521,7 +521,7 @@ __metadata:
     react-router-devtools: "npm:1.1.10"
     shiki: "npm:3.3.0"
     storybook: "npm:8.6.12"
-    ts-jolt: "npm:0.2.2"
+    ts-jolt: "npm:0.2.3"
     ts-pattern: "npm:5.7.0"
     tsx: "npm:^4.19.3"
     typescript: "npm:5.8.3"
@@ -578,7 +578,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/cli@npm:2.29.2, @changesets/cli@npm:^2.28.1":
+"@changesets/cli@npm:2.29.2, @changesets/cli@npm:^2.28.1, @changesets/cli@npm:^2.29.2":
   version: 2.29.2
   resolution: "@changesets/cli@npm:2.29.2"
   dependencies:
@@ -11128,6 +11128,15 @@ __metadata:
   version: 0.2.2
   resolution: "ts-jolt@npm:0.2.2"
   checksum: 10c0/7d236fe09b8adf276f22835a28114ad066e0d10867a0250f9195c25d77fd06f61d0691a9d38894d707b0678f1d60917b9ec358e4c53ce437cb6c3f19dfdc7d18
+  languageName: node
+  linkType: hard
+
+"ts-jolt@npm:0.2.3":
+  version: 0.2.3
+  resolution: "ts-jolt@npm:0.2.3"
+  dependencies:
+    "@changesets/cli": "npm:^2.29.2"
+  checksum: 10c0/8fc8b10a25ebcf4154335d2d9818af6a51b8a2816eb9a358f04c1c6d190e18d2e16bbdedbeec5241580743e8b92bff217a6fb848dae43fd8989fbed1965dceee
   languageName: node
   linkType: hard
 

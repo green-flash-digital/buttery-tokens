@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "lint": "eslint './packages/core/src/**' './packages/studio/app/**' --fix"
+    "lint": "eslint './packages/core/src/**' './packages/studio/app/**' --fix",
+    "release": "npx changeset publish"
   },
   "repository": {
     "type": "git",
