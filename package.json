@@ -35,5 +35,8 @@
     "eslint": "9.25.1",
     "turbo": "2.5.0",
     "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "wrangler": "^4.12.0"
   }
 }
