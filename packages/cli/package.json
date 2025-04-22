@@ -1,6 +1,6 @@
 {
   "name": "buttery-tokens",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Auto-generate TS functional utilities to easily recall & implement CSS design tokens",
   "publishConfig": {
     "access": "public"
@@ -29,8 +29,8 @@
     "buttery": "./bin/index.js"
   },
   "dependencies": {
-    "@buttery/core": "0.2.4",
-    "@buttery/studio": "0.2.4",
+    "@buttery/core": "0.2.5",
+    "@buttery/studio": "0.2.5",
     "fizmoo": "0.1.2"
   }
 }
