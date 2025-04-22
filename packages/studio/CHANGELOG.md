@@ -1,5 +1,13 @@
 # @buttery/studio
 
+## 0.2.6
+
+### Patch Changes
+
+- a49dfb7: Re-enables sticky scrolling in studio
+- Updated dependencies [a49dfb7]
+  - @buttery/studio-tokens@0.2.6
+
 ## 0.2.5
 
 ### Patch Changes

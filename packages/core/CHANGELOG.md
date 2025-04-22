@@ -1,5 +1,11 @@
 # @buttery/core
 
+## 0.2.6
+
+### Patch Changes
+
+- a49dfb7: Re-enables sticky scrolling in studio
+
 ## 0.2.5
 
 ### Patch Changes
