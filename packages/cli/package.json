@@ -22,7 +22,6 @@
   "devDependencies": {
     "@gfdigital/tsconfig": "0.3.1",
     "@types/node": "^22.14.1",
-    "fizmoo": "0.1.2",
     "typescript": "5.8.3"
   },
   "type": "module",
@@ -31,6 +30,7 @@
   },
   "dependencies": {
     "@buttery/core": "0.2.3",
-    "@buttery/studio": "0.2.3"
+    "@buttery/studio": "0.2.3",
+    "fizmoo": "0.1.2"
   }
 }
