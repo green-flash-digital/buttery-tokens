@@ -1,6 +1,6 @@
 {
   "name": "@buttery/studio-tokens",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A standalone package to test the APIs in @buttery/core and to establish the tokens for the @buttery/studio",
   "type": "module",
   "publishConfig": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
   "devDependencies": {
-    "@buttery/core": "0.2.2",
+    "@buttery/core": "0.2.3",
     "@gfdigital/tsconfig": "0.3.1",
     "isoscribe": "0.1.4",
     "tsx": "4.19.3",
