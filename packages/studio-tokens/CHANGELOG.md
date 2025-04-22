@@ -1,5 +1,11 @@
 # @buttery/studio-tokens
 
+## 0.2.4
+
+### Patch Changes
+
+- 3c43de6: Adds `fizmoo` as production dependency to resolve runtime
+
 ## 0.2.3
 
 ### Patch Changes
