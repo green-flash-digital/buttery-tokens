@@ -1,5 +1,11 @@
 # @buttery/studio-tokens
 
+## 0.2.5
+
+### Patch Changes
+
+- 6b49d5f: Adds StudioServer to studio ouput files
+
 ## 0.2.4
 
 ### Patch Changes
