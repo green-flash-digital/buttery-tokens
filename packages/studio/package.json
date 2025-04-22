@@ -1,6 +1,6 @@
 {
   "name": "@buttery/studio",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "sideEffects": false,
   "type": "module",
   "scripts": {
@@ -23,7 +23,7 @@
     "./server": "./StudioServer.js"
   },
   "dependencies": {
-    "@buttery/studio-tokens": "0.1.0",
+    "@buttery/studio-tokens": "0.2.1",
     "@linaria/server": "6.3.0",
     "@monaco-editor/react": "4.7.0",
     "@react-router/express": "^7.5.1",
