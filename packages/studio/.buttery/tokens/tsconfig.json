@@ -1,4 +1,0 @@
-{
-  "extends": "ts-jolt/tsconfig/library",
-  "compilerOptions": { "noEmit": false, "declaration": true }
-}

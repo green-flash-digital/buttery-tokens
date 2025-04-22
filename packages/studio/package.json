@@ -16,6 +16,10 @@
   "files": [
     "build"
   ],
+  "exports": {
+    "./server": "./build/server/index.js",
+    "./client": "./build/client/*"
+  },
   "dependencies": {
     "@buttery/core": "workspace:",
     "@buttery/studio-tokens": "workspace:",

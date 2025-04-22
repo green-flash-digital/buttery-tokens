@@ -1,15 +1,18 @@
-import path from "node:path";
+import path, { dirname } from "node:path";
 import { watch } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
 import { DotDir, type DotDirResponse } from "dotdir";
 import type { IsoScribeLogLevel } from "isoscribe";
 import { Isoscribe, printAsBullets } from "isoscribe";
-import { tryHandle } from "ts-jolt/isomorphic";
+import { exhaustiveMatchGuard, tryHandle } from "ts-jolt/isomorphic";
 import { input } from "@inquirer/prompts";
 import { writeFileRecursive } from "ts-jolt/node";
 import prettier from "prettier";
 import { globby } from "globby";
+import { createRequestHandler } from "@react-router/express";
+import express from "express";
 
 import { ConfigSchema, type ButteryTokensConfig } from "./schemas/schema.js";
 import { TemplateMakeColor } from "./templates/Template.make-color.js";
@@ -26,6 +29,7 @@ export type TokensConfigDirectories = {
   generated: string;
   ts: string;
   scss: string;
+  versions: string;
 };
 export type TokensConfig = DotDirResponse<ButteryTokensConfig> & {
   dirs: TokensConfigDirectories;
@@ -40,6 +44,13 @@ type GetConfigOptions = {
 };
 
 export type LogLevel = IsoScribeLogLevel;
+
+type EnvVars = {
+  BUTTERY_TOKENS_STUDIO_PORT: number;
+  BUTTERY_TOKENS_PG_IS_LOCAL: boolean;
+  BUTTERY_TOKENS_PG_CONFIG_PATH: string;
+  BUTTERY_TOKENS_PG_VERSION_DIR: string;
+};
 
 export class ButteryTokens {
   private _log: Isoscribe;
@@ -70,10 +81,12 @@ export class ButteryTokens {
     dotDirRes: DotDirResponse<ButteryTokensConfig>
   ): TokensConfigDirectories {
     const generated = path.resolve(dotDirRes.meta.dirPath, "./_generated");
+    const versions = path.resolve(dotDirRes.meta.dirName, "./versions");
     return {
       generated,
       scss: path.resolve(generated, "./scss"),
       ts: path.resolve(generated, "./ts"),
+      versions,
     };
   }
 
@@ -158,8 +171,54 @@ export class ButteryTokens {
   }
 
   /**
-   * Builds the :root CSS file and the utilities that
-   * easily interface it
+   * Private method to resolve environment variables
+   * with overrides provided either by internal variables
+   * or variables from an external source
+   */
+  private _getEnvVar<T extends keyof EnvVars, K extends EnvVars[T]>(
+    envVar: T,
+    override: K | undefined
+  ) {
+    const value = override ?? process.env[envVar];
+
+    switch (envVar) {
+      case "BUTTERY_TOKENS_STUDIO_PORT":
+        return value ?? 5700;
+
+      case "BUTTERY_TOKENS_PG_IS_LOCAL":
+        return value ?? false;
+
+      case "BUTTERY_TOKENS_PG_CONFIG_PATH":
+      case "BUTTERY_TOKENS_PG_VERSION_DIR":
+        return value ?? "";
+
+      default:
+        return exhaustiveMatchGuard(envVar);
+    }
+  }
+
+  /**
+   * Set;s multiple environment vars at once
+   */
+  private _setEnvVars(envVars: Partial<EnvVars>) {
+    for (const [varName, varValue] of Object.entries(envVars)) {
+      this._setEnvVar(varName as keyof EnvVars, varValue);
+    }
+  }
+
+  /**
+   * Set's a value to the environment variable to be used later
+   */
+  private _setEnvVar<T extends keyof EnvVars, K extends EnvVars[T]>(
+    envVar: T,
+    value: K
+  ) {
+    process.env[envVar] = value.toString();
+  }
+
+  /**
+   * Builds the buttery tokens utils and the :root css file
+   * that they interface
    */
   async build(options?: GetConfigOptions) {
     try {
@@ -281,8 +340,9 @@ export class ButteryTokens {
     this._log.debug(`Successfully formatted ${files.length} files.`);
   }
 
-  async studio() {}
-
+  /**
+   * Iteratively build the buttery tokens whenever the configuration file changes
+   */
   async dev() {
     await this.build({ noCache: true });
     let counter = 1;
@@ -305,5 +365,49 @@ Watching for changes in the following files:${printAsBullets([
       this._log.watch(`"${relPath}" changed. Rebuilding.... (${counter}x)`);
       this.build({ noCache: true });
     });
+  }
+
+  /**
+   * Launch the tokens studio in a development environment
+   */
+  async studio(options?: { port: number }) {
+    try {
+      //Resolve variables
+      const config = await this._getConfig();
+      const port = this._getEnvVar("BUTTERY_TOKENS_STUDIO_PORT", options?.port);
+      this._setEnvVars({
+        BUTTERY_TOKENS_PG_IS_LOCAL: true,
+        BUTTERY_TOKENS_PG_CONFIG_PATH: config.meta.filePath,
+        BUTTERY_TOKENS_PG_VERSION_DIR: config.dirs.versions,
+      });
+
+      // Instantiate an express application
+      const app = express();
+
+      // Serve static files from the public directory
+      const studioPath = fileURLToPath(
+        import.meta.resolve("@buttery/studio/client")
+      );
+      const clientAssetsDir = dirname(studioPath);
+      app.use(express.static(clientAssetsDir));
+
+      // Middleware to handle React Router requests
+      app.use(
+        createRequestHandler({
+          // @ts-expect-error No types are created for a full application build
+          build: async () => import("@buttery/studio/server"),
+          mode: process.env.NODE_ENV,
+        })
+      );
+
+      // Launch the app
+      app.listen(port, () => {
+        console.log(
+          `🎨 The TokensStudio is running at http://localhost:${port}`
+        );
+      });
+    } catch (error) {
+      this._handleError(error);
+    }
   }
 }

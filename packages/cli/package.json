@@ -19,6 +19,7 @@
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
   "devDependencies": {
     "@gfdigital/tsconfig": "0.3.1",
+    "@types/node": "^22.14.1",
     "fizmoo": "0.1.2",
     "typescript": "5.8.3"
   },
@@ -27,6 +28,7 @@
     "buttery": "./bin/index.js"
   },
   "dependencies": {
-    "@buttery/core": "workspace:^"
+    "@buttery/core": "workspace:^",
+    "@buttery/studio": "workspace:^"
   }
 }

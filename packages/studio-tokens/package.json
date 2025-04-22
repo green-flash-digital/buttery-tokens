@@ -10,7 +10,7 @@
   "scripts": {
     "tokens:build": "yarn buttery build",
     "build": "yarn tokens:build && yarn tsc --project tsconfig.build.json",
-    "dev": "yarn tsx ./scripts/dev-studio-tokens.ts"
+    "dev": "yarn buttery dev"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,7 @@
   },
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
   "devDependencies": {
-    "@buttery/core": "0.2.0",
     "@gfdigital/tsconfig": "0.3.1",
-    "buttery-tokens": "workspace:^",
     "isoscribe": "0.1.4",
     "tsx": "4.19.3",
     "typescript": "5.8.3"

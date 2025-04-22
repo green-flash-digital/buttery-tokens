@@ -26,10 +26,13 @@
   },
   "homepage": "https://github.com/drewdecarme/buttery-tools#readme",
   "dependencies": {
+    "@buttery/studio": "workspace:^",
     "@inquirer/prompts": "7.4.1",
+    "@react-router/express": "^7.5.1",
     "chokidar": "4.0.3",
     "chroma-js": "3.1.2",
     "dotdir": "0.3.1",
+    "express": "^5.1.0",
     "globby": "14.1.0",
     "isoscribe": "0.1.4",
     "prettier": "3.5.3",
@@ -40,7 +43,8 @@
   "devDependencies": {
     "@gfdigital/tsconfig": "0.3.1",
     "@types/chroma-js": "3.1.1",
-    "@types/node": "22.14.1",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
     "tsx": "4.19.3",
     "typescript": "5.8.3",
     "wrangler": "4.12.0",
