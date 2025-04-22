@@ -438,7 +438,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@buttery/core@npm:0.2.0, @buttery/core@workspace:packages/core":
+"@buttery/core@npm:0.2.1, @buttery/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@buttery/core@workspace:packages/core"
   dependencies:
@@ -464,11 +464,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@buttery/studio-tokens@npm:0.1.0, @buttery/studio-tokens@workspace:packages/studio-tokens":
+"@buttery/studio-tokens@npm:0.2.1, @buttery/studio-tokens@workspace:packages/studio-tokens":
   version: 0.0.0-use.local
   resolution: "@buttery/studio-tokens@workspace:packages/studio-tokens"
   dependencies:
-    "@buttery/core": "npm:0.2.0"
+    "@buttery/core": "npm:0.2.1"
     "@gfdigital/tsconfig": "npm:0.3.1"
     isoscribe: "npm:0.1.4"
     tsx: "npm:4.19.3"
@@ -476,14 +476,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@buttery/studio@npm:0.1.0, @buttery/studio@workspace:packages/studio":
+"@buttery/studio@npm:0.2.1, @buttery/studio@workspace:packages/studio":
   version: 0.0.0-use.local
   resolution: "@buttery/studio@workspace:packages/studio"
   dependencies:
     "@babel/core": "npm:7.26.10"
     "@babel/preset-react": "npm:7.26.3"
     "@babel/preset-typescript": "npm:7.27.0"
-    "@buttery/studio-tokens": "npm:0.1.0"
+    "@buttery/studio-tokens": "npm:0.2.1"
     "@chromatic-com/storybook": "npm:3.2.6"
     "@gfdigital/tsconfig": "npm:^0.3.1"
     "@linaria/core": "npm:6.3.0"
@@ -1544,7 +1544,6 @@ __metadata:
     "@changesets/cli": "npm:2.29.2"
     "@gfdigital/eslint-config": "npm:0.4.2"
     "@gfdigital/tsconfig": "npm:0.3.1"
-    buttery-tokens: "npm:0.1.0"
     eslint: "npm:9.25.1"
     turbo: "npm:2.5.0"
     typescript: "npm:5.8.3"
@@ -4873,12 +4872,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buttery-tokens@npm:0.1.0, buttery-tokens@workspace:packages/cli":
+"buttery-tokens@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "buttery-tokens@workspace:packages/cli"
   dependencies:
-    "@buttery/core": "npm:0.2.0"
-    "@buttery/studio": "npm:0.1.0"
+    "@buttery/core": "npm:0.2.1"
+    "@buttery/studio": "npm:0.2.1"
     "@gfdigital/tsconfig": "npm:0.3.1"
     "@types/node": "npm:^22.14.1"
     fizmoo: "npm:0.1.2"
