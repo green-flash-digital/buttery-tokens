@@ -30,8 +30,5 @@ jobs:
       - name: Install Dependencies
         run: yarn install --immutable
 
-      - name: Build Storybook
-        run: yarn build-storybook
-
       - name: Build Project
         run: yarn build
