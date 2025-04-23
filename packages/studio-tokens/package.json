@@ -7,12 +7,12 @@
     "access": "public"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./root.css": "./.buttery/_generated/root.css"
+    "./ts": "./dist/ts/index.js",
+    "./scss": "./dist/scss/_index.scss",
+    "./root.css": "./dist/root.css"
   },
   "scripts": {
-    "tokens:build": "yarn tsx ./scripts/build-studio-tokens.ts",
-    "build": "yarn tokens:build && yarn tsc --project tsconfig.build.json",
+    "build": "yarn tsx ./scripts/build-studio-tokens.ts",
     "dev": "yarn tsx ./scripts/dev-studio-tokens.ts"
   },
   "repository": {
@@ -25,11 +25,13 @@
     "url": "https://github.com/green-flash-digital/buttery-tokens/issues"
   },
   "homepage": "https://github.com/green-flash-digital/buttery-tokens#readme",
+  "dependencies": {
+    "@gfdigital/tsconfig": "0.3.1",
+    "typescript": "5.8.3"
+  },
   "devDependencies": {
     "@buttery/core": "0.2.6",
-    "@gfdigital/tsconfig": "0.3.1",
     "isoscribe": "0.1.4",
-    "tsx": "4.19.3",
-    "typescript": "5.8.3"
+    "tsx": "4.19.3"
   }
 }

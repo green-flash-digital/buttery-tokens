@@ -1,6 +1,7 @@
 import path from "node:path";
 import { watch } from "node:fs";
-import { readFile, writeFile } from "node:fs/promises";
+import { cp, readFile, rm, writeFile } from "node:fs/promises";
+import { exec } from "node:child_process";
 
 import { DotDir, type DotDirResponse } from "dotdir";
 import type { IsoScribeLogLevel } from "isoscribe";
@@ -164,7 +165,15 @@ export class ButteryTokens {
    * Builds the buttery tokens utils and the :root css file
    * that they interface
    */
-  async build(options?: GetConfigOptions) {
+  async build(
+    options?: GetConfigOptions & {
+      /**
+       * Packages & transpiles the _generated library so it can be
+       * distributed as a package
+       */
+      shouldPackage?: boolean;
+    }
+  ) {
     try {
       const config = await this.getConfig(options);
       this._log.info("Building buttery tokens");
@@ -239,6 +248,11 @@ export class ButteryTokens {
       // Format the directories
       await this._formatGeneratedFiles();
 
+      // Package as a library
+      if (options?.shouldPackage) {
+        await this._packageAsLibrary();
+      }
+
       // Success message
       this._log.success(
         `Alright, alright alright! Successfully built the "${this._config?.config.runtime.prefix}" tokens & utilities`
@@ -246,6 +260,58 @@ export class ButteryTokens {
     } catch (error) {
       this.printError(error);
     }
+  }
+
+  /**
+   * Move's `.buttery/_generated` directory to a distribution folder,
+   * transpiles all TS assets and then packages them up into a distribution
+   * folder to be used as a standalone library in monorepos or as a standalone
+   * distributable package
+   */
+  private async _packageAsLibrary() {
+    this._log.info("Packaging & transpiling `_generated` resources");
+    const config = await this.getConfig();
+
+    // move everything from the _generated to the dist folder
+    this._log.debug("Creating the distribution folder");
+    const distDir = path.resolve(config.meta.dirPath, "../dist");
+    await rm(distDir, { force: true, recursive: true });
+    await cp(config.dirs.generated, distDir, { recursive: true });
+
+    // create a tsconfig in the dist dir
+    this._log.debug("Creating a tsconfig to transpile TS utils");
+    const tsconfigPath = path.resolve(distDir, "./tsconfig.json");
+    const tsconfigJsonContent = JSON.stringify({
+      extends: "@gfdigital/tsconfig/library",
+      compilerOptions: {
+        noEmit: false,
+        declaration: true,
+      },
+      include: ["./ts"],
+    });
+    await writeFile(tsconfigPath, tsconfigJsonContent, { encoding: "utf-8" });
+
+    // transpile the resources
+    this._log.debug("Transpiling resources");
+    const cmd = `tsc --project ${tsconfigPath}`;
+    const transpile = () =>
+      new Promise<void>((resolve, reject) => {
+        exec(cmd, (error, stdout) => {
+          if (error) {
+            const err = String(error);
+            const fullErr = stdout ? `${stdout}:${err}` : err;
+            reject(fullErr);
+            throw this._log.fatal(new Error(fullErr));
+          }
+          resolve();
+        });
+      });
+    await transpile();
+
+    // remove the tsconfig
+    this._log.debug("Removing the temp tsconfig");
+    await rm(tsconfigPath, { force: true });
+    this._log.debug("Packaging complete.");
   }
 
   /**

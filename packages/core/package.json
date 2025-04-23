@@ -42,7 +42,7 @@
     "zod": "3.24.3"
   },
   "devDependencies": {
-    "@gfdigital/tsconfig": "0.3.1",
+    "@gfdigital/tsconfig": "^0.3.1",
     "@types/chroma-js": "3.1.1",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",

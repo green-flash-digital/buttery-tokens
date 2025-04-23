@@ -1,3 +1,5 @@
 import { StudioTokens } from "./tokens.js";
 
-await StudioTokens.build();
+await StudioTokens.build({
+  shouldPackage: true,
+});
