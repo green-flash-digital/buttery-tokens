@@ -1,6 +1,6 @@
 {
   "name": "@buttery/core",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "The JS API for the buttery-tokens package that is used to distribute schemas, utils, and the main ButteryTokens class.",
   "publishConfig": {
     "access": "public"

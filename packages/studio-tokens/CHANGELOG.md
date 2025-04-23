@@ -1,5 +1,11 @@
 # @buttery/studio-tokens
 
+## 0.3.0
+
+### Minor Changes
+
+- 25636c2: Adds option to be able to package the \_generated folder into a library for distribution
+
 ## 0.2.6
 
 ### Patch Changes
