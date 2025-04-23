@@ -1,5 +1,14 @@
 # buttery-tokens
 
+## 0.3.1
+
+### Patch Changes
+
+- b79f6d7: Adds required dependencies to transiple tokens library at runtime
+- Updated dependencies [b79f6d7]
+  - @buttery/core@0.3.1
+  - @buttery/studio@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes
