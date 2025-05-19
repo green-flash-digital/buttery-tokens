@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@buttery/core": "0.3.1",
-    "isoscribe": "0.1.4",
-    "tsx": "4.19.3"
+    "isoscribe": "0.2.0",
+    "tsx": "4.19.4"
   }
 }
