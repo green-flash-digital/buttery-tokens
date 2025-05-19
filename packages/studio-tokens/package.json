@@ -1,6 +1,6 @@
 {
   "name": "@buttery/studio-tokens",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "A standalone package to test the APIs in @buttery/core and to establish the tokens for the @buttery/studio",
   "type": "module",
   "publishConfig": {
@@ -31,7 +31,7 @@
     "typescript": "5.8.3"
   },
   "devDependencies": {
-    "@buttery/core": "0.3.3",
+    "@buttery/core": "0.3.4",
     "isoscribe": "0.2.0",
     "tsx": "4.19.4"
   }
