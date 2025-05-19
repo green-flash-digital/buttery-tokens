@@ -766,7 +766,7 @@ __metadata:
     tsx: "npm:4.19.4"
     typescript: "npm:5.8.3"
     wrangler: "npm:4.15.2"
-    zod: "npm:3.25.3"
+    zod: "npm:3.25.4"
     zod-to-json-schema: "npm:3.24.5"
   languageName: unknown
   linkType: soft
@@ -837,7 +837,7 @@ __metadata:
     vite-plugin-monaco-editor: "npm:1.1.0"
     vite-tsconfig-paths: "npm:5.1.4"
     wrangler: "npm:4.15.2"
-    zod: "npm:3.25.3"
+    zod: "npm:3.25.4"
   languageName: unknown
   linkType: soft
 
@@ -1849,9 +1849,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fizmoo/core@npm:0.1.3":
-  version: 0.1.3
-  resolution: "@fizmoo/core@npm:0.1.3"
+"@fizmoo/core@npm:0.1.4":
+  version: 0.1.4
+  resolution: "@fizmoo/core@npm:0.1.4"
   dependencies:
     "@inquirer/prompts": "npm:7.5.1"
     dotdir: "npm:0.3.2"
@@ -1861,16 +1861,17 @@ __metadata:
     picomatch: "npm:4.0.2"
     ts-jolt: "npm:0.2.3"
     zod: "npm:3.25.3"
-  checksum: 10c0/e706b26627e73ce86b0d66d98115cd3b176709e14339769165122881540c2e5c0d23efdc603eed722dc03a0367763b9c24d518e72595d26724456663079375eb
+  checksum: 10c0/4e6fdc18f8e036cef9eab021a01753a8ee09ff2ff209aa849aba3a5ca30cdf441a6a66e05d9eedb83d0c14ef7ec3196e113ec438928c779ec2db205b1348c8c0
   languageName: node
   linkType: hard
 
-"@fizmoo/runtime@npm:0.1.3":
-  version: 0.1.3
-  resolution: "@fizmoo/runtime@npm:0.1.3"
+"@fizmoo/runtime@npm:0.1.4":
+  version: 0.1.4
+  resolution: "@fizmoo/runtime@npm:0.1.4"
   dependencies:
+    "@fizmoo/core": "npm:0.1.4"
     ts-jolt: "npm:0.2.3"
-  checksum: 10c0/18644467d36921be7992190e1e3f0020a7da49d4001189f5565985094c55e91d04a6895042b4c76de074bbd2fbb79ac211850494a8aba14c2708a0ab89b07ed3
+  checksum: 10c0/71a0cdc2914d68338ac6e926221425f5eed96c0fcb64baee6b750dbb03f2a6048ac693e27c4994217d43d20df13134aa80ab503c662f44c36f36ce1129b93950
   languageName: node
   linkType: hard
 
@@ -5264,10 +5265,10 @@ __metadata:
   dependencies:
     "@buttery/core": "npm:0.3.2"
     "@buttery/studio": "npm:0.3.2"
-    "@fizmoo/runtime": "npm:0.1.3"
+    "@fizmoo/runtime": "npm:0.1.4"
     "@gfdigital/tsconfig": "npm:0.3.1"
     "@types/node": "npm:22.15.19"
-    fizmoo: "npm:0.1.3"
+    fizmoo: "npm:0.1.4"
     typescript: "npm:5.8.3"
   bin:
     buttery: ./bin/index.js
@@ -7290,12 +7291,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fizmoo@npm:0.1.3":
-  version: 0.1.3
-  resolution: "fizmoo@npm:0.1.3"
+"fizmoo@npm:0.1.4":
+  version: 0.1.4
+  resolution: "fizmoo@npm:0.1.4"
   dependencies:
-    "@fizmoo/core": "npm:0.1.3"
-    "@fizmoo/runtime": "npm:0.1.3"
+    "@fizmoo/core": "npm:0.1.4"
+    "@fizmoo/runtime": "npm:0.1.4"
     isoscribe: "npm:0.2.0"
     ts-jolt: "npm:0.2.3"
     zod: "npm:3.25.3"
@@ -7303,7 +7304,7 @@ __metadata:
     "@fizmoo/runtime": "*"
   bin:
     fizmoo: bin/index.js
-  checksum: 10c0/c3b75017125f73be5472282dd390516d0110c3fbfeb313d774197b28f8743f0a802f490cc4d70f6d74366b5d2a90a5f6e0bde68435231ac80ad6a08efc2827cf
+  checksum: 10c0/5b68ab4737277eabf1aa871e87b4b93cd49ce51f5cda0e938e5cee34a26b29ac038284875c24be10c9846f53552d44498245cf92d0f4783306e2666bb7f0bc77
   languageName: node
   linkType: hard
 
@@ -12775,6 +12776,13 @@ __metadata:
   version: 3.25.3
   resolution: "zod@npm:3.25.3"
   checksum: 10c0/744bc6d8f1500fbda2ddc713540fea7db2354c585d256eed9064f11d89976c184e7472a999a6713d2ae8e148d9bc9f23aae0403c5eb57e45c8563cbd036aaa9d
+  languageName: node
+  linkType: hard
+
+"zod@npm:3.25.4":
+  version: 3.25.4
+  resolution: "zod@npm:3.25.4"
+  checksum: 10c0/b83dd04399081b8dffc8144f600122314d52fc25726acacb101f22219d9de95337df30e2008de683da7a8eb9aee6e45887583344180a309404a6f39b7f997d29
   languageName: node
   linkType: hard
 

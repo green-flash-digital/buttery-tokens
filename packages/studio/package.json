@@ -50,7 +50,7 @@
     "ts-pattern": "5.7.1",
     "use-immer": "0.11.0",
     "vite-plugin-monaco-editor": "1.1.0",
-    "zod": "3.25.3"
+    "zod": "3.25.4"
   },
   "devDependencies": {
     "@babel/core": "7.27.1",

@@ -31,7 +31,7 @@
   "dependencies": {
     "@buttery/core": "0.3.2",
     "@buttery/studio": "0.3.2",
-    "@fizmoo/runtime": "0.1.3",
-    "fizmoo": "0.1.3"
+    "@fizmoo/runtime": "0.1.4",
+    "fizmoo": "0.1.4"
   }
 }

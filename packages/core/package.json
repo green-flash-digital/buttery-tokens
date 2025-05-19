@@ -41,7 +41,7 @@
     "ts-jolt": "0.2.3",
     "ts-pattern": "5.7.1",
     "typescript": "5.8.3",
-    "zod": "3.25.3"
+    "zod": "3.25.4"
   },
   "devDependencies": {
     "@types/chroma-js": "3.1.1",
