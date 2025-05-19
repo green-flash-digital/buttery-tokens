@@ -31,7 +31,7 @@
     "typescript": "5.8.3"
   },
   "devDependencies": {
-    "@buttery/core": "0.3.0",
+    "@buttery/core": "0.3.1",
     "isoscribe": "0.2.0",
     "tsx": "4.19.4"
   }
