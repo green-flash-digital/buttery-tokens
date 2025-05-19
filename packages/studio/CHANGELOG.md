@@ -1,5 +1,13 @@
 # @buttery/studio
 
+## 0.3.3
+
+### Patch Changes
+
+- cefc1f2: Upgrades dependencies
+- Updated dependencies [cefc1f2]
+  - @buttery/studio-tokens@0.3.3
+
 ## 0.3.2
 
 ### Patch Changes
