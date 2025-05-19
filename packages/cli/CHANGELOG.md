@@ -1,5 +1,14 @@
 # buttery-tokens
 
+## 0.3.2
+
+### Patch Changes
+
+- 2165fb3: Upgrades dependencies
+- Updated dependencies [2165fb3]
+  - @buttery/core@0.3.2
+  - @buttery/studio@0.3.2
+
 ## 0.3.1
 
 ### Patch Changes

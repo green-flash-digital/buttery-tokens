@@ -1,5 +1,11 @@
 # @buttery/core
 
+## 0.3.2
+
+### Patch Changes
+
+- 2165fb3: Upgrades dependencies
+
 ## 0.3.1
 
 ### Patch Changes
