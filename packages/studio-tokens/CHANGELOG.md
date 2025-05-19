@@ -1,5 +1,11 @@
 # @buttery/studio-tokens
 
+## 0.3.4
+
+### Patch Changes
+
+- 4a50d65: Adds required dependencies to support yarn pnp
+
 ## 0.3.3
 
 ### Patch Changes
