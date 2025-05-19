@@ -809,11 +809,13 @@ __metadata:
     "@storybook/react-vite": "npm:8.6.14"
     "@storybook/test": "npm:8.6.14"
     "@types/babel__core": "npm:7.20.5"
+    "@types/chroma-js": "npm:^3"
     "@types/express": "npm:5.0.2"
     "@types/node": "npm:22.15.19"
     "@types/react": "npm:19.1.4"
     "@types/react-dom": "npm:19.1.5"
     "@wyw-in-js/vite": "npm:0.6.0"
+    chroma-js: "npm:^3.1.2"
     eslint: "npm:9.27.0"
     express: "npm:5.1.0"
     immer: "npm:10.1.1"
@@ -4044,7 +4046,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chroma-js@npm:3.1.1":
+"@types/chroma-js@npm:3.1.1, @types/chroma-js@npm:^3":
   version: 3.1.1
   resolution: "@types/chroma-js@npm:3.1.1"
   checksum: 10c0/2b2d2eb44fd6e7103696c890c04a84c55441e9fea2f3913949bb377ec7249fe8a95e8117108b6e837422dbb23dee8180ad6907a29a8ae6d9443e7423cd0b2f6a
@@ -5453,7 +5455,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chroma-js@npm:3.1.2":
+"chroma-js@npm:3.1.2, chroma-js@npm:^3.1.2":
   version: 3.1.2
   resolution: "chroma-js@npm:3.1.2"
   checksum: 10c0/145ce9aea91dac81c6158082675084778e8c83e6959032e37fd4ba9b01db9f5c29c520453ec4bab7e87689f12756fcc63821e3c6b866e083ea41d341c7b2bf71
@@ -11567,7 +11569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jolt@npm:0.2.3":
+"ts-jolt@npm:0.2.3, ts-jolt@npm:^0.2.1, ts-jolt@npm:^0.2.2, ts-jolt@npm:^0.2.3":
   version: 0.2.3
   resolution: "ts-jolt@npm:0.2.3"
   dependencies:
