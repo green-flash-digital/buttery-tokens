@@ -1,5 +1,11 @@
 # @buttery/core
 
+## 0.3.3
+
+### Patch Changes
+
+- cefc1f2: Upgrades dependencies
+
 ## 0.3.2
 
 ### Patch Changes
