@@ -1,6 +1,6 @@
 {
   "name": "@buttery/studio-tokens",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A standalone package to test the APIs in @buttery/core and to establish the tokens for the @buttery/studio",
   "type": "module",
   "publishConfig": {

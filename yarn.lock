@@ -745,7 +745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@buttery/core@npm:0.3.0, @buttery/core@workspace:packages/core":
+"@buttery/core@npm:0.3.1, @buttery/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@buttery/core@workspace:packages/core"
   dependencies:
@@ -771,11 +771,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@buttery/studio-tokens@npm:0.3.0, @buttery/studio-tokens@workspace:packages/studio-tokens":
+"@buttery/studio-tokens@npm:0.3.1, @buttery/studio-tokens@workspace:packages/studio-tokens":
   version: 0.0.0-use.local
   resolution: "@buttery/studio-tokens@workspace:packages/studio-tokens"
   dependencies:
-    "@buttery/core": "npm:0.3.0"
+    "@buttery/core": "npm:0.3.1"
     "@gfdigital/tsconfig": "npm:0.3.1"
     isoscribe: "npm:0.2.0"
     tsx: "npm:4.19.4"
@@ -783,7 +783,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@buttery/studio@npm:0.3.0, @buttery/studio@workspace:packages/studio":
+"@buttery/studio@npm:0.3.1, @buttery/studio@workspace:packages/studio":
   version: 0.0.0-use.local
   resolution: "@buttery/studio@workspace:packages/studio"
   dependencies:
