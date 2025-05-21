@@ -1,5 +1,14 @@
 # buttery-tokens
 
+## 0.3.5
+
+### Patch Changes
+
+- b770433: Fixes known issue where CSS custom properties cannot be used with media queries
+- Updated dependencies [b770433]
+  - @buttery/core@0.3.5
+  - @buttery/studio@0.3.5
+
 ## 0.3.4
 
 ### Patch Changes
