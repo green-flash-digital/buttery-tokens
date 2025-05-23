@@ -49,7 +49,7 @@ export const ${functionName}: MakeFontFamily = (value) => {
     const properties = Object.entries(fontFamilies).map(
       ([fontFamilyName, fontFamilyValue]) => {
         const property = this._createCSSProperty(fontFamilyName);
-        return `${property}: "${fontFamilyName}", ${fontFamilyValue.fallback}`;
+        return `${property}: "${fontFamilyValue.family}", ${fontFamilyValue.fallback}`;
       }
     );
     return properties;
