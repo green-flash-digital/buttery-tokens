@@ -1,5 +1,11 @@
 # @buttery/studio-tokens
 
+## 0.3.6
+
+### Patch Changes
+
+- ce972e7: Fixes issue where the font family name was being replaced with the token name in the generated CSS
+
 ## 0.3.5
 
 ### Patch Changes
