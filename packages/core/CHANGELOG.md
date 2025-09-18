@@ -1,5 +1,11 @@
 # @buttery/core
 
+## 0.3.7
+
+### Patch Changes
+
+- ce80050: Removes an invalid inline media query
+
 ## 0.3.6
 
 ### Patch Changes

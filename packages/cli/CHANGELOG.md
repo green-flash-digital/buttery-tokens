@@ -1,5 +1,14 @@
 # buttery-tokens
 
+## 0.3.7
+
+### Patch Changes
+
+- ce80050: Removes an invalid inline media query
+- Updated dependencies [ce80050]
+  - @buttery/core@0.3.7
+  - @buttery/studio@0.3.7
+
 ## 0.3.6
 
 ### Patch Changes
