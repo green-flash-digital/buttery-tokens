@@ -35,7 +35,7 @@ export const ${this._name}: MakeResponsive = (params) => {
   const from = params?.from ? \`\${breakpoints[params.from]}px\` : undefined;
   const to = params?.to ? \`calc(\${breakpoints[params.to]}px - 1px)\` : undefined;
   if (from && to) {
-    return \`@media (min-width: \${from}) and @media (max-width:\${to})\`;
+    return \`@media (min-width: \${from}) and (max-width:\${to})\`;
   }
   if (from && !to) {
     return \`@media (min-width: \${from})\`;
