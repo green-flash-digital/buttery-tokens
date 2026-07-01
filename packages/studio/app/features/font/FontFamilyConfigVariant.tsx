@@ -1,11 +1,9 @@
 import { css } from "@linaria/core";
-import type { ChangeEventHandler, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useCallback } from "react";
 import { makeRem, makeColor } from "@buttery/studio-tokens";
 
 import { InputGroup } from "~/components/InputGroup";
-import { InputRadioTab } from "~/components/InputRadioTab";
-import { InputRadioTabs } from "~/components/InputRadioTabs";
 import { VariantContainer } from "~/components/VariantContainer";
 import { VariantContainerBar } from "~/components/VariantContainerBar";
 import { VariantContainerBarActions } from "~/components/VariantContainerBarActions";
@@ -75,16 +73,6 @@ export function FontFamilyConfigVariant(
   //   [props]
   // );
 
-  const handleChangeSource = useCallback<ChangeEventHandler<HTMLInputElement>>(
-    ({ currentTarget: { value } }) => {
-      props.onAction({
-        action: "changeSource",
-        source: value as ConfigurationStateFont["source"],
-      });
-    },
-    [props]
-  );
-
   const handleToggle = useCallback(() => {
     props.onAction({
       action: "toggle",
@@ -113,26 +101,6 @@ export function FontFamilyConfigVariant(
       {props.meta.isOpen && (
         <VariantContainerContent>
           <InputGroup>
-            <InputRadioTabs>
-              <InputRadioTab
-                defaultChecked={props.source === "manual"}
-                dxSize="dense"
-                name="type"
-                dxLabel="Manual"
-                dxSubLabel="Custom family, weights, and styles"
-                value="manual"
-                onChange={handleChangeSource}
-              />
-              <InputRadioTab
-                dxSize="dense"
-                defaultChecked={props.source !== "manual"}
-                name="type"
-                dxLabel="Registries"
-                dxSubLabel="Select from Google, Adobe, etc..."
-                value="google"
-                onChange={handleChangeSource}
-              />
-            </InputRadioTabs>
             {props.children}
 
             {/* <InputLabel

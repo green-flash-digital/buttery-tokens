@@ -6,7 +6,7 @@ import {
   fontFamilyFallback,
   manualFontStyles,
 } from "@buttery/core/schemas";
-import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
+import { generateGUID } from "ts-jolt/isomorphic";
 import type { Updater } from "use-immer";
 import { useImmer } from "use-immer";
 
@@ -21,6 +21,7 @@ export type ConfigurationStateFontVariantValue = {
   weight: string;
   size: number;
   lineHeight: number;
+  letterSpacing: number;
 };
 export type ConfigurationStateFontVariant = Record<
   string,
@@ -46,40 +47,12 @@ export type ConfigurationStateFontManualFamily = Record<
   string,
   ConfigurationStateFontManualFamilyValues
 >;
-export type ConfigurationStateFontManual = {
+
+export type ConfigurationStateFont = {
   source: "manual";
+  variants: ConfigurationStateFontVariant;
   families: ConfigurationStateFontManualFamily;
 };
-
-export type ConfigurationStateFontRegistryFamilyValues =
-  ConfigurationStateFontFamilyValuesMeta & {
-    tokenName: string;
-    familyName: string;
-    fallback?: string;
-    styles: string[];
-  };
-export type ConfigurationStateFontRegistryFamily = Record<
-  string,
-  ConfigurationStateFontRegistryFamilyValues
->;
-export type ConfigurationStateFontGoogle = {
-  source: "google";
-  families: ConfigurationStateFontRegistryFamily;
-};
-export type ConfigurationStateFontAdobe = {
-  source: "adobe";
-  families: ConfigurationStateFontRegistryFamily;
-};
-
-type ConfigurationStateFontShared = {
-  variants: ConfigurationStateFontVariant;
-};
-export type ConfigurationStateFont = ConfigurationStateFontShared &
-  (
-    | ConfigurationStateFontManual
-    | ConfigurationStateFontGoogle
-    | ConfigurationStateFontAdobe
-  );
 
 export function getInitStateFontFromConfig(
   config: ButteryTokensConfig
@@ -100,102 +73,61 @@ export function getInitStateFontFromConfig(
     {}
   );
 
-  switch (config.font.source) {
-    case "manual":
-      return {
-        source: "manual",
-        variants,
-        families: Object.entries(
-          config.font.families
-        ).reduce<ConfigurationStateFontManualFamily>(
-          (accum, [tokenName, familyDef]) =>
-            Object.assign<
-              ConfigurationStateFontManualFamily,
-              ConfigurationStateFontManualFamily
-            >(accum, {
-              [generateGUID()]: {
-                tokenName,
-                familyName: familyDef.family,
-                fallback: familyDef.fallback,
-                styles:
-                  familyDef.styles.length > 0
-                    ? familyDef.styles.reduce(
-                        (accum, style) =>
-                          Object.assign(accum, {
-                            [style]: {
-                              display: manualFontStyles[style],
-                            },
-                          }),
-                        {}
-                      )
-                    : {
-                        "regular-400": {
-                          display: manualFontStyles["regular-400"],
+  return {
+    source: "manual",
+    variants,
+    families: Object.entries(
+      config.font.families
+    ).reduce<ConfigurationStateFontManualFamily>(
+      (accum, [tokenName, familyDef]) =>
+        Object.assign<
+          ConfigurationStateFontManualFamily,
+          ConfigurationStateFontManualFamily
+        >(accum, {
+          [generateGUID()]: {
+            tokenName,
+            familyName: familyDef.family,
+            fallback: familyDef.fallback,
+            styles:
+              familyDef.styles.length > 0
+                ? familyDef.styles.reduce(
+                    (accum, style) =>
+                      Object.assign(accum, {
+                        [style]: {
+                          display: manualFontStyles[style],
                         },
-                      },
-                meta: {
-                  isOpen: false,
-                },
-              },
-            }),
-          {}
-        ),
-      };
-
-    case "adobe":
-    case "google":
-      return {
-        source: config.font.source,
-        variants,
-        families: Object.entries(
-          config.font.families
-        ).reduce<ConfigurationStateFontRegistryFamily>(
-          (accum, [familyName, familyDef]) =>
-            Object.assign<
-              ConfigurationStateFontRegistryFamily,
-              ConfigurationStateFontRegistryFamily
-            >(accum, {
-              [generateGUID()]: {
-                name: familyName,
-                ...familyDef,
-              },
-            }),
-          {}
-        ),
-      };
-
-    default:
-      return exhaustiveMatchGuard(config.font);
-  }
+                      }),
+                    {}
+                  )
+                : {
+                    "regular-400": {
+                      display: manualFontStyles["regular-400"],
+                    },
+                  },
+            meta: {
+              isOpen: false,
+            },
+          },
+        }),
+      {}
+    ),
+  };
 }
 
 export function getFontConfigFromState(
   state: ConfigurationStateFont
 ): ButteryTokensConfig["font"] {
-  const families =
-    state.source === "manual"
-      ? Object.values(state.families).reduce(
-          (accum, family) =>
-            Object.assign<FontFamiliesManual, FontFamiliesManual>(accum, {
-              [family.tokenName]: {
-                family: family.familyName,
-                fallback: family.fallback ?? fontFamilyFallback,
-                styles: Object.keys(family.styles) as ManualFontStyles,
-              },
-            }),
-          {}
-        )
-      : Object.values(state.families).reduce(
-          (accum, family) =>
-            Object.assign(accum, {
-              [family.tokenName]: {
-                family: family.familyName,
-                fallback: family.fallback ?? fontFamilyFallback,
-                styles: Object.keys(family.styles),
-              },
-            }),
-          {}
-        );
+  const families = Object.values(state.families).reduce(
+    (accum, family) =>
+      Object.assign<FontFamiliesManual, FontFamiliesManual>(accum, {
+        [family.tokenName]: {
+          family: family.familyName,
+          fallback: family.fallback ?? fontFamilyFallback,
+          styles: Object.keys(family.styles) as ManualFontStyles,
+        },
+      }),
+    {}
+  );
 
   return {
     source: state.source,
@@ -208,6 +140,7 @@ export function getFontConfigFromState(
             lineHeight: variant.lineHeight,
             size: variant.size,
             weight: variant.weight,
+            letterSpacing: variant.letterSpacing,
           },
         }),
       {}
@@ -230,7 +163,6 @@ export type OnFontFamilyAction = (
     | { action: "toggle"; id: string }
     | { action: "addStyle"; id: string; style: string }
     | { action: "deleteStyle"; id: string; style: string }
-    | { action: "changeSource"; source: ConfigurationStateFont["source"] }
     | {
         action: "changeTokenName";
         id: string;

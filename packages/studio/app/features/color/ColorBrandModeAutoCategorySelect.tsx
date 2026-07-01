@@ -1,4 +1,4 @@
-import type { ButteryTokensColorBrandTypeAuto } from "@buttery/core/schemas";
+import type { VibeName } from "./color.utils";
 import { css } from "@linaria/core";
 import { useCallback } from "react";
 import { classes } from "react-hook-primitives";
@@ -24,7 +24,7 @@ type ColorCategoryDef = {
   Icon: typeof IconCopy;
 };
 export const colorCategories: {
-  [key in ButteryTokensColorBrandTypeAuto["type"]]: ColorCategoryDef;
+  [key in VibeName]: ColorCategoryDef;
 } = {
   earth: {
     display: "Earth",
@@ -140,7 +140,7 @@ function CategoryItem({
 export type ColorBrandModeAutoCategorySelectProps<T extends string> = {
   onSelect: (value: T) => void;
   id: string;
-  selectedType: ButteryTokensColorBrandTypeAuto["type"];
+  selectedType: VibeName;
 };
 
 export function ColorBrandModeAutoCategorySelect<T extends string>(

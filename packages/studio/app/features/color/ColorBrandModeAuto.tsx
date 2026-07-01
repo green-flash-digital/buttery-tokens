@@ -10,8 +10,8 @@ import { VariantAdd } from "~/components/VariantAdd";
 
 import { ColorBrandModeAutoVariant } from "./ColorBrandModeAutoVariant";
 import { ColorBrandModeAutoCategory } from "./ColorBrandModeAutoCategory";
-import type { ConfigurationStateColorBrandAuto } from "./color.utils";
-import { colorAutoPresets } from "./color.utils";
+import type { ConfigurationStateColor } from "./color.utils";
+import { colorVibePresets, vibeDefaults } from "./color.utils";
 
 import type { ConfigurationContextType } from "../Config.context";
 import { InputRange } from "../../components/InputRange";
@@ -27,93 +27,94 @@ export function ColorBrandModeAuto({
   state,
   setColor,
 }: {
-  state: ConfigurationStateColorBrandAuto;
+  state: ConfigurationStateColor;
   setColor: ConfigurationContextType["setColor"];
 }) {
-  const handleChangeBrightness = useCallback<
+  const vibeType = state.vibe?.type ?? "fluorescent";
+  const presets = colorVibePresets[vibeType];
+
+  const handleChangeLightness = useCallback<
     ChangeEventHandler<HTMLInputElement>
   >(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        // @ts-expect-error This number is validated by the min and max on the range
-        draft.brand.auto.brightness = Number(value);
+        if (!draft.vibe) {
+          draft.vibe = { type: vibeType, ...vibeDefaults[vibeType] };
+        }
+        (draft.vibe as { lightness: number }).lightness = Number(value);
       });
     },
-    [setColor]
+    [setColor, vibeType]
   );
 
-  const handleChangeSaturation = useCallback<
-    ChangeEventHandler<HTMLInputElement>
-  >(
+  const handleChangeChroma = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        // @ts-expect-error This number is validated by the min and max on the range
-        draft.brand.auto.saturation = Number(value);
+        if (!draft.vibe) {
+          draft.vibe = { type: vibeType, ...vibeDefaults[vibeType] };
+        }
+        (draft.vibe as { chroma: number }).chroma = Number(value);
       });
     },
-    [setColor]
+    [setColor, vibeType]
   );
 
   const handleAddVariant = useCallback(() => {
-    const totalColors = Object.entries(state.colors).length;
+    const totalColors = Object.keys(state.hue).length;
     setColor((draft) => {
       const id = generateGUID();
-      draft.brand.auto.colors[id] = {
+      draft.hue[id] = {
         hue: 180,
         name: `brand${totalColors + 1}`,
         variants: 10,
       };
     });
-  }, [setColor, state.colors]);
+  }, [setColor, state.hue]);
 
-  const colorEntries = Object.entries(state.colors);
+  const colorEntries = Object.entries(state.hue);
 
   return (
     <>
       <InputSection>
         <InputLabel
           dxLabel="Determine the color category"
-          dxHelp="Manually select a category or pick a color to auto determine it's category"
+          dxHelp="Select a vibe or pick a color to auto-detect it"
         />
         <ColorBrandModeAutoCategory state={state} setColor={setColor} />
       </InputSection>
       <InputSection>
         <InputLabel
           dxLabel="Configure your colors"
-          dxHelp="Adjust the saturation, brightness and hues to get the colors you want in accordance with the selected category"
+          dxHelp="Adjust lightness, chroma, and hues within the selected vibe"
         />
         <div className={inputLabelStyles}>
-          <InputLabel
-            dxLabel="Saturation"
-            htmlFor="saturation"
-            dxSize="dense"
-          />
+          <InputLabel dxLabel="Lightness" htmlFor="lightness" dxSize="dense" />
           <InputRange
-            id="saturation"
+            id="lightness"
             dxDisplayMin
             dxDisplayMax
             dxDisplayInput
-            value={state.saturation}
-            {...colorAutoPresets[state.type].saturation}
+            value={state.vibe?.lightness ?? vibeDefaults[vibeType].lightness}
+            min={presets.lightness.min}
+            max={presets.lightness.max}
+            step={0.01}
             className={inputLabelStyles}
-            onChange={handleChangeSaturation}
+            onChange={handleChangeLightness}
           />
         </div>
         <div className={inputLabelStyles}>
-          <InputLabel
-            dxLabel="Brightness"
-            htmlFor="brightness"
-            dxSize="dense"
-          />
+          <InputLabel dxLabel="Chroma" htmlFor="chroma" dxSize="dense" />
           <InputRange
-            id="brightness"
+            id="chroma"
             dxDisplayMin
             dxDisplayMax
             dxDisplayInput
-            value={state.brightness}
-            {...colorAutoPresets[state.type].brightness}
+            value={state.vibe?.chroma ?? vibeDefaults[vibeType].chroma}
+            min={presets.chroma.min}
+            max={presets.chroma.max}
+            step={0.01}
             className={inputLabelStyles}
-            onChange={handleChangeBrightness}
+            onChange={handleChangeChroma}
           />
         </div>
         <div className={inputLabelStyles}>
@@ -126,16 +127,14 @@ export function ColorBrandModeAuto({
             />
           ) : (
             <VariantList>
-              {colorEntries.map(([colorId, colorNameAndDef]) => {
-                return (
-                  <li key={colorId}>
-                    <ColorBrandModeAutoVariant
-                      colorDef={{ [colorId]: colorNameAndDef }}
-                      setColor={setColor}
-                    />
-                  </li>
-                );
-              })}
+              {colorEntries.map(([colorId, colorNameAndDef]) => (
+                <li key={colorId}>
+                  <ColorBrandModeAutoVariant
+                    colorDef={{ [colorId]: colorNameAndDef }}
+                    setColor={setColor}
+                  />
+                </li>
+              ))}
               <li>
                 <VariantAdd onAdd={handleAddVariant}>
                   Add another color

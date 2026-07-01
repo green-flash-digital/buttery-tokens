@@ -1,9 +1,9 @@
 import type { FontFamilyConfigVariantProps } from "./FontFamilyConfigVariant";
 import { FontFamilyConfigVariant } from "./FontFamilyConfigVariant";
-import type { ConfigurationStateFontRegistryFamilyValues } from "./font.utils";
+import type { ConfigurationStateFontManualFamilyValues } from "./font.utils";
 
 export function FontFamilyConfigRegistry<
-  T extends ConfigurationStateFontRegistryFamilyValues
+  T extends ConfigurationStateFontManualFamilyValues
 >({
   tokenName,
   familyName,

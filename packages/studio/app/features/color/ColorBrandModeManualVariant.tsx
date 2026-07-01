@@ -15,7 +15,7 @@ import { VariantContainerBarText } from "~/components/VariantContainerBarText";
 import { VariantContainerBarTitle } from "~/components/VariantContainerBarTitle";
 import { VariantContainerContent } from "~/components/VariantContainerContent";
 
-import type { ConfigurationStateColorsManual } from "./color.utils";
+import type { ConfigurationStateColorHexEntry } from "./color.utils";
 import { ColorSwatchName } from "./ColorSwatchName";
 import { ColorSwatchVariants } from "./ColorSwatchVariants";
 import type { ColorSwatchVariantsPropsCustom } from "./ColorSwatchVariants";
@@ -28,7 +28,7 @@ const barStyles = css`
 `;
 
 export function ColorBrandModeManualVariant<
-  T extends ConfigurationStateColorsManual
+  T extends { [id: string]: ConfigurationStateColorHexEntry }
 >({
   colorDef,
   setColor,
@@ -43,7 +43,7 @@ export function ColorBrandModeManualVariant<
   const handleChangeHex = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        const color = draft.brand.manual.colors[id];
+        const color = draft.hex[id];
         color.hex = value;
       });
       setHex(value);
@@ -54,7 +54,7 @@ export function ColorBrandModeManualVariant<
   const handleChangeName = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        const color = draft.brand.manual.colors[id];
+        const color = draft.hex[id];
         color.name = value;
       });
     },
@@ -63,7 +63,7 @@ export function ColorBrandModeManualVariant<
 
   const handleRemove = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
     setColor((draft) => {
-      delete draft.brand.manual.colors[id];
+      delete draft.hex[id];
     });
   }, [id, setColor]);
 
@@ -75,17 +75,17 @@ export function ColorBrandModeManualVariant<
       switch (type) {
         case "auto":
           setColor((draft) => {
-            draft.brand.manual.colors[id].variants = 10;
+            draft.hex[id].variants = 10;
           });
           break;
         case "auto-named":
           setColor((draft) => {
-            draft.brand.manual.colors[id].variants = ["light", "dark"];
+            draft.hex[id].variants = ["light", "dark"];
           });
           break;
         case "key-value":
           setColor((draft) => {
-            draft.brand.manual.colors[id].variants = {
+            draft.hex[id].variants = {
               light: "#cccccc",
               dark: "#525252",
             };
@@ -104,7 +104,7 @@ export function ColorBrandModeManualVariant<
   >(
     (variant) => {
       setColor((draft) => {
-        draft.brand.manual.colors[id].variants = variant;
+        draft.hex[id].variants = variant;
       });
     },
     [id, setColor]
@@ -117,7 +117,7 @@ export function ColorBrandModeManualVariant<
       switch (params.mode) {
         case "change":
           setColor((draft) => {
-            const variants = draft.brand.manual.colors[id].variants;
+            const variants = draft.hex[id].variants;
             if (!Array.isArray(variants)) return;
             variants[params.index] = params.value;
           });
@@ -125,7 +125,7 @@ export function ColorBrandModeManualVariant<
 
         case "add":
           setColor((draft) => {
-            const variants = draft.brand.manual.colors[id].variants;
+            const variants = draft.hex[id].variants;
             if (!Array.isArray(variants)) return;
             variants.push(params.newValue);
           });
@@ -133,7 +133,7 @@ export function ColorBrandModeManualVariant<
 
         case "remove":
           setColor((draft) => {
-            const variants = draft.brand.manual.colors[id].variants;
+            const variants = draft.hex[id].variants;
             if (!Array.isArray(variants)) return;
             variants.splice(params.index, 1);
           });
@@ -151,7 +151,7 @@ export function ColorBrandModeManualVariant<
   >(
     (variants) => {
       setColor((draft) => {
-        draft.brand.manual.colors[id].variants = variants;
+        draft.hex[id].variants = variants;
       });
     },
     [id, setColor]

@@ -5,6 +5,8 @@ import { withDescription } from "./schema-utils.js";
 export const fontFamilyFallback =
   'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 
+const toKebabCase = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+
 export const ManualFontStylesValueSchema = z.object({
   "thin-100": z.literal("Thin 100"),
   "thin-100-italic": z.literal("Thin 100 - Italic"),
@@ -52,99 +54,42 @@ export const ManualFontStylesSchema =
   ManualFontStylesValueSchema.keyof().array();
 export type ManualFontStyles = z.infer<typeof ManualFontStylesSchema>;
 
-const FontFamiliesManualSchema = z.record(
-  z.string(),
-  z.object({
-    family: z.string(),
-    fallback: z.string().optional().default(fontFamilyFallback),
-    styles: ManualFontStylesSchema,
-  })
-);
+const FontFamiliesManualSchema = z
+  .record(
+    z.string(),
+    z.object({
+      family: z.string(),
+      fallback: z.string().optional().default(fontFamilyFallback),
+      styles: ManualFontStylesSchema,
+    })
+  )
+  .transform((families) =>
+    Object.fromEntries(
+      Object.entries(families).map(([k, v]) => [toKebabCase(k), v])
+    )
+  );
 export type FontFamiliesManual = z.infer<typeof FontFamiliesManualSchema>;
 
-const FontFamiliesGoogleSchema = z.union([
-  z.record(
-    z.literal("google-font-1"),
-    z.object({
-      family: z.string(),
-      fallback: z.string().default(fontFamilyFallback),
-      styles: z.array(
-        z.literal("google-font-1-style-1"),
-        z.literal("google-font-1-style-2")
-      ),
-    })
-  ),
-  z.record(
-    z.literal("google-font-2"),
-    z.object({
-      family: z.string(),
-      styles: z.array(
-        z.literal("google-font-2-style-1"),
-        z.literal("google-font-2-style-2")
-      ),
-    })
-  ),
-]);
-
-const FontFamiliesAdobeSchema = z.union([
-  z.record(
-    z.literal("adobe-font-1"),
-    z.object({
-      fallback: z.string().default(fontFamilyFallback),
-      styles: z.array(
-        z.literal("adobe-font-1-style-1"),
-        z.literal("adobe-font-1-style-2")
-      ),
-    })
-  ),
-  z.record(
-    z.literal("adobe-font-2"),
-    z.object({
-      styles: z.array(
-        z.literal("adobe-font-2-style-1"),
-        z.literal("adobe-font-2-style-2")
-      ),
-    })
-  ),
-]);
-
 const FontVariantValueSchema = z.object({
-  familyToken: z.string(),
+  familyToken: z.string().transform(toKebabCase),
   weight: z.string(),
   size: z.number(),
   lineHeight: z.number(),
+  letterSpacing: z.number().optional().default(0),
 });
 export type FontVariantValue = z.infer<typeof FontVariantValueSchema>;
 
 const FontVariantSchema = z.record(z.string(), FontVariantValueSchema);
 export type FontVariant = z.infer<typeof FontVariantSchema>;
 
-export const FontSchema = z
-  .discriminatedUnion("source", [
-    withDescription(
-      z.object({
-        source: z.literal("manual"),
-        families: FontFamiliesManualSchema,
-        variants: FontVariantSchema,
-      })
-    ),
-    withDescription(
-      z.object({
-        source: z.literal("google"),
-        families: FontFamiliesGoogleSchema,
-        variants: FontVariantSchema,
-      })
-    ),
-    withDescription(
-      z.object({
-        source: z.literal("adobe"),
-        families: FontFamiliesAdobeSchema,
-        variants: FontVariantSchema,
-      })
-    ),
-  ])
+export const FontSchema = withDescription(
+  z.object({
+    source: z.literal("manual"),
+    families: FontFamiliesManualSchema,
+    variants: FontVariantSchema,
+  })
+)
   .superRefine((data, ctx) => {
-    // Ensure font.variants[variantName].family keys match font.families
     const familyKeys = Object.keys(data.families ?? {});
     const variantEntries = Object.entries(data.variants ?? {});
 

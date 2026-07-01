@@ -1,17 +1,11 @@
 import chroma from "chroma-js";
-import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
-
-import { hsbToHex } from "./util.color-conversions.js";
 
 import type {
+  ButteryTokensColor,
   ButteryTokensColorVariant,
-  ButteryTokensColorDefHue,
-  ButteryTokensColorDefHex,
-  ButteryTokensColorBrand,
-  ButteryTokensColorNeutral,
 } from "../schemas/schema.color.js";
 
-type HEXValue = string;
+export type HEXValue = string;
 export type VariantMap = {
   base: string;
   [variantName: string]: HEXValue;
@@ -20,14 +14,17 @@ export type VariantManifest = {
   [colorName: string]: VariantMap;
 };
 
+function toOklchString(color: chroma.Color): string {
+  const [L, C, H] = color.oklch();
+  return `oklch(${L.toFixed(4)} ${C.toFixed(4)} ${(isNaN(H) ? 0 : H).toFixed(2)})`;
+}
+
 export function autoCreateVariantMap(
   variants: string[]
 ): Omit<VariantMap, "base"> {
   return variants.reduce<Omit<VariantMap, "base">>((accum, variant, i) => {
     const variantName = i === 0 ? "50" : (i * 100).toString();
-    return Object.assign(accum, {
-      [variantName]: variant,
-    });
+    return Object.assign(accum, { [variantName]: variant });
   }, {});
 }
 
@@ -35,111 +32,50 @@ export function createVariantsFromBaseHex(
   baseHex: string,
   variantDef: ButteryTokensColorVariant
 ): VariantMap {
-  const lightest = chroma(baseHex).brighten(2);
-  const darkest = chroma(baseHex).darken(2);
-  const scale = chroma.scale([lightest, baseHex, darkest]).mode("lab");
+  const base = chroma(baseHex);
+  const baseOklch = toOklchString(base);
+  const scale = chroma
+    .scale([base.brighten(2.5), base, base.darken(2)])
+    .mode("oklch");
 
-  // create a number of auto variants
   if (typeof variantDef === "number") {
-    const numOfVariants = variantDef;
-    const variants = scale.colors(numOfVariants);
-    const variantMap = autoCreateVariantMap(variants);
-    return {
-      base: baseHex,
-      ...variantMap,
-    };
+    if (variantDef === 0) return { base: baseOklch };
+    const oklchColors = scale
+      .colors(variantDef)
+      .map((h) => toOklchString(chroma(h)));
+    return { base: baseOklch, ...autoCreateVariantMap(oklchColors) };
   }
-  // create a set number of auto variants with the hex values in the array
+
   if (Array.isArray(variantDef)) {
-    const numOfVariants = variantDef.length;
-    const variants = scale.colors(numOfVariants);
-    const variantMap = autoCreateVariantMap(variants);
-    return {
-      base: baseHex,
-      ...variantMap,
-    };
+    const oklchColors = scale
+      .colors(variantDef.length)
+      .map((h) => toOklchString(chroma(h)));
+    return { base: baseOklch, ...autoCreateVariantMap(oklchColors) };
   }
 
-  // the object is already in the format we want so
-  // we just return it
-  return {
-    base: baseHex,
-    ...variantDef,
-  };
+  // key-value: explicit hex values per step
+  const result: VariantMap = { base: baseOklch };
+  for (const [key, hex] of Object.entries(variantDef)) {
+    result[key] = toOklchString(chroma(hex));
+  }
+  return result;
 }
 
-export function createVariantsFromDefHue(
-  colorDef: ButteryTokensColorDefHue,
-  saturation: number,
-  brightness: number
-): VariantMap {
-  const [_, colorValue] = Object.entries(colorDef)[0];
-  // hue to hex
-  const baseHex = hsbToHex(colorValue.hue, saturation, brightness);
-  return createVariantsFromBaseHex(baseHex, colorValue.variants);
-}
-
-export function createVariantsFromDefHex(
-  colorDef: ButteryTokensColorDefHex
-): VariantMap {
-  const [_, colorValue] = Object.entries(colorDef)[0];
-  return createVariantsFromBaseHex(colorValue.hex, colorValue.variants);
-}
-
-/**
- * Loops through all of the brand colors and creates their variants
- * based upon the type of the brand config.
- */
-export function createBrandVariants(
-  brandConfig: ButteryTokensColorBrand | undefined
+export function createColorVariants(
+  colorConfig: ButteryTokensColor
 ): VariantManifest {
-  if (!brandConfig?.colors) return {};
-
-  return Object.entries(brandConfig.colors).reduce<VariantManifest>(
-    (accum, [colorName, colorValue]) => {
-      const colorDef = { [colorName]: colorValue }; // reconstruct the definition
-      switch (brandConfig.type) {
-        case "manual":
-          return Object.assign(accum, {
-            [colorName]: createVariantsFromDefHex(colorDef),
-          });
-
-        case "earth":
-        case "fluorescent":
-        case "jewel":
-        case "neutral":
-        case "pastel":
-          return Object.assign(accum, {
-            [colorName]: createVariantsFromDefHue(
-              colorDef,
-              brandConfig.saturation,
-              brandConfig.brightness
-            ),
-          });
-
-        default:
-          return exhaustiveMatchGuard(brandConfig);
+  const { vibe, colors } = colorConfig;
+  return Object.entries(colors).reduce<VariantManifest>(
+    (accum, [name, entry]) => {
+      if ("hue" in entry) {
+        if (!vibe) return accum;
+        const baseHex = chroma(vibe.lightness, vibe.chroma, entry.hue, "oklch").hex();
+        return Object.assign(accum, {
+          [name]: createVariantsFromBaseHex(baseHex, entry.variants),
+        });
       }
-    },
-    {}
-  );
-}
-
-/**
- * Loops through all of the colors defined in the neutral config
- * and creates their variants
- */
-export function createNeutralVariants(
-  neutralConfig: ButteryTokensColorNeutral | undefined
-): VariantManifest {
-  if (!neutralConfig) return {};
-  return Object.entries(neutralConfig).reduce<VariantManifest>(
-    (accum, [colorName, colorValue]) => {
       return Object.assign(accum, {
-        [colorName]:
-          typeof colorValue === "string"
-            ? colorValue
-            : createVariantsFromDefHex({ [colorName]: colorValue }),
+        [name]: createVariantsFromBaseHex(entry.hex, entry.variants),
       });
     },
     {}

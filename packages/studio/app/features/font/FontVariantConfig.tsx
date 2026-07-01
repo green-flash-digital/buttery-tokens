@@ -29,6 +29,7 @@ export function FontVariantConfig() {
               size: 16,
               variantName: `variant${nextVariantNum}`,
               weight: "regular-400",
+              letterSpacing: 0,
             };
           });
           break;

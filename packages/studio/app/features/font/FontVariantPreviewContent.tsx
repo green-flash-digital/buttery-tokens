@@ -64,8 +64,7 @@ export function FontVariantPreviewContent() {
   return (
     <ul className={styles}>
       {Object.entries(font.variants).map(([variantId, variant]) => {
-        // @ts-expect-error This is a valid statement; the types don't match up
-        const fontFamily = fontConfig.families[variant.familyToken].family;
+        const fontFamily = fontConfig.families[variant.familyToken]?.family;
         return (
           <li key={variantId}>
             <div className="heading">

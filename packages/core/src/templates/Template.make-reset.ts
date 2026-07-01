@@ -1,38 +1,13 @@
-import { Template } from "./Template.js";
+import { defineTemplate } from "./types.js";
 
-import type { TokensConfig } from "../ButteryTokens.js";
-
-export class TemplateMakeReset extends Template {
-  private _resetUnion: string;
-
-  constructor(config: TokensConfig) {
-    super({
-      prefix: config.config.runtime.prefix,
-      name: "makeReset",
-      namespace: "reset",
-      description: "Returns some CSS resets for any given elements",
-    });
-
-    this._resetUnion = this._createUnionType([
-      "ul",
-      "button",
-      "body",
-      "anchor",
-      "input",
-    ]);
-  }
-
-  makeUtilTS(): string {
-    return `export type MakeReset = (element: ${this._resetUnion}) => string;
-
-const matchGuard = (_: never): never => {
-  throw new Error(\`Forgot to include an \${_} in the switch statement\`);
-};
-
-export const ${this._name}: MakeReset = (element) => {
-    switch(element) {
-      case "ul":
-        return \`
+function makeResetUtil<T>(_tokens: T) {
+  return {
+    makeReset(
+      element: "ul" | "button" | "body" | "anchor" | "input"
+    ): string {
+      switch (element) {
+        case "ul":
+          return `
           margin: 0;
           padding: 0;
 
@@ -41,34 +16,30 @@ export const ${this._name}: MakeReset = (element) => {
             padding: 0;
             list-style-type: none;
           }
-        \`;
-
-      case "button":
-        return \`
+        `;
+        case "button":
+          return `
           margin: 0;
           padding: 0;
           border: none;
           background: none;
-        \`;
-
-      case "body":
-        return \`
+        `;
+        case "body":
+          return `
           margin: 0;
           padding: 0;
-        \`;
-
-      case "anchor":
-        return \`
+        `;
+        case "anchor":
+          return `
           text-decoration: none;
           color: inherit;
 
           &:visited {
             color: inherit;
           }
-        \`;
-
-      case "input":
-        return \`
+        `;
+        case "input":
+          return `
           margin: 0;
           padding: 0;
           border: none;
@@ -86,33 +57,37 @@ export const ${this._name}: MakeReset = (element) => {
             margin: 0;
           }
 
-          // range
           &[type="range"]::-ms-track {
-            background: transparent; /* Transparent since MS uses a pseudo track */
+            background: transparent;
             border-color: transparent;
             color: transparent;
           },
           &[type="range"]::-webkit-slider-thumb {
             appearance: none;
-            -webkit-appearance: none; /* Removes default styling */
+            -webkit-appearance: none;
           }
           &[type="range"]:focus {
             outline: none;
           }
-        \`;
-
-      default:
-        return matchGuard(element);
-    }
-};
-`;
-  }
-
-  makeUtilSCSS(): string {
-    return "";
-  }
-
-  makeCSSProperties(): string[] {
-    return [""];
-  }
+        `;
+        default: {
+          const _exhaustive: never = element;
+          throw new Error(`Unhandled reset element: ${_exhaustive}`);
+        }
+      }
+    },
+  };
 }
+
+export const resetTemplate = defineTemplate({
+  name: "makeReset",
+  namespace: "reset",
+  description: "Provides CSS resets for common HTML elements.",
+  tokens(_config) {
+    return {};
+  },
+  cssProperties(_config) {
+    return [];
+  },
+  util: makeResetUtil,
+});

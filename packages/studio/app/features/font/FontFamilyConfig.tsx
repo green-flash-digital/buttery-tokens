@@ -1,7 +1,6 @@
 import { css } from "@linaria/core";
 import { useCallback } from "react";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
-import { match } from "ts-pattern";
 import { manualFontStyles } from "@buttery/core/schemas";
 import { makeRem, makeReset } from "@buttery/studio-tokens";
 
@@ -10,7 +9,6 @@ import { VariantAdd } from "~/components/VariantAdd";
 import { VariantEmpty } from "~/components/VariantEmpty";
 
 import { FontFamilyConfigManual } from "./FontFamilyConfigManual";
-import { FontFamilyConfigRegistry } from "./FontFamilyConfigRegistry";
 import type { OnFontFamilyAction } from "./font.utils";
 
 import { useConfigurationContext } from "../Config.context";
@@ -81,10 +79,8 @@ export function FontFamilyConfig() {
 
         case "addStyle": {
           setFont((draft) => {
-            // @ts-expect-error this is going to be okay TODO: Enable Types
             draft.families[args.id].styles[args.style] = {
-              // @ts-expect-error this is going to be okay TODO: Enable Types
-              display: manualFontStyles[args.style],
+              display: manualFontStyles[args.style as keyof typeof manualFontStyles],
             };
           });
           break;
@@ -92,17 +88,10 @@ export function FontFamilyConfig() {
 
         case "deleteStyle": {
           setFont((draft) => {
-            // @ts-expect-error this is going to be okay
             delete draft.families[args.id].styles[args.style];
           });
           break;
         }
-
-        case "changeSource":
-          setFont((draft) => {
-            draft.source = args.source;
-          });
-          break;
 
         case "changeFamilyName":
           setFont((draft) => {
@@ -147,31 +136,16 @@ export function FontFamilyConfig() {
 
   return (
     <ul className={styles}>
-      {match(font)
-        .with({ source: "manual" }, (state) =>
-          Object.entries(state.families).map(([familyId, family]) => (
-            <li key={familyId}>
-              <FontFamilyConfigManual
-                {...family}
-                id={familyId}
-                source={state.source}
-                onAction={handleAction}
-              />
-            </li>
-          ))
-        )
-        .otherwise((state) =>
-          Object.entries(state.families).map(([familyId, family]) => (
-            <li key={familyId}>
-              <FontFamilyConfigRegistry
-                {...family}
-                id={familyId}
-                source={state.source}
-                onAction={handleAction}
-              />
-            </li>
-          ))
-        )}
+      {Object.entries(font.families).map(([familyId, family]) => (
+        <li key={familyId}>
+          <FontFamilyConfigManual
+            {...family}
+            id={familyId}
+            source={font.source}
+            onAction={handleAction}
+          />
+        </li>
+      ))}
       <VariantAdd onAdd={handleAddFontFamily}>Add a font family</VariantAdd>
     </ul>
   );

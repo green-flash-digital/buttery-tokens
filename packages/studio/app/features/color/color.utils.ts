@@ -1,204 +1,101 @@
 import type {
   ButteryTokensConfig,
-  ColorDefHueSchema,
-  ColorDefHexSchema,
-  ButteryTokensColorBrandTypeAuto,
-  ButteryTokensColorBrandTypeManual,
+  ButteryTokensColorEntry,
+  ButteryTokensColorEntryHue,
+  ButteryTokensColorEntryHex,
+  ButteryTokensColorVibe,
+  VibeName,
 } from "@buttery/core/schemas";
-import {
-  ConfigSchema,
-  ColorBrandTypeEarthSchema,
-  ColorBrandTypeFluorescentSchema,
-  ColorBrandTypeJewelSchema,
-  ColorBrandTypeNeutralSchema,
-  ColorBrandTypePastelSchema,
-} from "@buttery/core/schemas";
-import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
+import { vibePresets, ConfigSchema } from "@buttery/core/schemas";
+import { generateGUID } from "ts-jolt/isomorphic";
 import type { Updater } from "use-immer";
 import { useImmer } from "use-immer";
-import type { z, ZodUnionDef, ZodLiteral } from "zod";
-import { match } from "ts-pattern";
-import {
-  createBrandVariants,
-  createNeutralVariants,
-} from "@buttery/core/utils";
+import { createColorVariants } from "@buttery/core/utils";
 
-import type { ColorPreviewThemeMode } from "./ColorPreview.context";
+export { vibePresets };
+export type { VibeName };
 
 export const initConfig: ButteryTokensConfig = ConfigSchema.parse({});
 
-export type ConfigurationStateColorsAuto = {
-  [id: string]: z.infer<typeof ColorDefHueSchema.valueSchema> & {
-    name: string;
-  };
+// ── State types ──────────────────────────────────────────────────────────────
+
+export type ConfigurationStateColorHueEntry = {
+  name: string;
+  hue: number;
+  variants: number | string[];
 };
-export type ConfigurationStateColorsManual = {
-  [id: string]: z.infer<typeof ColorDefHexSchema.valueSchema> & {
-    name: string;
-  };
+
+export type ConfigurationStateColorHexEntry = {
+  name: string;
+  hex: string;
+  variants: number | string[] | Record<string, string>;
 };
-export type ConfigurationStateColorBrandAuto =
-  ButteryTokensColorBrandTypeAuto & {
-    colors: ConfigurationStateColorsAuto;
-  };
-export type ConfigurationStateColorBrandManual =
-  ButteryTokensColorBrandTypeManual & {
-    colors: ConfigurationStateColorsManual;
-  };
-export type ConfigurationStateColorBrand = {
-  auto: ConfigurationStateColorBrandAuto;
-  manual: ConfigurationStateColorBrandManual;
-};
-export type ConfigurationStateColorNeutral = ConfigurationStateColorsManual;
 
 export type ConfigurationStateColor = {
-  brand: ConfigurationStateColorBrand & {
-    type: keyof ConfigurationStateColorBrand;
-  };
-  neutral: ConfigurationStateColorsManual;
+  vibe: ButteryTokensColorVibe | undefined;
+  hue: { [id: string]: ConfigurationStateColorHueEntry };
+  hex: { [id: string]: ConfigurationStateColorHexEntry };
 };
 
-function getMinMax<T extends number>(
-  def: ZodUnionDef<[ZodLiteral<T>, ...ZodLiteral<T>[]]>
-) {
-  const optionalArr = def.options.map((option) => option._def.value);
-  return {
-    min: Math.min(...optionalArr),
-    max: Math.max(...optionalArr),
-  };
-}
+// ── Vibe presets formatted for InputRange (min/max per field) ────────────────
 
-export const colorAutoPresets: {
-  [key in ButteryTokensColorBrandTypeAuto["type"]]: {
-    saturation: { min: number; max: number };
-    brightness: { min: number; max: number };
-  };
-} = {
-  earth: {
-    saturation: getMinMax(ColorBrandTypeEarthSchema.shape.saturation._def),
-    brightness: getMinMax(ColorBrandTypeEarthSchema.shape.brightness._def),
-  },
-  fluorescent: {
-    saturation: getMinMax(
-      ColorBrandTypeFluorescentSchema.shape.saturation._def
-    ),
-    brightness: getMinMax(
-      ColorBrandTypeFluorescentSchema.shape.brightness._def
-    ),
-  },
-  jewel: {
-    saturation: getMinMax(ColorBrandTypeJewelSchema.shape.saturation._def),
-    brightness: getMinMax(ColorBrandTypeJewelSchema.shape.brightness._def),
-  },
-  neutral: {
-    saturation: getMinMax(ColorBrandTypeNeutralSchema.shape.saturation._def),
-    brightness: getMinMax(ColorBrandTypeNeutralSchema.shape.brightness._def),
-  },
-  pastel: {
-    saturation: getMinMax(ColorBrandTypePastelSchema.shape.saturation._def),
-    brightness: getMinMax(ColorBrandTypePastelSchema.shape.brightness._def),
-  },
+export const colorVibePresets: Record<
+  VibeName,
+  { lightness: { min: number; max: number }; chroma: { min: number; max: number } }
+> = {
+  earth:       { lightness: { min: vibePresets.earth.minL,       max: vibePresets.earth.maxL       }, chroma: { min: vibePresets.earth.minC,       max: vibePresets.earth.maxC       } },
+  fluorescent: { lightness: { min: vibePresets.fluorescent.minL, max: vibePresets.fluorescent.maxL }, chroma: { min: vibePresets.fluorescent.minC, max: vibePresets.fluorescent.maxC } },
+  jewel:       { lightness: { min: vibePresets.jewel.minL,       max: vibePresets.jewel.maxL       }, chroma: { min: vibePresets.jewel.minC,       max: vibePresets.jewel.maxC       } },
+  neutral:     { lightness: { min: vibePresets.neutral.minL,     max: vibePresets.neutral.maxL     }, chroma: { min: vibePresets.neutral.minC,     max: vibePresets.neutral.maxC     } },
+  pastel:      { lightness: { min: vibePresets.pastel.minL,      max: vibePresets.pastel.maxL      }, chroma: { min: vibePresets.pastel.minC,     max: vibePresets.pastel.maxC      } },
 };
+
+// Default lightness/chroma for each vibe (midpoint of its range)
+export const vibeDefaults: Record<VibeName, { lightness: number; chroma: number }> = {
+  earth:       { lightness: 0.525, chroma: 0.075 },
+  fluorescent: { lightness: 0.825, chroma: 0.23  },
+  jewel:       { lightness: 0.475, chroma: 0.18  },
+  neutral:     { lightness: 0.70,  chroma: 0.01  },
+  pastel:      { lightness: 0.86,  chroma: 0.07  },
+};
+
+// ── Config → state ───────────────────────────────────────────────────────────
 
 export function getInitColorStateFromConfig(
   config: ButteryTokensConfig
 ): ConfigurationStateColor {
-  const brandColors = Object.entries(config.color.brand.colors ?? {}).reduce(
-    (accum, [colorName, colorDefValue]) =>
-      Object.assign(accum, {
-        [generateGUID()]: {
-          name: colorName,
-          ...colorDefValue,
-        },
-      }),
-    {}
-  );
-  const neutralColors = Object.entries(config.color.neutral ?? {}).reduce(
-    (accum, [colorName, colorDefValue]) => {
-      const def =
-        typeof colorDefValue === "string"
-          ? { hex: colorDefValue }
-          : colorDefValue;
-      return Object.assign(accum, {
-        [generateGUID()]: {
-          name: colorName,
-          ...def,
-        },
-      });
-    },
-    {}
-  );
-  // START HERE WITH THE NEUTRAL COLORS
-  if (config.color.brand.type === "manual") {
-    return {
-      brand: {
-        type: "manual",
-        manual: {
-          type: "manual",
-          colors: brandColors,
-        },
-        auto: {
-          type: "earth",
-          brightness: 36,
-          saturation: 36,
-          colors: {},
-        },
-      },
-      neutral: neutralColors,
-    };
+  const hue: ConfigurationStateColor["hue"] = {};
+  const hex: ConfigurationStateColor["hex"] = {};
+
+  for (const [name, entry] of Object.entries(config.color.colors)) {
+    if ("hue" in entry) {
+      hue[generateGUID()] = { name, hue: entry.hue, variants: entry.variants };
+    } else {
+      hex[generateGUID()] = { name, hex: entry.hex, variants: entry.variants };
+    }
   }
 
-  return {
-    brand: {
-      type: "auto",
-      manual: {
-        type: "manual",
-        colors: {},
-      },
-      auto: {
-        ...config.color.brand,
-        colors: brandColors,
-      },
-    },
-    neutral: neutralColors,
-  };
+  return { vibe: config.color.vibe, hue, hex };
 }
+
+// ── State → config ───────────────────────────────────────────────────────────
 
 export function getColorConfigFromState(
   colorState: ConfigurationStateColor
 ): ButteryTokensConfig["color"] {
-  const neutralColors = Object.values(colorState.neutral).reduce(
-    (accum, { name, ...restDef }) => Object.assign(accum, { [name]: restDef }),
-    {}
-  );
-  const brandColors = Object.values(
-    colorState.brand[colorState.brand.type].colors
-  ).reduce(
-    (accum, { name, ...restDef }) => Object.assign(accum, { [name]: restDef }),
-    {}
-  );
-  switch (colorState.brand.type) {
-    case "manual":
-      return {
-        brand: {
-          type: "manual",
-          colors: brandColors,
-        },
-        neutral: neutralColors,
-      };
-    case "auto":
-      return {
-        brand: {
-          ...colorState.brand.auto,
-          colors: brandColors,
-        },
-        neutral: neutralColors,
-      };
+  const colors: Record<string, ButteryTokensColorEntry> = {};
 
-    default:
-      exhaustiveMatchGuard(colorState.brand.type);
+  for (const { name, hue, variants } of Object.values(colorState.hue)) {
+    colors[name] = { hue, variants } satisfies ButteryTokensColorEntryHue;
   }
+  for (const { name, hex, variants } of Object.values(colorState.hex)) {
+    colors[name] = { hex, variants } satisfies ButteryTokensColorEntryHex;
+  }
+
+  return { vibe: colorState.vibe, colors };
 }
+
+// ── Hooks ────────────────────────────────────────────────────────────────────
 
 export function useConfigStateColor(initConfig: ButteryTokensConfig) {
   return useImmer(getInitColorStateFromConfig(initConfig));
@@ -208,48 +105,36 @@ export type ConfigurationContextColorType = {
   setColor: Updater<ConfigurationStateColor>;
 };
 
-export const colorThemeMap: Record<ColorPreviewThemeMode, string> = {
+// ── Preview helpers ──────────────────────────────────────────────────────────
+
+export function convertHueColorsIntoVariants(color: ConfigurationStateColor) {
+  if (!color.vibe) return {};
+  const colors: Record<string, ButteryTokensColorEntryHue> = Object.values(
+    color.hue
+  ).reduce(
+    (acc, { name, hue, variants }) =>
+      Object.assign(acc, { [name]: { hue, variants } }),
+    {}
+  );
+  return createColorVariants({ vibe: color.vibe, colors });
+}
+
+export function convertHexColorsIntoVariants(color: ConfigurationStateColor) {
+  const colors: Record<string, ButteryTokensColorEntryHex> = Object.values(
+    color.hex
+  ).reduce(
+    (acc, { name, hex, variants }) =>
+      Object.assign(acc, { [name]: { hex, variants } }),
+    {}
+  );
+  return createColorVariants({ colors });
+}
+
+// kept for components that haven't been migrated yet
+export const convertBrandColorIntoVariants = convertHueColorsIntoVariants;
+export const convertNeutralColorIntoVariants = convertHexColorsIntoVariants;
+
+export const colorThemeMap: Record<string, string> = {
   dark: "#1e1e1e",
   light: "#ffffff",
 };
-
-export const convertBrandColorIntoVariants = (
-  color: ConfigurationStateColor
-) => {
-  return match(color.brand)
-    .with({ type: "auto" }, (state) => {
-      const variants = createBrandVariants({
-        ...state.auto,
-        colors: Object.values(state.auto.colors).reduce(
-          (accum, { name, ...restDef }) =>
-            Object.assign(accum, { [name]: restDef }),
-          {}
-        ),
-      });
-      return variants;
-    })
-    .with({ type: "manual" }, (state) => {
-      const variants = createBrandVariants({
-        type: "manual",
-        colors: Object.values(state.manual.colors).reduce(
-          (accum, { name, ...restDef }) =>
-            Object.assign(accum, { [name]: restDef }),
-          {}
-        ),
-      });
-      return variants;
-    })
-    .exhaustive();
-};
-
-export function convertNeutralColorIntoVariants(
-  color: ConfigurationStateColor
-) {
-  return createNeutralVariants(
-    Object.values(color.neutral).reduce(
-      (accum, { name, ...restDef }) =>
-        Object.assign(accum, { [name]: restDef }),
-      {}
-    )
-  );
-}

@@ -1,29 +1,22 @@
-import { Template } from "./Template.js";
+import { defineTemplate } from "./types.js";
 
-import type { TokensConfig } from "../ButteryTokens.js";
-
-export class TemplateMakePx extends Template {
-  constructor(config: TokensConfig) {
-    super({
-      prefix: config.config.runtime.prefix,
-      name: "makePx",
-      namespace: "length",
-      description:
-        "A utility that concatenates 'px' onto the end of the provided value",
-    });
-  }
-
-  makeUtilTS(): string {
-    return `${this._createDocsDescription("ts")}
-export const ${this._name} = (val: number) => \`\${val}px\`;
-`;
-  }
-
-  makeUtilSCSS(): string {
-    return "";
-  }
-
-  makeCSSProperties(): string[] {
-    return [""];
-  }
+function makePxUtil<T>(_tokens: T) {
+  return {
+    makePx(val: number): string {
+      return `${val}px`;
+    },
+  };
 }
+
+export const pxTemplate = defineTemplate({
+  name: "makePx",
+  namespace: "length",
+  description: "Provides a utility for appending 'px' to a numeric value.",
+  tokens(_config) {
+    return {};
+  },
+  cssProperties(_config) {
+    return [];
+  },
+  util: makePxUtil,
+});

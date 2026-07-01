@@ -15,7 +15,7 @@ import { VariantContainerBarActions } from "~/components/VariantContainerBarActi
 import { VariantContainerContent } from "~/components/VariantContainerContent";
 import { VariantContainerBarText } from "~/components/VariantContainerBarText";
 
-import type { ConfigurationStateColorsAuto } from "./color.utils";
+import type { ConfigurationStateColorHueEntry } from "./color.utils";
 import { ColorSwatchHue } from "./ColorSwatchHue";
 import { ColorSwatchName } from "./ColorSwatchName";
 import { ColorSwatchVariants } from "./ColorSwatchVariants";
@@ -28,7 +28,7 @@ const barStyles = css`
 `;
 
 export function ColorBrandModeAutoVariant<
-  T extends ConfigurationStateColorsAuto
+  T extends { [id: string]: ConfigurationStateColorHueEntry }
 >({
   colorDef,
   setColor,
@@ -43,7 +43,7 @@ export function ColorBrandModeAutoVariant<
   const handleChangeHue = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        const color = draft.brand.auto.colors[id];
+        const color = draft.hue[id];
         const hue = Number(value);
         color.hue = hue;
         setHue(hue);
@@ -55,7 +55,7 @@ export function ColorBrandModeAutoVariant<
   const handleChangeName = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        const color = draft.brand.auto.colors[id];
+        const color = draft.hue[id];
         color.name = value;
       });
     },
@@ -64,7 +64,7 @@ export function ColorBrandModeAutoVariant<
 
   const handleRemove = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
     setColor((draft) => {
-      delete draft.brand.auto.colors[id];
+      delete draft.hue[id];
     });
   }, [id, setColor]);
 
@@ -76,12 +76,12 @@ export function ColorBrandModeAutoVariant<
       switch (type) {
         case "auto":
           setColor((draft) => {
-            draft.brand.auto.colors[id].variants = 10;
+            draft.hue[id].variants = 10;
           });
           break;
         case "auto-named":
           setColor((draft) => {
-            draft.brand.auto.colors[id].variants = ["light", "dark"];
+            draft.hue[id].variants = ["light", "dark"];
           });
           break;
         case "key-value":
@@ -99,7 +99,7 @@ export function ColorBrandModeAutoVariant<
   >(
     (variant) => {
       setColor((draft) => {
-        draft.brand.auto.colors[id].variants = variant;
+        draft.hue[id].variants = variant;
       });
     },
     [id, setColor]
@@ -112,7 +112,7 @@ export function ColorBrandModeAutoVariant<
       switch (params.mode) {
         case "change":
           setColor((draft) => {
-            const variants = draft.brand.auto.colors[id].variants;
+            const variants = draft.hue[id].variants;
             if (!Array.isArray(variants)) return;
             variants[params.index] = params.value;
           });
@@ -120,7 +120,7 @@ export function ColorBrandModeAutoVariant<
 
         case "add":
           setColor((draft) => {
-            const variants = draft.brand.auto.colors[id].variants;
+            const variants = draft.hue[id].variants;
             if (!Array.isArray(variants)) return;
             variants.push(params.newValue);
           });
@@ -128,7 +128,7 @@ export function ColorBrandModeAutoVariant<
 
         case "remove":
           setColor((draft) => {
-            const variants = draft.brand.auto.colors[id].variants;
+            const variants = draft.hue[id].variants;
             if (!Array.isArray(variants)) return;
             variants.splice(params.index, 1);
           });
@@ -148,7 +148,7 @@ export function ColorBrandModeAutoVariant<
       setColor((draft) => {
         // only handle the number and array
         if (typeof variants === "number" || Array.isArray(variants)) {
-          draft.brand.auto.colors[id].variants = variants;
+          draft.hue[id].variants = variants;
         }
       });
     },

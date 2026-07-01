@@ -6,14 +6,13 @@ export const SpaceVariantSchema = z.record(z.string(), z.number());
 
 export const SpaceManualSchema = z.object({
   mode: z.literal("manual"),
-  variants: z.record(z.string(), z.number()),
+  variants: z.number().array(),
 });
 export type SpaceManual = z.infer<typeof SpaceManualSchema>;
 
 export const SpaceAutoSchema = z.object({
   mode: z.literal("auto"),
-  factor: z.union([z.literal(2), z.literal(3)]).optional(),
-  variants: z.union([z.number(), z.string().array()]).default(11),
+  variants: z.number().default(11),
 });
 export type SpaceAuto = z.infer<typeof SpaceAutoSchema>;
 

@@ -77,15 +77,14 @@ export function hsbToHex(h: number, s: number, b: number) {
 
 // Convert HEX to RGB
 export function hexToRgb(h: string) {
-  // Remove the hash at the start if it's there
-  const hex = h.replace(/^#/, "");
-
-  // Parse r, g, b values
+  let hex = h.replace(/^#/, "");
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
   const bigint = Number.parseInt(hex, 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
-
   return { r, g, b };
 }
 
@@ -140,7 +139,7 @@ export function hexToHsl(hex: string): { h: number; s: number; l: number } {
 
   // Convert 3-digit hex to 6-digit hex
   if (newHex.length === 3) {
-    newHex = hex
+    newHex = newHex
       .split("")
       .map((char) => char + char)
       .join("");

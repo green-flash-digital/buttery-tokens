@@ -14,13 +14,13 @@ import { useConfigurationContext } from "../Config.context";
 export function ColorNeutral() {
   const { color, setColor } = useConfigurationContext();
 
-  const colorEntries = Object.entries(color.neutral);
+  const colorEntries = Object.entries(color.hex);
 
   const handleAdd = useCallback(() => {
     const totalColors = colorEntries.length;
     setColor((draft) => {
       const id = generateGUID();
-      draft.neutral[id] = {
+      draft.hex[id] = {
         hex: "#000000",
         name: `neutral${totalColors + 1}`,
         variants: 10,

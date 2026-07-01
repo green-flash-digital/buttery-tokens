@@ -1,74 +1,59 @@
+import { defineTemplate } from "./types.js";
+
 import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 
-import { Template } from "./Template.js";
+import { createCSSProperty } from "../utils/index.js";
 
-import type { TokensConfig } from "../ButteryTokens.js";
+function makeCustomUtil<
+  T extends { prefix: string; custom: Record<string, string> }
+>(tokens: T) {
+  return {
+    makeCustom(tokenName: keyof T["custom"] & string): string {
+      return `var(--${tokens.prefix}-custom-${tokenName})`;
+    },
+  };
+}
 
-export class TemplateMakeCustom extends Template {
-  private _config: TokensConfig;
-
-  constructor(config: TokensConfig) {
-    super({
-      prefix: config.config.runtime.prefix,
-      name: "makeCustom",
-      namespace: "custom",
-      description:
-        "Enables to references custom tokens that don't fit within the bounds of the static configuration points. This is good for things like navigational headers, footers, or any other heights, 1-off colors, etc... that need to be shared across all parts of the application",
-    });
-    this._config = config;
-  }
-
-  makeUtilTS(): string {
-    const customTokenNames = Object.keys(this._config.config.custom);
-    const customTokenUnion = this._createUnionType(customTokenNames);
-    const propertyBase = this._createCSSProperty();
-
-    return `export type CustomTokens = ${customTokenUnion};
-export type MakeCustom = (tokenName: CustomTokens) => string | number;
-
-${this._createDocsDescription("ts")}
-export const ${this._name}: MakeCustom = (value) => {
-  return \`var(${propertyBase}-\${value})\`
-};
-`;
-  }
-
-  makeUtilSCSS(): string {
-    return "";
-  }
-
-  makeCSSProperties(): string[] {
-    const properties = Object.entries(this._config.config.custom).map(
+export const customTemplate = defineTemplate({
+  name: "makeCustom",
+  namespace: "custom",
+  description: "Generates tokens for arbitrary custom values that don't fit other token categories.",
+  tokens(config) {
+    const { baseFontSize } = config.config.sizeAndSpace;
+    const custom: Record<string, string> = {};
+    for (const [tokenName, tokenValue] of Object.entries(config.config.custom)) {
+      switch (tokenValue.type) {
+        case "number":
+        case "string":
+          custom[tokenName] = String(tokenValue.value);
+          break;
+        case "rem":
+          custom[tokenName] = `${tokenValue.value / baseFontSize}rem`;
+          break;
+        default:
+          exhaustiveMatchGuard(tokenValue);
+      }
+    }
+    return { custom };
+  },
+  cssProperties(config) {
+    const prefix = config.config.runtime.prefix;
+    const { baseFontSize } = config.config.sizeAndSpace;
+    return Object.entries(config.config.custom).map(
       ([customToken, customTokenValue]) => {
-        const property = this._createCSSProperty(customToken);
+        const property = createCSSProperty(prefix, "custom", customToken);
         switch (customTokenValue.type) {
           case "number":
           case "string":
-            return `${property}: ${customTokenValue}`;
-
+            return `${property}: ${customTokenValue.value}`;
           case "rem": {
-            const remValue =
-              customTokenValue.value /
-              this._config.config.sizeAndSpace.baseFontSize;
-            return `${property}: ${remValue}rem`;
+            return `${property}: ${customTokenValue.value / baseFontSize}rem`;
           }
-
           default:
             return exhaustiveMatchGuard(customTokenValue);
         }
-      },
-      []
+      }
     );
-    return properties;
-  }
-}
-
-//  * It's important to note that the values that are associated with the token from
-//  * the config are going to be raw values. This is to ensure that there's not black
-//  * magic behind the scenes happening that makes the utility do more than just recall
-//  * the value with the token.
-//  *
-//  * With that said, there are options on the method that will allow you to recall
-//  * the value and add some simple processing on it. For instance, if the token value
-//  * is a number you would be able to use an option in the \`${functionName}\` function
-//  * to convert that value to a rem.
+  },
+  util: makeCustomUtil,
+});

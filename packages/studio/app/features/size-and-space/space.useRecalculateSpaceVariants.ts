@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { calculateSpaceVariantAutoValue } from "@buttery/core/utils";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 
 import { useConfigurationContext } from "../Config.context";
@@ -43,17 +42,11 @@ export function useRecalculateSpaceVariants() {
             case "auto": {
               const newAutoVariants = Object.entries(newVariantsArr).reduce(
                 (accum, _, i) => {
-                  const index = newVariantStartIndex + i;
                   const order = newVariantStartOrder + i;
-                  const value = calculateSpaceVariantAutoValue(
-                    index,
-                    draft.baselineGrid,
-                    draft.space.auto.factor
-                  );
-
+                  const value = draft.baselineGrid * (prevVarEntriesLength + i + 1);
                   return Object.assign(accum, {
                     [generateGUID()]: {
-                      name: String(index),
+                      name: String(value),
                       value,
                       order,
                     },

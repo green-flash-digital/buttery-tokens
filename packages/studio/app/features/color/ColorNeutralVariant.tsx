@@ -15,7 +15,7 @@ import { VariantContainerBarText } from "~/components/VariantContainerBarText";
 import { VariantContainerBarTitle } from "~/components/VariantContainerBarTitle";
 import { VariantContainerContent } from "~/components/VariantContainerContent";
 
-import type { ConfigurationStateColorsManual } from "./color.utils";
+import type { ConfigurationStateColorHexEntry } from "./color.utils";
 import { ColorSwatchName } from "./ColorSwatchName";
 import { ColorSwatchVariants } from "./ColorSwatchVariants";
 import type { ColorSwatchVariantsPropsCustom } from "./ColorSwatchVariants";
@@ -27,7 +27,7 @@ const barStyles = css`
   grid-template-columns: ${makeRem(24)} ${makeRem(100)} auto 1fr !important;
 `;
 
-export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
+export function ColorNeutralVariant<T extends { [id: string]: ConfigurationStateColorHexEntry }>({
   colorDef,
   setColor,
 }: {
@@ -41,7 +41,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
   const handleChangeHex = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        const color = draft.neutral[id];
+        const color = draft.hex[id];
         color.hex = value;
       });
       setHex(value);
@@ -52,7 +52,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
   const handleChangeName = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ currentTarget: { value } }) => {
       setColor((draft) => {
-        const color = draft.neutral[id];
+        const color = draft.hex[id];
         color.name = value;
       });
     },
@@ -61,7 +61,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
 
   const handleRemove = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
     setColor((draft) => {
-      delete draft.neutral[id];
+      delete draft.hex[id];
     });
   }, [id, setColor]);
 
@@ -73,17 +73,17 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
       switch (type) {
         case "auto":
           setColor((draft) => {
-            draft.neutral[id].variants = 10;
+            draft.hex[id].variants = 10;
           });
           break;
         case "auto-named":
           setColor((draft) => {
-            draft.neutral[id].variants = ["light", "dark"];
+            draft.hex[id].variants = ["light", "dark"];
           });
           break;
         case "key-value":
           setColor((draft) => {
-            draft.neutral[id].variants = {
+            draft.hex[id].variants = {
               light: "#cccccc",
               dark: "#525252",
             };
@@ -102,7 +102,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
   >(
     (variant) => {
       setColor((draft) => {
-        draft.neutral[id].variants = variant;
+        draft.hex[id].variants = variant;
       });
     },
     [id, setColor]
@@ -115,7 +115,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
       switch (params.mode) {
         case "change":
           setColor((draft) => {
-            const variants = draft.neutral[id].variants;
+            const variants = draft.hex[id].variants;
             if (!Array.isArray(variants)) return;
             variants[params.index] = params.value;
           });
@@ -123,7 +123,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
 
         case "add":
           setColor((draft) => {
-            const variants = draft.neutral[id].variants;
+            const variants = draft.hex[id].variants;
             if (!Array.isArray(variants)) return;
             variants.push(params.newValue);
           });
@@ -131,7 +131,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
 
         case "remove":
           setColor((draft) => {
-            const variants = draft.neutral[id].variants;
+            const variants = draft.hex[id].variants;
             if (!Array.isArray(variants)) return;
             variants.splice(params.index, 1);
           });
@@ -149,7 +149,7 @@ export function ColorNeutralVariant<T extends ConfigurationStateColorsManual>({
   >(
     (variants) => {
       setColor((draft) => {
-        draft.neutral[id].variants = variants;
+        draft.hex[id].variants = variants;
       });
     },
     [id, setColor]

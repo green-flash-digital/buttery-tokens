@@ -1,57 +1,36 @@
-import { match } from "ts-pattern";
+import { defineTemplate } from "./types.js";
 
-import { Template } from "./Template.js";
+import { createCSSProperty } from "../utils/index.js";
 
-import type { TokensConfig } from "../ButteryTokens.js";
+function makeFontFamilyUtil<
+  T extends { prefix: string; font: { families: Record<string, string> } }
+>(tokens: T) {
+  return {
+    makeFontFamily(familyName: keyof T["font"]["families"] & string): string {
+      return `var(--${tokens.prefix}-font-family-${familyName})`;
+    },
+  };
+}
 
-export class TemplateMakeFontFamily extends Template {
-  private _config: TokensConfig;
-
-  constructor(config: TokensConfig) {
-    super({
-      prefix: config.config.runtime.prefix,
-      name: "makeFontFamily",
-      namespace: "font-family",
-      description:
-        "A utility that returns the CSS variable assigned to the font-family`",
-    });
-    this._config = config;
-  }
-
-  makeUtilTS(): string {
-    const functionName = this._name;
-    const propertyBase = this._createCSSProperty();
-    const fontFamilyNames = match(this._config.config.font)
-      .with({ source: "manual" }, (state) => {
-        return Object.keys(state.families);
-      })
-      .otherwise((state) => {
-        return Object.keys(state.families);
-      });
-    const fontFamilyUnion = this._createUnionType(fontFamilyNames);
-
-    return `export type FontFamily = ${fontFamilyUnion};
-export type MakeFontFamily = (fontFamilyName: FontFamily) => string;
-  
-  ${this._createDocsDescription("ts")}
-export const ${functionName}: MakeFontFamily = (value) => {
-    return \`var(${propertyBase}-\${value})\`
-};
-`;
-  }
-
-  makeUtilSCSS(): string {
-    return "";
-  }
-
-  makeCSSProperties(): string[] {
-    const fontFamilies = this._config.config.font.families ?? {};
-    const properties = Object.entries(fontFamilies).map(
+export const fontFamilyTemplate = defineTemplate({
+  name: "makeFontFamily",
+  namespace: "font-family",
+  description: "Generates font-family tokens from manual font configurations.",
+  tokens(config) {
+    const families: Record<string, string> = {};
+    for (const [name, def] of Object.entries(config.config.font.families)) {
+      families[name] = `"${def.family}", ${def.fallback}`;
+    }
+    return { font: { families } };
+  },
+  cssProperties(config) {
+    const prefix = config.config.runtime.prefix;
+    return Object.entries(config.config.font.families).map(
       ([fontFamilyName, fontFamilyValue]) => {
-        const property = this._createCSSProperty(fontFamilyName);
+        const property = createCSSProperty(prefix, "font-family", fontFamilyName);
         return `${property}: "${fontFamilyValue.family}", ${fontFamilyValue.fallback}`;
       }
     );
-    return properties;
-  }
-}
+  },
+  util: makeFontFamilyUtil,
+});

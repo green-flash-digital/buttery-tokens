@@ -6,7 +6,7 @@ import { VariantEmpty } from "~/components/VariantEmpty";
 import { VariantList } from "~/components/VariantList";
 
 import { ColorBrandModeManualVariant } from "./ColorBrandModeManualVariant";
-import type { ConfigurationStateColorBrandManual } from "./color.utils";
+import type { ConfigurationStateColor } from "./color.utils";
 
 import type { ConfigurationContextType } from "../Config.context";
 import { InputLabel } from "../../components/InputLabel";
@@ -16,14 +16,14 @@ export function ColorBrandModeManual({
   state,
   setColor,
 }: {
-  state: ConfigurationStateColorBrandManual;
+  state: ConfigurationStateColor;
   setColor: ConfigurationContextType["setColor"];
 }) {
   const handleAdd = useCallback(() => {
-    const totalColors = Object.entries(state.colors).length;
+    const totalColors = Object.keys(state.hex).length;
     setColor((draft) => {
       const id = generateGUID();
-      draft.brand.manual.colors[id] = {
+      draft.hex[id] = {
         hex: "#000000",
         name: `brand${totalColors + 1}`,
         variants: 10,
@@ -31,7 +31,7 @@ export function ColorBrandModeManual({
     });
   }, [setColor, state]);
 
-  const colorEntries = Object.entries(state.colors);
+  const colorEntries = Object.entries(state.hex);
 
   return (
     <InputSection>

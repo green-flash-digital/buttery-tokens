@@ -1,19 +1,10 @@
 import type { Updater } from "use-immer";
 import type { ChangeEventHandler } from "react";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
-import type { ButteryTokensColorBrandTypeAuto } from "@buttery/core/schemas";
-import {
-  ColorBrandTypeJewelSchema,
-  ColorBrandTypePastelSchema,
-  ColorBrandTypeEarthSchema,
-  ColorBrandTypeNeutralSchema,
-  ColorBrandTypeFluorescentSchema,
-} from "@buttery/core/schemas";
+import chroma from "chroma-js";
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
-import { hexToHsb } from "@buttery/core/utils";
 import { match, P } from "ts-pattern";
-import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { makeRem, makeColor, makeFontWeight } from "@buttery/studio-tokens";
 
 import { InputColor } from "~/components/InputColor";
@@ -24,12 +15,52 @@ import { IconTickDouble01 } from "~/icons/IconTickDouble01";
 
 import type {
   ConfigurationStateColor,
-  ConfigurationStateColorBrandAuto,
+  VibeName,
 } from "./color.utils";
+import { vibePresets, vibeDefaults } from "./color.utils";
 import {
   ColorBrandModeAutoCategorySelect,
   colorCategories,
 } from "./ColorBrandModeAutoCategorySelect";
+
+function matchHexToVibe(
+  hex: string
+): { type: VibeName; exact: boolean } | undefined {
+  try {
+    const color = chroma(hex);
+    const [L, C] = color.oklch();
+    for (const [name, preset] of Object.entries(vibePresets) as [
+      VibeName,
+      (typeof vibePresets)[VibeName],
+    ][]) {
+      if (
+        L >= preset.minL &&
+        L <= preset.maxL &&
+        C >= preset.minC &&
+        C <= preset.maxC
+      ) {
+        return { type: name, exact: true };
+      }
+    }
+    let minDist = Infinity;
+    let closest: VibeName = "neutral";
+    for (const [name, preset] of Object.entries(vibePresets) as [
+      VibeName,
+      (typeof vibePresets)[VibeName],
+    ][]) {
+      const midL = (preset.minL + preset.maxL) / 2;
+      const midC = (preset.minC + preset.maxC) / 2;
+      const dist = ((L - midL) ** 2 + (C - midC) ** 2) ** 0.5;
+      if (dist < minDist) {
+        minDist = dist;
+        closest = name;
+      }
+    }
+    return { type: closest, exact: false };
+  } catch {
+    return undefined;
+  }
+}
 
 const categoryContainerStyles = css`
   padding: ${makeRem(16)};
@@ -95,17 +126,9 @@ const categoryContainerStyles = css`
   }
 `;
 
-const schemas = [
-  ColorBrandTypeJewelSchema,
-  ColorBrandTypePastelSchema,
-  ColorBrandTypeEarthSchema,
-  ColorBrandTypeNeutralSchema,
-  ColorBrandTypeFluorescentSchema,
-];
-
 export type ColorBrandModeAutoCategoryProps = {
   setColor: Updater<ConfigurationStateColor>;
-  state: ConfigurationStateColorBrandAuto;
+  state: ConfigurationStateColor;
 };
 
 export function ColorBrandModeAutoCategory({
@@ -114,134 +137,37 @@ export function ColorBrandModeAutoCategory({
 }: ColorBrandModeAutoCategoryProps) {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [matchType, setMatchType] = useState<
-    | {
-        category: ButteryTokensColorBrandTypeAuto["type"];
-        matchType: "exact" | "close";
-      }
+    | { category: VibeName; matchType: "exact" | "close" }
     | undefined
   >(undefined);
-  const handleSelectCategory = useCallback<
-    (type: ButteryTokensColorBrandTypeAuto["type"]) => void
-  >(
-    (value) => {
-      const category = value as ButteryTokensColorBrandTypeAuto["type"];
+
+  const currentVibeType = state.vibe?.type ?? "fluorescent";
+
+  const handleSelectVibe = useCallback(
+    (type: VibeName) => {
       setColor((draft) => {
-        draft.brand.auto.type = category;
-        switch (draft.brand.auto.type) {
-          case "earth":
-            draft.brand.auto.brightness = 36;
-            draft.brand.auto.saturation = 36;
-            break;
-
-          case "fluorescent":
-            draft.brand.auto.brightness = 82;
-            draft.brand.auto.saturation = 63;
-            break;
-
-          case "jewel":
-            draft.brand.auto.brightness = 56;
-            draft.brand.auto.saturation = 73;
-            break;
-
-          case "neutral":
-            draft.brand.auto.brightness = 58;
-            draft.brand.auto.saturation = 1;
-            break;
-
-          case "pastel":
-            draft.brand.auto.brightness = 89;
-            draft.brand.auto.saturation = 14;
-            break;
-
-          default:
-            exhaustiveMatchGuard(draft.brand.auto);
-        }
+        draft.vibe = { type, ...vibeDefaults[type] };
       });
     },
     [setColor]
   );
+
   const handlePickColorForCategory = useCallback<
     ChangeEventHandler<HTMLInputElement>
   >(
     ({ target: { value } }) => {
-      function matchColorToSchemas() {
-        const { s, b } = hexToHsb(value);
-
-        const exactMatch = schemas.find((schema) => {
-          const saturationOptions = schema.shape.saturation._def.options.map(
-            (opt) => opt.value
-          );
-          const brightnessOptions = schema.shape.brightness._def.options.map(
-            (opt) => opt.value
-          );
-
-          // Check if both saturation and brightness match exactly
-          // @ts-expect-error The s and b don't match up to the literals but they are
-          // numbers so we can safely ignore this TS error
-          return saturationOptions.includes(s) && brightnessOptions.includes(b);
-        });
-
-        if (exactMatch) {
-          setMatchType({
-            category: exactMatch.shape.type._def.value,
-            matchType: "exact",
-          });
-          handleSelectCategory(exactMatch.shape.type._def.value);
-          return;
-        }
-
-        const calculateDistance = (schema: (typeof schemas)[0]) => {
-          const saturationOptions = schema.shape.saturation._def.options;
-          const brightnessOptions = schema.shape.brightness._def.options;
-
-          // Closest saturation and brightness values
-          const closestSaturation = Math.min(
-            ...saturationOptions.map((opt) => Math.abs(opt.value - s))
-          );
-          const closestBrightness = Math.min(
-            ...brightnessOptions.map((opt) => Math.abs(opt.value - b))
-          );
-
-          // Use Hue only if it's part of schema matching
-          const hueDistance = 0; // Add hue distance logic if needed
-
-          // Total distance
-          return closestSaturation + closestBrightness + hueDistance;
-        };
-
-        // Find the schema with the smallest distance
-        const closestSchema = schemas.reduce<{
-          schema: (typeof schemas)[0] | null;
-          distance: number;
-        }>(
-          (accum, schema) => {
-            const distance = calculateDistance(schema);
-            if (distance < accum.distance) {
-              return { schema, distance };
-            }
-            return accum;
-          },
-          { schema: null, distance: Infinity }
-        );
-        if (!closestSchema.schema) return;
-
-        setMatchType({
-          category: closestSchema.schema.shape.type._def.value,
-          matchType: "close",
-        });
-        handleSelectCategory(closestSchema.schema.shape.type._def.value);
-      }
-
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      timeoutRef.current = setTimeout(matchColorToSchemas, 500);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        const result = matchHexToVibe(value);
+        if (!result) return;
+        setMatchType({ category: result.type, matchType: result.exact ? "exact" : "close" });
+        handleSelectVibe(result.type);
+      }, 500);
     },
-    [handleSelectCategory]
+    [handleSelectVibe]
   );
 
-  const CategoryIcon = colorCategories[state.type].Icon;
+  const CategoryIcon = colorCategories[currentVibeType].Icon;
   const selectId = useId();
 
   return (
@@ -251,14 +177,14 @@ export function ColorBrandModeAutoCategory({
           <div className="cat-head">
             <div className="title">
               <CategoryIcon dxSize={24} />
-              <span>{colorCategories[state.type].display}</span>
+              <span>{colorCategories[currentVibeType].display}</span>
             </div>
             <div className="desc">
-              {colorCategories[state.type].description}
+              {colorCategories[currentVibeType].description}
             </div>
           </div>
         ),
-        [CategoryIcon, state.type]
+        [CategoryIcon, currentVibeType]
       )}
       <div className="cat-pick">
         {useMemo(
@@ -266,12 +192,12 @@ export function ColorBrandModeAutoCategory({
             <InputLabel dxLabel="Manually select" dxSize="dense">
               <ColorBrandModeAutoCategorySelect
                 id={selectId}
-                onSelect={handleSelectCategory}
-                selectedType={state.type}
+                onSelect={handleSelectVibe}
+                selectedType={currentVibeType}
               />
             </InputLabel>
           ),
-          [handleSelectCategory, selectId, state.type]
+          [handleSelectVibe, selectId, currentVibeType]
         )}
         <InputLabel dxLabel="Pick a color" dxSize="dense">
           <div className="color">
@@ -283,15 +209,15 @@ export function ColorBrandModeAutoCategory({
                   <Button
                     dxVariant="icon"
                     className="close"
-                    dxHelp="Close Match: This color profile doesn't not explicitly match the constraints of the category. However this color represent's it's nearest match"
+                    dxHelp="Close Match: nearest vibe based on oklch lightness and chroma"
                     DXIcon={IconTick01}
                   />
                 ))
-                .with({ matchType: "exact" }, (state) => (
+                .with({ matchType: "exact" }, (s) => (
                   <Button
                     dxVariant="icon"
                     className="exact"
-                    dxHelp={`Exact Match: This color's hue, saturation, and brightness matches the exact profile of "${state.category}" category.`}
+                    dxHelp={`Exact Match: this color falls within the oklch range for "${s.category}"`}
                     DXIcon={IconTickDouble01}
                   />
                 ))

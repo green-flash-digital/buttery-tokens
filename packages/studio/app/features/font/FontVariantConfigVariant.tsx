@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { VariantContainer } from "~/components/VariantContainer";
@@ -50,51 +49,16 @@ export function FontVariantConfigVariant({
 }: FontVariantConfigVariantProps) {
   const [isOpen, toggle] = useToggle();
 
-  const families = useMemo(() => {
-    switch (state.source) {
-      case "manual":
-        return Object.values(state.families).map((family) => family.tokenName);
-
-      case "adobe":
-      case "google":
-        return Object.values(state.families).map((family) => family.tokenName);
-
-      default:
-        return exhaustiveMatchGuard(state);
-    }
-  }, [state]);
+  const families = useMemo(
+    () => Object.values(state.families).map((family) => family.tokenName),
+    [state]
+  );
 
   const weights = useMemo(() => {
-    let selectedFamily: ConfigurationStateFontManualFamilyValues | undefined =
-      undefined;
-    switch (state.source) {
-      case "manual":
-        selectedFamily = Object.values(state.families).reduce<
-          ConfigurationStateFontManualFamilyValues | undefined
-        >(
-          (accum, familyDef) =>
-            familyDef.tokenName === familyToken ? familyDef : accum,
-          undefined
-        );
-        break;
-
-      case "adobe":
-      case "google":
-        // selectedFamily = Object.values(state.families).reduce<
-        //   ConfigurationStateFontManualFamilyValues | undefined
-        // >(
-        //   (accum, familyDef) => (familyDef.name === family ? familyDef : accum),
-        //   undefined
-        // );
-        break;
-
-      default:
-        return exhaustiveMatchGuard(state);
-    }
-    if (!selectedFamily) {
-      throw "Cannot determine the family from the selection. This should not have happened.";
-    }
-
+    const selectedFamily = Object.values(state.families).find(
+      (familyDef) => familyDef.tokenName === familyToken
+    );
+    if (!selectedFamily) return [];
     return Object.entries(selectedFamily.styles).reduce<
       { value: string; display: string }[]
     >((accum, [value, { display }]) => accum.concat({ value, display }), []);
