@@ -3,6 +3,7 @@ import type { MouseEventHandler, RefCallback } from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { classes } from "react-hook-primitives";
 import {
+  makeSpace,
   makeColor,
   makeFontWeight,
   makePx,
@@ -22,9 +23,9 @@ const styles = css`
     ${makeReset("ul")};
     display: flex;
     justify-content: center;
-    gap: ${makeRem(16)};
-    padding: ${makeRem(16)};
-    margin-bottom: ${makeRem(16)};
+    gap: ${makeSpace(16)};
+    padding: ${makeSpace(16)};
+    margin-bottom: ${makeSpace(16)};
 
     li {
       & + li {
@@ -40,17 +41,17 @@ const styles = css`
     button {
       ${makeReset("button")};
       width: min-content;
-      height: ${makeRem(44)};
+      height: ${makeSpace(44)};
       display: grid;
       place-content: center;
-      padding: ${makeRem(16)};
+      padding: ${makeSpace(16)};
       color: ${makeColor("neutral-light", { opacity: 0.5 })};
       .title {
         font-size: ${makeRem(18)};
       }
       .name {
         font-size: ${makeRem(14)};
-        font-weight: ${makeFontWeight("Mulish-light")};
+        font-weight: ${makeFontWeight("mulish-light")};
       }
       &.active {
         color: ${makeColor("neutral")};
@@ -63,7 +64,7 @@ const styles = css`
     position: relative;
     width: 100%;
     height: ${makeRem(200)};
-    padding-top: ${makeRem(24)};
+    padding-top: ${makeSpace(24)};
 
     .line {
       position: absolute;
@@ -80,8 +81,8 @@ const styles = css`
       button {
         ${makeReset("button")};
         width: 100%;
-        height: ${makeRem(24)};
-        font-size: ${makeRem(12)};
+        height: ${makeSpace(24)};
+        font-size: ${makeSpace(12)};
         display: grid;
         place-content: center;
         cursor: pointer;
@@ -108,10 +109,10 @@ const styles = css`
       position: relative;
       z-index: 20;
       padding: 1rem;
-      height: ${`calc(100% - ${makeRem(8)})`};
-      border-radius: ${makeRem(4)};
+      height: ${`calc(100% - ${makeSpace(8)})`};
+      border-radius: ${makeSpace(4)};
       box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-      margin-top: ${makeRem(8)};
+      margin-top: ${makeSpace(8)};
       margin-left: auto;
       margin-right: auto;
       border: 2px solid transparent;

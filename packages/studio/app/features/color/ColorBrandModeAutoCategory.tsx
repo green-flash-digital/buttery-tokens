@@ -5,7 +5,7 @@ import chroma from "chroma-js";
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
 import { match, P } from "ts-pattern";
-import { makeRem, makeColor, makeFontWeight } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeColor, makeFontWeight } from "@buttery/studio-tokens";
 
 import { InputColor } from "~/components/InputColor";
 import { InputLabel } from "~/components/InputLabel";
@@ -63,29 +63,29 @@ function matchHexToVibe(
 }
 
 const categoryContainerStyles = css`
-  padding: ${makeRem(16)};
+  padding: ${makeSpace(16)};
   background: white;
   border: 1px solid ${makeColor("neutral-light", { opacity: 0.1 })};
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
 
   .cat-head {
-    margin-bottom: ${makeRem(16)};
+    margin-bottom: ${makeSpace(16)};
     border-bottom: 1px solid ${makeColor("neutral-light", { opacity: 0.1 })};
-    padding-bottom: ${makeRem(16)};
+    padding-bottom: ${makeSpace(16)};
 
     .title {
       display: grid;
-      grid-template-columns: ${makeRem(24)} 1fr;
+      grid-template-columns: ${makeSpace(24)} 1fr;
       align-items: center;
-      gap: ${makeRem(8)};
-      font-weight: ${makeFontWeight("Mulish-bold")};
+      gap: ${makeSpace(8)};
+      font-weight: ${makeFontWeight("mulish-bold")};
     }
 
     .desc {
-      font-size: ${makeRem(12)};
-      font-weight: ${makeFontWeight("Mulish-regular")};
-      height: ${makeRem(44)};
-      margin-top: ${makeRem(8)};
+      font-size: ${makeSpace(12)};
+      font-weight: ${makeFontWeight("mulish-regular")};
+      height: ${makeSpace(44)};
+      margin-top: ${makeSpace(8)};
       line-height: 1.4;
     }
   }
@@ -93,24 +93,24 @@ const categoryContainerStyles = css`
   .cat-pick {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    margin-bottom: ${makeRem(16)};
+    margin-bottom: ${makeSpace(16)};
     & > *:last-child {
       flex: 1;
       border-left: 1px solid ${makeColor("neutral-light", { opacity: 0.1 })};
-      padding-left: ${makeRem(16)};
-      margin-left: ${makeRem(16)};
+      padding-left: ${makeSpace(16)};
+      margin-left: ${makeSpace(16)};
     }
 
     .color {
       display: flex;
-      gap: ${makeRem(16)};
+      gap: ${makeSpace(16)};
       align-items: center;
-      height: ${makeRem(24)};
+      height: ${makeSpace(24)};
 
       .match {
         font-size: ${makeRem(14)};
         display: flex;
-        gap: ${makeRem(8)};
+        gap: ${makeSpace(8)};
         align-items: center;
       }
     }

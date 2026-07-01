@@ -2,7 +2,7 @@ import { classes, useDropdownTooltip } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeColor, makeFontFamily, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeFontFamily, makeRem } from "@buttery/studio-tokens";
 import "react-hook-primitives/styles";
 
 export type TooltipVariant = "light" | "dark";
@@ -18,10 +18,10 @@ const styles = css`
   }
   --arrow-color: var(--tooltip-bg-color) !important;
 
-  border-radius: ${makeRem(4)};
-  padding: ${makeRem(16)};
-  font-size: ${makeRem(12)};
-  font-family: ${makeFontFamily("Mulish")};
+  border-radius: ${makeSpace(4)};
+  padding: ${makeSpace(16)};
+  font-size: ${makeSpace(12)};
+  font-family: ${makeFontFamily("mulish")};
   max-width: ${makeRem(300)};
   border: 0;
   filter: drop-shadow(1px 2px 3px var(--tooltip-bg-filter-color))

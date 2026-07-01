@@ -1,13 +1,13 @@
 import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import { forwardRef } from "react";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import type { NavTabsProps } from "~/components/NavTabs";
 import { NavTabs } from "~/components/NavTabs";
 
 const styles = css`
-  margin: ${makeRem(20)} 0;
+  margin: ${makeSpace(20)} 0;
 `;
 
 export const ColorSwatchTabs = forwardRef<

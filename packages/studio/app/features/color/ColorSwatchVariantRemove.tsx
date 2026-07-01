@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeReset, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeReset, makeRem } from "@buttery/studio-tokens";
 
 import { IconDelete } from "~/icons/IconDelete";
 
@@ -16,7 +16,7 @@ export type ColorSwatchVariantRemoveProps =
 
 const styles = css`
   ${makeReset("button")};
-  width: ${makeRem(24)};
+  width: ${makeSpace(24)};
   aspect-ratio: 1 / 1;
 `;
 

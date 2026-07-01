@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeRem, makeColor, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeColor, makeReset } from "@buttery/studio-tokens";
 
 import { IconArrowDown } from "~/icons/IconArrowDown";
 
@@ -49,9 +49,9 @@ const styles = css`
   width: 100%;
 
   &.s-dense {
-    height: ${makeRem(28)};
+    height: ${makeSpace(28)};
     font-size: ${makeRem(14)};
-    padding: 0 ${makeRem(8)};
+    padding: 0 ${makeSpace(8)};
   }
 
   &:invalid {

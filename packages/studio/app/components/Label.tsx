@@ -4,12 +4,14 @@ import type { JSX } from "react";
 import { forwardRef } from "react";
 import { match } from "ts-pattern";
 import {
+  makeSpace,
   makeColor,
   makeFontFamily,
   makeFontWeight,
   makeRem,
-  type ColorAndVariants,
 } from "@buttery/studio-tokens";
+
+type ColorAndVariants = Parameters<typeof makeColor>[0];
 
 import type { IconArrowDown } from "~/icons/IconArrowDown";
 
@@ -26,17 +28,17 @@ const styles = css`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-family: ${makeFontFamily("Mulish")};
+  font-family: ${makeFontFamily("mulish")};
   background: var(--bg-color);
   line-height: 1;
-  font-weight: ${makeFontWeight("Mulish-semiBold")};
+  font-weight: ${makeFontWeight("mulish-semiBold")};
   white-space: nowrap;
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
 
   &.s {
     &-dense {
-      padding: 0 ${makeRem(8)};
-      height: ${makeRem(20)};
+      padding: 0 ${makeSpace(8)};
+      height: ${makeSpace(20)};
       font-size: ${makeRem(10)};
       gap: ${makeRem(6)};
     }
@@ -45,18 +47,18 @@ const styles = css`
   &.s {
     &-normal {
       padding: 0 ${makeRem(10)};
-      height: ${makeRem(24)};
-      font-size: ${makeRem(12)};
-      gap: ${makeRem(8)};
+      height: ${makeSpace(24)};
+      font-size: ${makeSpace(12)};
+      gap: ${makeSpace(8)};
     }
   }
 
   &.s {
     &-large {
-      padding: 0 ${makeRem(12)};
-      height: ${makeRem(28)};
+      padding: 0 ${makeSpace(12)};
+      height: ${makeSpace(28)};
       font-size: ${makeRem(14)};
-      gap: ${makeRem(12)};
+      gap: ${makeSpace(12)};
     }
   }
 `;

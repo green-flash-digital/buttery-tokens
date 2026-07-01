@@ -2,7 +2,7 @@ import type { FormEventHandler } from "react";
 import { useCallback } from "react";
 import { useDropdownMenu, useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { VariantContainerBarActions } from "~/components/VariantContainerBarActions";
 import { VariantContainerBarTitle } from "~/components/VariantContainerBarTitle";
@@ -38,7 +38,7 @@ const barStyles = css`
 const contentStyles = css`
   .footer {
     display: flex;
-    gap: ${makeRem(8)};
+    gap: ${makeSpace(8)};
   }
 `;
 
@@ -47,7 +47,7 @@ const dropdownStyles = css`
     ${makeReset("ul")};
     display: flex;
     flex-direction: column;
-    gap: ${makeRem(4)};
+    gap: ${makeSpace(4)};
 
     button {
       background: transparent;

@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 export type ButtonGroupPropsNative = JSX.IntrinsicElements["div"];
 export type ButtonGroupProps = ButtonGroupPropsNative;
@@ -24,13 +24,13 @@ const styles = css`
       }
     }
     &:first-of-type {
-      border-top-left-radius: ${makeRem(4)} !important;
-      border-bottom-left-radius: ${makeRem(4)} !important;
+      border-top-left-radius: ${makeSpace(4)} !important;
+      border-bottom-left-radius: ${makeSpace(4)} !important;
 
       & > button {
         &:nth-of-type(1) {
-          border-top-left-radius: ${makeRem(4)} !important;
-          border-bottom-left-radius: ${makeRem(4)} !important;
+          border-top-left-radius: ${makeSpace(4)} !important;
+          border-bottom-left-radius: ${makeSpace(4)} !important;
         }
         &:nth-of-type(2) {
           border-radius: 0;
@@ -38,16 +38,16 @@ const styles = css`
       }
     }
     &:last-of-type {
-      border-top-right-radius: ${makeRem(4)} !important;
-      border-bottom-right-radius: ${makeRem(4)} !important;
+      border-top-right-radius: ${makeSpace(4)} !important;
+      border-bottom-right-radius: ${makeSpace(4)} !important;
 
       & > button {
         &:nth-of-type(1) {
           border-radius: 0;
         }
         &:nth-of-type(2) {
-          border-top-right-radius: ${makeRem(4)} !important;
-          border-bottom-right-radius: ${makeRem(4)} !important;
+          border-top-right-radius: ${makeSpace(4)} !important;
+          border-bottom-right-radius: ${makeSpace(4)} !important;
         }
       }
     }

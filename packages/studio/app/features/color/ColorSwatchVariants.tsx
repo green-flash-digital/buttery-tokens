@@ -8,7 +8,7 @@ import { css } from "@linaria/core";
 import type { ChangeEventHandler, JSX } from "react";
 import { useMemo, forwardRef } from "react";
 import { match } from "ts-pattern";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 
 import { ColorSwatchVariantTypeAuto } from "./ColorSwatchVariantTypeAuto";
@@ -41,7 +41,7 @@ export type ColorSwatchVariantsProps = ColorSwatchVariantsPropsNative &
   ColorSwatchVariantsPropsCustom;
 
 const styles = css`
-  padding: 0 ${makeRem(16)};
+  padding: 0 ${makeSpace(16)};
 `;
 
 const variantOptions: {

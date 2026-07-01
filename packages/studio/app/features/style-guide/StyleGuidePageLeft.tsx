@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import { forwardRef } from "react";
 import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { makeRem, makeColor } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeColor } from "@buttery/studio-tokens";
 
 export type StyleGuidePageLeftPropsNative = JSX.IntrinsicElements["article"];
 
@@ -14,7 +14,7 @@ export type StyleGuidePageLeftProps = StyleGuidePageLeftPropsNative &
   StyleGuidePageLeftPropsCustom;
 
 const styles = css`
-  padding: 0 ${makeRem(32)};
+  padding: 0 ${makeSpace(32)};
   border-right: 1px solid ${makeColor("neutral-light", { opacity: 0.2 })};
   font-family: "Playfair Display", serif !important;
 
@@ -25,11 +25,11 @@ const styles = css`
   }
 
   .title {
-    font-size: ${makeRem(32)};
+    font-size: ${makeSpace(32)};
     font-weight: 700;
     font-family: "Playfair Display";
-    margin-top: ${makeRem(16)};
-    margin-bottom: ${makeRem(8)};
+    margin-top: ${makeSpace(16)};
+    margin-bottom: ${makeSpace(8)};
   }
 
   .description {
@@ -42,9 +42,9 @@ const styles = css`
       color: ${makeColor("neutral")} !important;
 
       & + P {
-        margin-top: ${makeRem(32)};
+        margin-top: ${makeSpace(32)};
         border-top: 1px solid ${makeColor("neutral-light", { opacity: 0.2 })};
-        padding-top: ${makeRem(32)};
+        padding-top: ${makeSpace(32)};
       }
     }
   }

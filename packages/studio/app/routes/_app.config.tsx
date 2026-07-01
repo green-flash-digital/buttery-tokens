@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { NavLink, Outlet, useLoaderData } from "react-router";
 import { tryHandle } from "ts-jolt/isomorphic";
-import { makeColor, makeCustom, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeCustom, makeRem } from "@buttery/studio-tokens";
 
 import { ButtonGroup } from "~/components/ButtonGroup";
 import { NavTabs } from "~/components/NavTabs";
@@ -27,21 +27,21 @@ const styles = css`
     display: grid;
     grid-template-columns: 1fr auto;
     width: 100%;
-    padding: ${makeRem(20)} ${makeCustom("layout-gutters")};
+    padding: ${makeSpace(20)} ${makeCustom("layout-gutters")};
 
     h2 {
       margin: 0;
     }
 
     p {
-      font-size: ${makeRem(12)};
+      font-size: ${makeSpace(12)};
       margin-bottom: 0;
       color: ${makeColor("neutral-light", { opacity: 0.8 })};
     }
 
     .actions {
       display: flex;
-      gap: ${makeRem(16)};
+      gap: ${makeSpace(16)};
     }
     & + * {
     }

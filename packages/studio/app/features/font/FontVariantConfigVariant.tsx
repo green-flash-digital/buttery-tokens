@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { VariantContainer } from "~/components/VariantContainer";
 import { VariantContainerBar } from "~/components/VariantContainerBar";
@@ -25,7 +25,7 @@ const barStyles = css`
   grid-template-columns: ${makeRem(80)} 1fr auto !important;
 
   .meta {
-    font-size: ${makeRem(12)};
+    font-size: ${makeSpace(12)};
     color: ${makeColor("neutral-light", { opacity: 0.7 })};
   }
 `;

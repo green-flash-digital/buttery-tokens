@@ -2,7 +2,7 @@ import { classes, useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { InputGroup } from "~/components/InputGroup";
 import { InputLabel } from "~/components/InputLabel";
@@ -37,13 +37,13 @@ const styles = css`
 
   .value {
     position: relative;
-    font-size: ${makeRem(12)};
+    font-size: ${makeSpace(12)};
     color: ${makeColor("neutral-light", { opacity: 0.8 })};
 
     &::before {
       content: "";
       position: absolute;
-      left: -${makeRem(8)};
+      left: -${makeSpace(8)};
       top: 0;
       bottom: 0;
       height: 100%;

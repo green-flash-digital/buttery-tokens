@@ -4,7 +4,7 @@ import type { ColorVariantTypes } from "@buttery/core/schemas";
 import { exhaustiveMatchGuard } from "ts-jolt/isomorphic";
 import { useToggle } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { ColorBlob, useColorBlob } from "~/components/ColorBlob";
 import { InputGroup } from "~/components/InputGroup";
@@ -24,7 +24,7 @@ import type { ColorSwatchVariantsPropsCustom } from "./ColorSwatchVariants";
 import type { ConfigurationContextType } from "../Config.context";
 
 const barStyles = css`
-  grid-template-columns: ${makeRem(24)} ${makeRem(100)} auto 1fr !important;
+  grid-template-columns: ${makeSpace(24)} ${makeRem(100)} auto 1fr !important;
 `;
 
 export function ColorBrandModeAutoVariant<

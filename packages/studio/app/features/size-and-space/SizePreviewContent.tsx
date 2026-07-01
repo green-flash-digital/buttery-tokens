@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
 import { useEffect, useRef } from "react";
-import { makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { useSizePreviewContext } from "./SizePreview.context";
 
@@ -68,7 +68,7 @@ const ulStyles = css`
     place-content: center;
     border: 1px solid ${makeColor("secondary-600")};
     font-size: 0.5em;
-    border-radius: ${makeRem(4)};
+    border-radius: ${makeSpace(4)};
   }
 `;
 

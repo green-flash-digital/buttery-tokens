@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import { match, P } from "ts-pattern";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { StyleGuidePage } from "./StyleGuidePage";
 import { StyleGuidePageLeft } from "./StyleGuidePageLeft";
@@ -15,7 +15,7 @@ const styles = css`
   grid-template-rows: auto;
 
   .family {
-    padding: ${makeRem(32)};
+    padding: ${makeSpace(32)};
     border: 1px solid ${makeColor("neutral-light", { opacity: 0.03 })};
     font-family: var(--family);
     background: var(--bg);
@@ -25,7 +25,7 @@ const styles = css`
       font-family: "Playfair Display";
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: ${makeRem(32)};
+      margin-bottom: ${makeSpace(32)};
     }
 
     .title {

@@ -3,6 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import {
+  makeSpace,
   makeReset,
   makeRem,
   makeColor,
@@ -28,7 +29,7 @@ export type DropdownMenuItemProps = DropdownMenuItemPropsNative &
 const styles = css`
   ${makeReset("button")};
   text-align: left;
-  padding: ${makeRem(12)} !important;
+  padding: ${makeSpace(12)} !important;
   cursor: pointer;
 
   display: grid;
@@ -37,9 +38,9 @@ const styles = css`
   grid-template-areas:
     "icon title"
     "icon subtitle";
-  column-gap: ${makeRem(12)};
-  row-gap: ${makeRem(4)};
-  border-radius: ${makeRem(4)};
+  column-gap: ${makeSpace(12)};
+  row-gap: ${makeSpace(4)};
+  border-radius: ${makeSpace(4)};
   transition: all 0.15s ease-in-out;
 
   &:hover {
@@ -54,7 +55,7 @@ const styles = css`
     display: grid;
     place-content: center;
     height: 100%;
-    border-radius: ${makeRem(4)};
+    border-radius: ${makeSpace(4)};
 
     &.primary {
       background: ${makeColor("primary-500", { opacity: 0.2 })};
@@ -65,14 +66,14 @@ const styles = css`
   }
   .title {
     grid-area: title;
-    font-weight: ${makeFontWeight("Mulish-medium")};
+    font-weight: ${makeFontWeight("mulish-medium")};
     color: ${makeColor("neutral")};
-    font-size: ${makeRem(16)};
+    font-size: ${makeSpace(16)};
   }
   .subtitle {
     grid-area: subtitle;
     white-space: nowrap;
-    font-size: ${makeRem(12)};
+    font-size: ${makeSpace(12)};
     color: ${makeColor("neutral", { opacity: 0.6 })};
   }
 `;

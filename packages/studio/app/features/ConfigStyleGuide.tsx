@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { Button } from "~/components/Button";
 import { ModalHeader } from "~/components/ModalHeader";
@@ -25,7 +25,7 @@ const styles = css`
 const bodyStyles = css`
   display: grid;
   grid-template-columns: auto minmax(min-content, 1fr);
-  column-gap: ${makeRem(32)};
+  column-gap: ${makeSpace(32)};
   height: 100%;
   overflow: hidden;
   padding-right: 0;
@@ -46,20 +46,20 @@ const bodyStyles = css`
       justify-content: end;
     }
     .s-body {
-      padding: ${makeRem(16)} 0;
+      padding: ${makeSpace(16)} 0;
     }
   }
 
   .guide {
     background: ${makeColor("neutral-light", { opacity: 0.1 })};
-    padding: ${makeRem(32)};
+    padding: ${makeSpace(32)};
     height: 100%;
     overflow: auto;
 
     & > div {
-      padding: ${makeRem(32)};
+      padding: ${makeSpace(32)};
       background: white;
-      border-radius: ${makeRem(8)};
+      border-radius: ${makeSpace(8)};
       max-width: ${makeRem(1280)};
       margin: 0 auto;
     }

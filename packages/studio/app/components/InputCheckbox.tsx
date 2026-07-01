@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { IconTick04Solid } from "~/icons/IconTick04Solid";
 
@@ -18,28 +18,28 @@ export type InputCheckboxProps = InputCheckboxPropsNative &
 
 const styles = css`
   position: relative;
-  height: ${makeRem(24)};
+  height: ${makeSpace(24)};
   aspect-ratio: 1 / 1;
   display: grid;
   place-content: center;
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
   transition: all 0.1s ease-in-out;
   border: 1px solid transparent;
 
   &.s {
     &-normal {
-      height: ${makeRem(24)};
+      height: ${makeSpace(24)};
 
       span {
-        height: ${makeRem(16)};
-        width: ${makeRem(16)};
+        height: ${makeSpace(16)};
+        width: ${makeSpace(16)};
       }
     }
     &-big {
-      height: ${makeRem(32)};
+      height: ${makeSpace(32)};
       span {
-        height: ${makeRem(24)};
-        width: ${makeRem(24)};
+        height: ${makeSpace(24)};
+        width: ${makeSpace(24)};
       }
     }
   }
@@ -53,13 +53,13 @@ const styles = css`
     left: 0;
     border: 1px solid transparent;
     opacity: 0;
-    border-radius: ${makeRem(4)};
+    border-radius: ${makeSpace(4)};
   }
 
   span {
-    height: ${makeRem(16)};
-    width: ${makeRem(16)};
-    border-radius: ${makeRem(4)};
+    height: ${makeSpace(16)};
+    width: ${makeSpace(16)};
+    border-radius: ${makeSpace(4)};
     display: block;
     border: 1px solid ${makeColor("neutral-light", { opacity: 0.8 })};
     pointer-events: none;

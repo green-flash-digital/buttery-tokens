@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import { forwardRef } from "react";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import type { InputRangePropsNative } from "./InputRange";
 import { InputRange } from "./InputRange";
@@ -11,8 +11,8 @@ export type InputHueProps = InputHuePropsNative;
 
 const styles = css`
   display: grid;
-  grid-template-columns: ${makeRem(24)} 1fr;
-  gap: ${makeRem(16)};
+  grid-template-columns: ${makeSpace(24)} 1fr;
+  gap: ${makeSpace(16)};
   align-items: center;
   width: 100%;
 `;

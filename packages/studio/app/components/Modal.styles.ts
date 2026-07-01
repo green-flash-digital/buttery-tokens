@@ -1,4 +1,4 @@
-import { makeRem, makeColor } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeColor } from "@buttery/studio-tokens";
 import type { LinariaClassName } from "@linaria/core";
 import { css } from "@linaria/core";
 
@@ -77,8 +77,8 @@ const drawerStyles = css`
 
   &.v {
     &-right {
-      border-top-left-radius: ${makeRem(4)};
-      border-bottom-left-radius: ${makeRem(4)};
+      border-top-left-radius: ${makeSpace(4)};
+      border-bottom-left-radius: ${makeSpace(4)};
       left: 100%;
 
       &:open,
@@ -95,7 +95,7 @@ const defaultStyles = css`
   border: 0;
   margin: 0;
   margin: auto;
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
   transition: backdrop-filter 1s ease;
   filter: ${` drop-shadow(1px 2px 20px ${makeColor("neutral", {
     opacity: 0.5,

@@ -7,7 +7,7 @@ import {
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
-import { makeColor, makePx, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makePx, makeRem } from "@buttery/studio-tokens";
 
 export type InputRadioTabsPropsNative = JSX.IntrinsicElements["div"];
 export type InputRadioTabsProps = InputRadioTabsPropsNative;
@@ -15,8 +15,8 @@ export type InputRadioTabsProps = InputRadioTabsPropsNative;
 const styles = css`
   display: flex;
   justify-content: space-evenly;
-  gap: ${makeRem(16)};
-  border-radius: ${makeRem(4)};
+  gap: ${makeSpace(16)};
+  border-radius: ${makeSpace(4)};
   position: relative;
   overflow: hidden;
   border: ${makeRem(1)} solid ${makeColor("neutral-light", { opacity: 0.1 })};
@@ -26,7 +26,7 @@ const styles = css`
     height: 100%;
     background: ${makeColor("primary-100", { opacity: 0.5 })};
     transition: all 0.15s ease-in-out;
-    border-radius: ${makeRem(4)};
+    border-radius: ${makeSpace(4)};
     z-index: 1;
   }
 `;

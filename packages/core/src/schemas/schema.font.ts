@@ -5,7 +5,7 @@ import { withDescription } from "./schema-utils.js";
 export const fontFamilyFallback =
   'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 
-const toKebabCase = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+export const toKebabCase = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 
 export const ManualFontStylesValueSchema = z.object({
   "thin-100": z.literal("Thin 100"),

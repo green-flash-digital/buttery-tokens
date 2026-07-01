@@ -3,6 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import {
+  makeSpace,
   makeRem,
   makeCustom,
   makeReset,
@@ -28,11 +29,11 @@ const styles = css`
   background: inherit;
   height: ${makeCustom("layout-section-title-height")};
   z-index: 10;
-  gap: ${makeRem(8)};
+  gap: ${makeSpace(8)};
 
   button {
     ${makeReset("button")};
-    height: ${makeRem(24)};
+    height: ${makeSpace(24)};
     aspect-ratio: 1 / 1;
     display: grid;
     place-content: center;
@@ -40,8 +41,8 @@ const styles = css`
 
   h3 {
     margin: 0;
-    font-size: ${makeRem(20)};
-    font-weight: ${makeFontWeight("Mulish-bold")};
+    font-size: ${makeSpace(20)};
+    font-weight: ${makeFontWeight("mulish-bold")};
   }
 `;
 

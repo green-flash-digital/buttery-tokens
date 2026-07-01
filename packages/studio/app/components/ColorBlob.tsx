@@ -8,7 +8,7 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 export type ColorBlobPropsNative = Omit<
   JSX.IntrinsicElements["div"],
@@ -28,7 +28,7 @@ const styles = css`
   aspect-ratio: 1 / 1;
 
   &.square {
-    border-radius: ${makeRem(4)};
+    border-radius: ${makeSpace(4)};
   }
   &.circle {
     border-radius: 50%;

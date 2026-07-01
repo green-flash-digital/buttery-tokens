@@ -2,7 +2,7 @@ import type { ChangeEventHandler } from "react";
 import { useCallback, useMemo } from "react";
 import { match } from "ts-pattern";
 import { css } from "@linaria/core";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { InputLabel } from "~/components/InputLabel";
 import { InputRadioCard } from "~/components/InputRadioCard";
@@ -17,7 +17,7 @@ import { useConfigurationContext } from "../Config.context";
 
 const groupStyles = css`
   display: flex;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
 
   & > * {
     flex: 1;

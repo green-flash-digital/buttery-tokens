@@ -65,11 +65,11 @@ export type ButteryTokensColorDefHex = z.infer<typeof ColorDefHexSchema>;
 // ── Vibe system (oklch perceptual constraints) ───────────────────────────────
 
 export const vibePresets = {
-  jewel:       { minL: 0.40, maxL: 0.55, minC: 0.14, maxC: 0.22 },
+  jewel:       { minL: 0.40, maxL: 0.65, minC: 0.14, maxC: 0.22 },
   pastel:      { minL: 0.80, maxL: 0.92, minC: 0.04, maxC: 0.10 },
   earth:       { minL: 0.40, maxL: 0.65, minC: 0.05, maxC: 0.10 },
   neutral:     { minL: 0.50, maxL: 0.90, minC: 0.00, maxC: 0.02 },
-  fluorescent: { minL: 0.75, maxL: 0.90, minC: 0.18, maxC: 0.28 },
+  fluorescent: { minL: 0.75, maxL: 0.90, minC: 0.22, maxC: 0.28 },
 } as const;
 export type VibeName = keyof typeof vibePresets;
 

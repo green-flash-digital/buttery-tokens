@@ -1,4 +1,5 @@
 import { defineTemplate } from "./types.js";
+import { toKebabCase } from "../schemas/schema.font.js";
 
 function makeFontVariantUtil<
   T extends {
@@ -53,12 +54,13 @@ export const fontVariantTemplate = defineTemplate({
       config.config.font.variants
     )) {
       const weightName = variant.weight.split("-")[0];
+      const familyKey = toKebabCase(variant.familyToken);
       variants[variantName] = {
-        family: variant.familyToken,
-        weight: `${variant.familyToken}-${weightName}`,
+        family: familyKey,
+        weight: `${familyKey}-${weightName}`,
         size: variant.size / baseFontSize,
         lineHeight: variant.lineHeight,
-        letterSpacing: variant.letterSpacing,
+        letterSpacing: variant.letterSpacing ?? 0,
       };
     }
 

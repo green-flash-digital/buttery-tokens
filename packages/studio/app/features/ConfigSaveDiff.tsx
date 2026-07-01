@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import { DiffEditor } from "@monaco-editor/react";
-import { makeColor, makeFontWeight, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeFontWeight, makeRem } from "@buttery/studio-tokens";
 
 import { useConfigurationContext } from "./Config.context";
 
@@ -9,16 +9,16 @@ const styles = css`
   grid-template-columns: 1fr 1fr;
 
   & > div {
-    margin-bottom: ${makeRem(16)};
+    margin-bottom: ${makeSpace(16)};
   }
 
   .title {
-    font-size: ${makeRem(16)};
-    font-weight: ${makeFontWeight("Mulish-semiBold")};
-    margin-bottom: ${makeRem(4)};
+    font-size: ${makeSpace(16)};
+    font-weight: ${makeFontWeight("mulish-semiBold")};
+    margin-bottom: ${makeSpace(4)};
   }
   .help {
-    font-size: ${makeRem(12)};
+    font-size: ${makeSpace(12)};
     color: ${makeColor("neutral-light", { opacity: 0.8 })};
   }
 `;

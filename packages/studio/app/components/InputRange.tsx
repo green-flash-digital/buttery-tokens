@@ -3,6 +3,7 @@ import { css } from "@linaria/core";
 import type { ChangeEventHandler, JSX } from "react";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import {
+  makeSpace,
   makeColor,
   makeFontFamily,
   makeRem,
@@ -35,9 +36,9 @@ export type InputRangeProps = InputRangePropsNative & InputRangePropsCustom;
 const containerStyles = css`
   display: flex;
   align-items: center;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
   width: 100%;
-  font-family: ${makeFontFamily("Mulish")};
+  font-family: ${makeFontFamily("mulish")};
 
   .range-label {
     font-size: ${makeRem(14)};
@@ -80,7 +81,7 @@ const inputRangeStyles = css`
     );
   }
 
-  --track-border-radius: ${makeRem(4)};
+  --track-border-radius: ${makeSpace(4)};
 
   --shadow-color: 0deg 0% 0%;
   --shadow-elevation-low: 0.3px 0.2px 0.4px hsl(var(--shadow-color) / 0.12),

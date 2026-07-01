@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 export type VariantContainerPropsNative = JSX.IntrinsicElements["div"];
 export type VariantContainerPropsCustom = {
@@ -14,15 +14,15 @@ export type VariantContainerProps = VariantContainerPropsNative &
 const styles = css`
   width: 100%;
   border: 1px solid ${makeColor("neutral-light", { opacity: 0.2 })};
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
 
   &.normal {
-    padding: ${makeRem(16)};
+    padding: ${makeSpace(16)};
     background: white;
   }
 
   &.alt {
-    padding: ${makeRem(8)};
+    padding: ${makeSpace(8)};
     background: ${makeColor("neutral-light", { opacity: 0.1 })};
   }
 `;

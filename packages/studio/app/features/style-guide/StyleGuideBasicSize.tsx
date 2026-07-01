@@ -1,6 +1,7 @@
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
 import {
+  makeSpace,
   makeColor,
   makeFontFamily,
   makePx,
@@ -21,15 +22,15 @@ const styles = css`
 
   td {
     text-align: left;
-    font-family: ${makeFontFamily("Consolas")};
-    padding-top: ${makeRem(16)} !important;
-    padding-bottom: ${makeRem(16)} !important;
+    font-family: ${makeFontFamily("consolas")};
+    padding-top: ${makeSpace(16)} !important;
+    padding-bottom: ${makeSpace(16)} !important;
 
     .height {
       display: grid;
       place-content: center;
       position: relative;
-      padding-right: ${makeRem(12)};
+      padding-right: ${makeSpace(12)};
 
       &:after {
         content: "";
@@ -44,15 +45,15 @@ const styles = css`
 
     .ex {
       display: flex;
-      gap: ${makeRem(8)};
-      font-size: ${makeRem(12)};
+      gap: ${makeSpace(8)};
+      font-size: ${makeSpace(12)};
 
       button {
         ${makeReset("button")};
         padding: 0 1em;
         background: ${makeColor("primary")};
-        border-radius: ${makeRem(4)};
-        font-family: ${makeFontFamily("Consolas")};
+        border-radius: ${makeSpace(4)};
+        font-family: ${makeFontFamily("consolas")};
         display: grid;
         place-content: center;
         width: ${makeRem(120)};
@@ -62,8 +63,8 @@ const styles = css`
         ${makeReset("input")};
         padding: 0 1em;
         border: 1px solid ${makeColor("primary")};
-        font-family: ${makeFontFamily("Consolas")};
-        border-radius: ${makeRem(4)};
+        font-family: ${makeFontFamily("consolas")};
+        border-radius: ${makeSpace(4)};
       }
     }
 

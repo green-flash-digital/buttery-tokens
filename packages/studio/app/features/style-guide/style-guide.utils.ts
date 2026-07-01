@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { getAccessibleTextColor } from "@buttery/core/utils";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { StyleGuideBasicColor } from "./StyleGuideBasicColor";
 import { StyleGuideBasicFont } from "./StyleGuideBasicFont";
@@ -33,7 +33,7 @@ export const styleGuideTableStyles = css`
     margin: 0;
     border: 0;
     padding: 0;
-    padding: 0 ${makeRem(8)};
+    padding: 0 ${makeSpace(8)};
   }
 
   th {
@@ -45,7 +45,7 @@ export const styleGuideTableStyles = css`
     white-space: nowrap;
 
     &:last-child {
-      padding: 0 ${makeRem(16)};
+      padding: 0 ${makeSpace(16)};
     }
   }
 `;

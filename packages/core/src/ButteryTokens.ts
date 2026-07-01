@@ -12,7 +12,11 @@ import prettier from "prettier";
 import { globby } from "globby";
 
 import { ConfigSchema, type ButteryTokensConfig } from "./schemas/schema.js";
+import type { ButteryTokensDefinition } from "./defineTokens.js";
+import type { TokenManifest } from "./TokenManifest.js";
 import { defineTemplate } from "./templates/types.js";
+export { defineTokens } from "./defineTokens.js";
+export type { ButteryTokensConfigInput, ButteryTokensDefinition } from "./defineTokens.js";
 import type { TokenTemplate } from "./templates/types.js";
 import { colorTemplate } from "./templates/Template.make-color.js";
 import { customTemplate } from "./templates/Template.make-custom.js";
@@ -77,11 +81,17 @@ export class ButteryTokens {
   private _log: Isoscribe;
   private _config: TokensConfig | undefined = undefined;
   private _configAutoInit: boolean;
+  private _inlineDefinition: ButteryTokensDefinition | undefined;
+  private _inlineCwd: string | undefined;
 
   constructor(options: {
     logLevel?: IsoScribeLogLevel;
     env?: "development" | "production";
-    autoInit: boolean;
+    autoInit?: boolean;
+    /** Definition produced by `defineTokens()`. When provided, DotDir lookup is skipped. */
+    definition?: ButteryTokensDefinition;
+    /** Directory that contains the `.buttery/` folder. Defaults to `process.cwd()`. Required when `definition` is provided. */
+    cwd?: string;
   }) {
     const logLevel =
       (process.env.BUTTERY_TOKENS_LOG_LEVEL as IsoScribeLogLevel) ??
@@ -90,7 +100,9 @@ export class ButteryTokens {
     process.env.BUTTERY_TOKENS_ENV =
       options.env ?? process.env.BUTTERY_TOKENS_ENV ?? "development";
 
-    this._configAutoInit = options.autoInit;
+    this._configAutoInit = options.autoInit ?? false;
+    this._inlineDefinition = options.definition;
+    this._inlineCwd = options.cwd;
     this._log = new Isoscribe({
       name: "@buttery/core",
       logFormat: "string",
@@ -110,6 +122,24 @@ export class ButteryTokens {
     const shouldGetNew = options?.noCache ?? false;
 
     if (this._config && !shouldGetNew) return this._config;
+
+    if (this._inlineDefinition) {
+      const cwd = this._inlineCwd ?? process.cwd();
+      const butteryDir = path.resolve(cwd, ".buttery");
+      this._config = {
+        config: this._inlineDefinition.config,
+        meta: {
+          dirPath: butteryDir,
+          dirName: cwd,
+          filePath: path.resolve(butteryDir, "config.ts"),
+        } as DotDirResponse<ButteryTokensConfig>["meta"],
+        dirs: {
+          generated: path.resolve(butteryDir, "_generated"),
+          versions: path.resolve(cwd, "versions"),
+        },
+      } as TokensConfig;
+      return this._config;
+    }
 
     const dotDir = new DotDir<ButteryTokensConfig>();
     const dirRes = await tryHandle(dotDir.find)({ dirName: "buttery" });
@@ -178,7 +208,7 @@ export class ButteryTokens {
       const config = await this.getConfig(options);
       this._log.info("Building buttery tokens");
 
-      const templates: TokenTemplate[] = [
+      const builtinTemplates: TokenTemplate[] = [
         colorTemplate,
         customTemplate,
         fontFamilyTemplate,
@@ -190,8 +220,54 @@ export class ButteryTokens {
         remTemplate,
         resetTemplate,
         responsiveTemplate,
+      ];
+
+      const templates: TokenTemplate[] = [
+        ...builtinTemplates,
+        ...(this._inlineDefinition?.templates ?? []),
         ...(options?.extraTemplates ?? []),
       ];
+
+      // Auto-discover file-based user templates from .buttery/templates/
+      type FileTemplate = { template: TokenTemplate; relPath: string };
+      const fileTemplates: FileTemplate[] = [];
+      const userTemplatesDir = path.resolve(config.meta.dirPath, "templates");
+      if (existsSync(userTemplatesDir)) {
+        const userTemplateFiles = await globby(
+          `${userTemplatesDir}/**/*.{ts,js}`,
+          { absolute: true },
+        );
+        for (const file of userTemplateFiles) {
+          try {
+            const mod = await import(file);
+            const template = (mod.default ?? mod) as TokenTemplate;
+            if (
+              typeof template.name === "string" &&
+              typeof template.namespace === "string" &&
+              typeof template.tokens === "function" &&
+              typeof template.cssProperties === "function"
+            ) {
+              const relPath = path
+                .relative(config.dirs.generated, file)
+                .replace(/\\/g, "/")
+                .replace(/\.ts$/, ".js");
+              fileTemplates.push({ template, relPath });
+              templates.push(template);
+              this._log.debug(
+                `Loaded user template "${template.name}" from ${path.relative(config.meta.dirPath, file)}`,
+              );
+            } else {
+              this._log.warn(
+                `Skipping ${path.relative(config.meta.dirPath, file)}: default export is not a valid TokenTemplate`,
+              );
+            }
+          } catch (err) {
+            this._log.warn(
+              `Failed to load user template at ${path.relative(config.meta.dirPath, file)}: ${err instanceof Error ? err.message : String(err)}`,
+            );
+          }
+        }
+      }
 
       // 1. Collect token data from all templates into a single manifest
       this._log.debug("Collecting token manifest...");
@@ -226,56 +302,101 @@ export class ButteryTokens {
       );
       this._log.debug("Generating css :root... done.");
 
-      // 4. Generate _token-utils.ts with named exports
-      this._log.debug("Generating _token-utils.ts...");
-      const userExtensionsPath = path.resolve(
-        config.meta.dirPath,
-        "./token-utils.ts",
-      );
-      const hasUserExtensions = existsSync(userExtensionsPath);
-      const utilNames = templates
-        .filter((t) => t.util != null)
-        .map((t) => t.name);
-      const destructureBlock = utilNames.join(",\n  ");
-      const tokenUtilsContent = hasUserExtensions
-        ? [
-            `// auto-generated by buttery-tokens — do not edit`,
-            `import { createTokenUtils } from "@buttery/core/token-utils";`,
-            `import { tokens } from "./_tokens.js";`,
-            `import { extensions } from "../token-utils.js";`,
-            ``,
-            `export const {`,
-            `  ${destructureBlock},`,
-            `} = createTokenUtils(tokens);`,
-            ``,
-            `export const tokenUtils = {`,
-            `  ${utilNames.join(",\n  ")},`,
-            `  ...extensions.reduce(`,
-            `    (acc, template) => ({ ...acc, ...(template.util?.(tokens) ?? {}) }),`,
-            `    {} as Record<string, unknown>`,
-            `  ),`,
-            `};`,
-          ].join("\n")
-        : [
-            `// auto-generated by buttery-tokens — do not edit`,
-            `import { createTokenUtils } from "@buttery/core/token-utils";`,
-            `import { tokens } from "./_tokens.js";`,
-            ``,
-            `export const {`,
-            `  ${destructureBlock},`,
-            `} = createTokenUtils(tokens);`,
-          ].join("\n");
+      // 4. Generate makeUtils.ts — one export block per template
+      this._log.debug("Generating makeUtils.ts...");
+
+      const builtinVarMap = new Map<TokenTemplate, string>([
+        [colorTemplate, "colorTemplate"],
+        [customTemplate, "customTemplate"],
+        [fontFamilyTemplate, "fontFamilyTemplate"],
+        [fontWeightTemplate, "fontWeightTemplate"],
+        [fontVariantTemplate, "fontVariantTemplate"],
+        [spaceTemplate, "spaceTemplate"],
+        [sizeTemplate, "sizeTemplate"],
+        [pxTemplate, "pxTemplate"],
+        [remTemplate, "remTemplate"],
+        [resetTemplate, "resetTemplate"],
+        [responsiveTemplate, "responsiveTemplate"],
+      ]);
+
+      const importLines: string[] = [
+        `import {`,
+        `  colorTemplate,`,
+        `  customTemplate,`,
+        `  fontFamilyTemplate,`,
+        `  fontWeightTemplate,`,
+        `  fontVariantTemplate,`,
+        `  spaceTemplate,`,
+        `  sizeTemplate,`,
+        `  pxTemplate,`,
+        `  remTemplate,`,
+        `  resetTemplate,`,
+        `  responsiveTemplate,`,
+        `} from "@buttery/core/templates";`,
+        `import { tokens } from "./_tokens.js";`,
+      ];
+
+      const exportLines: string[] = [];
+
+      for (const template of builtinTemplates) {
+        const varName = builtinVarMap.get(template)!;
+        const keys = Object.keys(
+          template.util(manifest as unknown as TokenManifest),
+        );
+        if (keys.length > 0) {
+          exportLines.push(
+            `export const { ${keys.join(", ")} } = ${varName}.util(tokens);`,
+          );
+        }
+      }
+
+      const inlineTemplates = this._inlineDefinition?.templates ?? [];
+      if (inlineTemplates.length > 0) {
+        importLines.push(`import _def from "../config.js";`);
+        for (let i = 0; i < inlineTemplates.length; i++) {
+          const keys = Object.keys(
+            inlineTemplates[i].util(manifest as unknown as TokenManifest),
+          );
+          if (keys.length > 0) {
+            exportLines.push(
+              `export const { ${keys.join(", ")} } = _def.templates[${i}].util(tokens);`,
+            );
+          }
+        }
+      }
+
+      for (let i = 0; i < fileTemplates.length; i++) {
+        const { template, relPath } = fileTemplates[i];
+        const varName = `_fileTemplate${i}`;
+        importLines.push(`import ${varName} from "${relPath}";`);
+        const keys = Object.keys(
+          template.util(manifest as unknown as TokenManifest),
+        );
+        if (keys.length > 0) {
+          exportLines.push(
+            `export const { ${keys.join(", ")} } = ${varName}.util(tokens);`,
+          );
+        }
+      }
+
+      const makeUtilsContent = [
+        `// auto-generated by buttery-tokens — do not edit`,
+        ...importLines,
+        ``,
+        ...exportLines,
+      ].join("\n");
+
       await writeFileRecursive(
-        path.resolve(config.dirs.generated, "./_token-utils.ts"),
-        tokenUtilsContent,
+        path.resolve(config.dirs.generated, "./makeUtils.ts"),
+        makeUtilsContent,
       );
-      this._log.debug("Generating _token-utils.ts... done.");
+      this._log.debug("Generating makeUtils.ts... done.");
 
       // 5. Generate .buttery/index.ts barrel
       this._log.debug("Generating index.ts barrel...");
       const barrelContent = [
         `// auto-generated by buttery-tokens — do not edit`,
-        `export * from "./_generated/_token-utils.js";`,
+        `export * from "./_generated/makeUtils.js";`,
       ].join("\n");
       await writeFileRecursive(
         path.resolve(config.meta.dirPath, "./index.ts"),

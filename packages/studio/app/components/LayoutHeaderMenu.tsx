@@ -3,6 +3,7 @@ import { NavLink } from "react-router";
 import type { RefCallback } from "react";
 import { useCallback } from "react";
 import {
+  makeSpace,
   makeColor,
   makeFontWeight,
   makeRem,
@@ -45,21 +46,21 @@ const styles = css`
     ${makeReset("ul")};
     display: flex;
     flex-direction: column;
-    gap: ${makeRem(16)};
+    gap: ${makeSpace(16)};
   }
 
   .item {
     width: ${makeRem(360)};
-    padding: ${makeRem(16)};
-    border-radius: ${makeRem(8)};
+    padding: ${makeSpace(16)};
+    border-radius: ${makeSpace(8)};
     display: grid;
-    column-gap: ${makeRem(16)};
-    grid-template-columns: ${makeRem(44)} auto;
+    column-gap: ${makeSpace(16)};
+    grid-template-columns: ${makeSpace(44)} auto;
 
     .icon {
       & > div {
         grid-area: icon;
-        border-radius: ${makeRem(8)};
+        border-radius: ${makeSpace(8)};
         display: grid;
         place-content: center;
         width: 100%;
@@ -81,12 +82,12 @@ const styles = css`
 
     div {
       .title {
-        font-size: ${makeRem(16)};
-        font-weight: ${makeFontWeight("Mulish-bold")};
+        font-size: ${makeSpace(16)};
+        font-weight: ${makeFontWeight("mulish-bold")};
       }
 
       .sub {
-        margin-top: ${makeRem(4)};
+        margin-top: ${makeSpace(4)};
         font-size: ${makeRem(14)};
         color: ${makeColor("neutral-light", { opacity: 0.8 })};
       }

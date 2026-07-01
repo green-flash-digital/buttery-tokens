@@ -1,7 +1,7 @@
 import type { ManualFontStylesValue } from "@buttery/core/schemas";
 import { manualFontStyles } from "@buttery/core/schemas";
 import { css } from "@linaria/core";
-import { makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makePx, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { StyleGuidePage } from "./StyleGuidePage";
 import { StyleGuidePageLeft } from "./StyleGuidePageLeft";
@@ -15,23 +15,23 @@ const styles = css`
   ${makeReset("ul")};
   display: flex;
   flex-direction: column;
-  gap: ${makeRem(32)};
+  gap: ${makeSpace(32)};
 
   li {
-    padding-bottom: ${makeRem(32)};
+    padding-bottom: ${makeSpace(32)};
     border-bottom: 1px solid ${makeColor("neutral-light", { opacity: 0.1 })};
   }
 
   .typ-display {
-    margin-bottom: ${makeRem(24)};
+    margin-bottom: ${makeSpace(24)};
   }
   .typ-description {
     display: flex;
-    gap: ${makeRem(16)};
+    gap: ${makeSpace(16)};
     span {
       font-family: "Playfair Display";
       &:not(:last-child) {
-        padding-right: ${makeRem(16)};
+        padding-right: ${makeSpace(16)};
         border-right: 1px solid ${makeColor("neutral-light", { opacity: 0.5 })};
       }
     }

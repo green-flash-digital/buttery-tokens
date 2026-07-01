@@ -15,6 +15,7 @@
   "exports": {
     ".": "./dist/ButteryTokens.js",
     "./token-utils": "./dist/createTokenUtils.js",
+    "./templates": "./dist/templates/index.js",
     "./utils": "./dist/utils/index.js",
     "./schemas": "./dist/schemas/index.js"
   },

@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeReset, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeReset, makeRem } from "@buttery/studio-tokens";
 
 export type DropdownMenuPropsNative = JSX.IntrinsicElements["ul"];
 export type DropdownMenuProps = DropdownMenuPropsNative;
@@ -10,7 +10,7 @@ export type DropdownMenuProps = DropdownMenuPropsNative;
 const styles = css`
   ${makeReset("ul")};
   min-width: ${makeRem(300)};
-  padding: ${makeRem(8)};
+  padding: ${makeSpace(8)};
 `;
 
 export const DropdownMenu = forwardRef<HTMLUListElement, DropdownMenuProps>(

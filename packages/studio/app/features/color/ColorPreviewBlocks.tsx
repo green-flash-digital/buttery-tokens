@@ -6,6 +6,7 @@ import {
 } from "@buttery/core/utils";
 import { classes } from "react-hook-primitives";
 import {
+  makeSpace,
   makeColor,
   makeFontFamily,
   makeFontWeight,
@@ -20,7 +21,7 @@ import { useColorPreviewContext } from "./ColorPreview.context";
 const blockStyles = css`
   height: 100%;
   width: 100%;
-  font-family: ${makeFontFamily("Consolas")};
+  font-family: ${makeFontFamily("consolas")};
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -28,44 +29,44 @@ const blockStyles = css`
   .color {
     height: 100%;
     width: 100%;
-    padding: ${makeRem(8)};
-    font-family: ${makeFontFamily("Consolas")};
+    padding: ${makeSpace(8)};
+    font-family: ${makeFontFamily("consolas")};
     height: ${makeRem(60)};
     background: var(--block-color);
   }
 
   .name {
-    font-family: ${makeFontFamily("Consolas")};
-    font-size: ${makeRem(12)};
+    font-family: ${makeFontFamily("consolas")};
+    font-size: ${makeSpace(12)};
   }
 
   .wcag {
-    padding: ${makeRem(8)};
-    font-size: ${makeRem(12)};
+    padding: ${makeSpace(8)};
+    font-size: ${makeSpace(12)};
     border: 1px solid var(--block-color);
     border-top: 0;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
     display: flex;
     flex-direction: column;
-    gap: ${makeRem(8)};
+    gap: ${makeSpace(8)};
     text-align: center;
 
     .ratio {
       text-decoration: underline;
-      font-weight: ${makeFontWeight("Mulish-semiBold")};
+      font-weight: ${makeFontWeight("mulish-semiBold")};
     }
 
     .level {
       border: 1px solid ${makeColor("neutral-light", { opacity: 0.2 })};
-      border-radius: ${makeRem(8)};
-      padding: ${makeRem(4)};
-      height: ${makeRem(20)};
+      border-radius: ${makeSpace(8)};
+      padding: ${makeSpace(4)};
+      height: ${makeSpace(20)};
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: ${makeRem(4)};
-      font-weight: ${makeFontWeight("Mulish-medium")};
+      gap: ${makeSpace(4)};
+      font-weight: ${makeFontWeight("mulish-medium")};
 
       &.pass {
         background-color: ${makeColor("success", { opacity: 0.2 })};
@@ -154,10 +155,10 @@ const styles = css`
   width: 100%;
   display: grid;
   grid-template-columns: ${makeRem(100)} 1fr;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
 
   & + & {
-    margin-top: ${makeRem(16)};
+    margin-top: ${makeSpace(16)};
   }
 
   & > div {
@@ -165,7 +166,7 @@ const styles = css`
     overflow: hidden;
 
     &:first-child {
-      border-radius: ${makeRem(12)};
+      border-radius: ${makeSpace(12)};
     }
 
     &:last-child {
@@ -174,13 +175,13 @@ const styles = css`
       justify-content: space-evenly;
 
       & > div:first-child {
-        border-top-left-radius: ${makeRem(12)};
-        border-bottom-left-radius: ${makeRem(12)};
+        border-top-left-radius: ${makeSpace(12)};
+        border-bottom-left-radius: ${makeSpace(12)};
       }
 
       & > div:last-child {
-        border-top-right-radius: ${makeRem(12)};
-        border-bottom-right-radius: ${makeRem(12)};
+        border-top-right-radius: ${makeSpace(12)};
+        border-bottom-right-radius: ${makeSpace(12)};
       }
     }
   }

@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeRem, makeColor, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeColor, makeReset } from "@buttery/studio-tokens";
 
 export type InputTextareaPropsNative = JSX.IntrinsicElements["textarea"];
 export type InputTextareaPropsCustom = {
@@ -21,7 +21,7 @@ const styles = css`
 
     border: ${makeRem(1)} solid ${makeColor("neutral", { opacity: 0.1 })};
     border-radius: ${makeRem(2)};
-    padding: ${makeRem(8)};
+    padding: ${makeSpace(8)};
     transition: all 0.1s ease-in-out;
     background: ${makeColor("neutral-light", { opacity: 0.05 })};
 

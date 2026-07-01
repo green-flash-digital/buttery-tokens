@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import { css } from "@linaria/core";
-import { makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { VariantAdd } from "~/components/VariantAdd";
 import { VariantEmpty } from "~/components/VariantEmpty";
@@ -15,7 +15,7 @@ const styles = css`
   ${makeReset("ul")};
   display: flex;
   flex-direction: column;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
 
   li.add {
     button {

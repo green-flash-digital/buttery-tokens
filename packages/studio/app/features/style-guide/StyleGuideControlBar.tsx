@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { Button } from "~/components/Button";
 import { IconDownload05 } from "~/icons/IconDownload05";
@@ -11,7 +11,7 @@ const styles = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
 `;
 
 export function StyleGuideControlBar() {

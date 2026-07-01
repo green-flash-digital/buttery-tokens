@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { useCallback } from "react";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
-import { makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { VariantEmpty } from "~/components/VariantEmpty";
 
@@ -14,7 +14,7 @@ const styles = css`
   ${makeReset("ul")};
   display: flex;
   flex-direction: column;
-  gap: ${makeRem(8)};
+  gap: ${makeSpace(8)};
 `;
 
 export function BreakpointConfig() {

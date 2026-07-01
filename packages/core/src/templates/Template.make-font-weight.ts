@@ -2,12 +2,20 @@ import { defineTemplate } from "./types.js";
 
 import { createCSSProperty } from "../utils/index.js";
 import type { TokensConfig } from "../ButteryTokens.js";
+import { toKebabCase } from "../schemas/schema.font.js";
 
-function getFamilyWeightPairs(config: TokensConfig): string[] {
-  return Object.entries(config.config.font.families).reduce<string[]>(
+type FamilyWeightPair = { raw: string; tokenKey: string; weightPart: string };
+
+function getFamilyWeightPairs(config: TokensConfig): FamilyWeightPair[] {
+  return Object.entries(config.config.font.families).reduce<FamilyWeightPair[]>(
     (accum, [familyName, familyDef]) => {
       for (const style of familyDef.styles) {
-        accum.push(`${familyName}-${style.split("-")[0]}`);
+        const weightPart = style.split("-")[0];
+        accum.push({
+          raw: familyName,
+          tokenKey: `${toKebabCase(familyName)}-${weightPart}`,
+          weightPart,
+        });
       }
       return accum;
     },
@@ -37,7 +45,7 @@ export const fontWeightTemplate = defineTemplate({
     )) {
       for (const style of familyDef.styles) {
         const parts = style.split("-");
-        weights[`${familyName}-${parts[0]}`] = parseInt(parts[1], 10);
+        weights[`${toKebabCase(familyName)}-${parts[0]}`] = parseInt(parts[1], 10);
       }
     }
     return { font: { weights } };
@@ -45,22 +53,16 @@ export const fontWeightTemplate = defineTemplate({
   cssProperties(config) {
     const prefix = config.config.runtime.prefix;
     return getFamilyWeightPairs(config).reduce<string[]>(
-      (accum, familyAndWeight) => {
-        const [familyName, weightName] = familyAndWeight.split("-");
-        const name = familyName as keyof typeof config.config.font.families;
-        const style = config.config.font.families[name].styles.find((s) =>
-          s.startsWith(weightName)
+      (accum, { raw, tokenKey, weightPart }) => {
+        const style = config.config.font.families[raw].styles.find((s) =>
+          s.startsWith(weightPart)
         );
         if (!style) {
           throw new Error(
-            `Cannot find a ${name} style that begins with ${weightName}.`
+            `Cannot find a ${raw} style that begins with ${weightPart}.`
           );
         }
-        const property = createCSSProperty(
-          prefix,
-          "font-weight",
-          familyAndWeight
-        );
+        const property = createCSSProperty(prefix, "font-weight", tokenKey);
         return accum.concat(`${property}: ${style.split("-")[1]}`);
       },
       []

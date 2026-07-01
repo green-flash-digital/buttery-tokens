@@ -3,6 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import {
+  makeSpace,
   makeColor,
   makeFontWeight,
   makeRem,
@@ -18,15 +19,15 @@ const styles = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: ${makeRem(16)};
+    gap: ${makeSpace(16)};
   }
 
   a {
     ${makeReset("anchor")};
-    font-size: ${makeRem(16)};
+    font-size: ${makeSpace(16)};
     text-transform: uppercase;
     letter-spacing: -1px;
-    font-weight: ${makeFontWeight("Mulish-medium")};
+    font-weight: ${makeFontWeight("mulish-medium")};
 
     &.active {
       color: ${makeColor("secondary-600")};

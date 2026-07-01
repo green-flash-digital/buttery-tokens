@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeColor, makeFontWeight, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeFontWeight, makeRem } from "@buttery/studio-tokens";
 
 export type TableHeadCellPropsNative = JSX.IntrinsicElements["th"];
 export type TableHeadCellPropsCustom = {
@@ -13,10 +13,10 @@ export type TableHeadCellProps = TableHeadCellPropsNative &
 
 const styles = css`
   font-size: ${makeRem(14)};
-  font-weight: ${makeFontWeight("Mulish-bold")};
+  font-weight: ${makeFontWeight("mulish-bold")};
   text-align: left;
-  padding: 0 ${makeRem(16)};
-  height: ${makeRem(40)};
+  padding: 0 ${makeSpace(16)};
+  height: ${makeSpace(40)};
   white-space: nowrap;
   border-bottom: 1px solid ${makeColor("neutral-light", { opacity: 0.1 })};
 

@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { InputRange } from "~/components/InputRange";
 import { InputColor } from "~/components/InputColor";
@@ -9,10 +9,10 @@ import { useColorPreviewContext } from "./ColorPreview.context";
 
 const styles = css`
   display: flex;
-  gap: ${makeRem(16)};
-  margin-right: ${makeRem(16)};
+  gap: ${makeSpace(16)};
+  margin-right: ${makeSpace(16)};
   border-right: 1px solid ${makeColor("neutral-light", { opacity: 0.2 })};
-  padding-right: ${makeRem(16)};
+  padding-right: ${makeSpace(16)};
   align-items: center;
 
   .color {

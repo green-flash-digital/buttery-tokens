@@ -3,6 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX, ReactNode } from "react";
 import { forwardRef } from "react";
 import {
+  makeSpace,
   makeCustom,
   makeFontFamily,
   makeFontWeight,
@@ -22,7 +23,7 @@ const styles = css`
   height: ${makeCustom("layout-header-height")};
   display: flex;
   align-items: center;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
 
   img {
     height: 50%;
@@ -32,16 +33,16 @@ const styles = css`
 
   .wordmark {
     span {
-      font-size: ${makeRem(24)};
+      font-size: ${makeSpace(24)};
       text-transform: uppercase;
       letter-spacing: -${makeRem(2)};
-      font-family: ${makeFontFamily("Poppins")};
+      font-family: ${makeFontFamily("poppins")};
       &:first-child {
-        font-weight: ${makeFontWeight("Poppins-medium")};
+        font-weight: ${makeFontWeight("poppins-medium")};
       }
 
       &:last-child {
-        font-weight: ${makeFontWeight("Poppins-bold")};
+        font-weight: ${makeFontWeight("poppins-bold")};
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;

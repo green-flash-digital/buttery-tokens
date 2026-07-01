@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 export type VariantContainerBarPropsNative = JSX.IntrinsicElements["div"];
 export type VariantContainerBarProps = VariantContainerBarPropsNative;
@@ -10,7 +10,7 @@ export type VariantContainerBarProps = VariantContainerBarPropsNative;
 const styles = css`
   display: grid;
   grid-template-columns: ${makeRem(100)} auto auto 1fr;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
   align-items: center;
 `;
 

@@ -3,6 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import {
+  makeSpace,
   makeColor,
   makeFontFamily,
   makeFontWeight,
@@ -32,11 +33,11 @@ const styles = css`
   vertical-align: top;
 
   .label {
-    font-size: ${makeRem(16)};
-    font-family: ${makeFontFamily("Mulish")};
-    font-weight: ${makeFontWeight("Mulish-semiBold")};
+    font-size: ${makeSpace(16)};
+    font-family: ${makeFontFamily("mulish")};
+    font-weight: ${makeFontWeight("mulish-semiBold")};
     color: ${makeColor("neutral-dark")};
-    margin-bottom: ${makeRem(8)};
+    margin-bottom: ${makeSpace(8)};
 
     &.dense {
       font-size: ${makeRem(14)};
@@ -45,13 +46,13 @@ const styles = css`
   }
 
   .help {
-    margin-top: ${makeRem(4)};
+    margin-top: ${makeSpace(4)};
     font-size: ${makeRem(14)};
     color: ${makeColor("neutral-dark", { opacity: 0.8 })};
-    font-weight: ${makeFontWeight("Mulish-regular")};
+    font-weight: ${makeFontWeight("mulish-regular")};
 
     &.dense {
-      font-size: ${makeRem(12)};
+      font-size: ${makeSpace(12)};
       margin-top: ${makeRem(0)};
     }
   }

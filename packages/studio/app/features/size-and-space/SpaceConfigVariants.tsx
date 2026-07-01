@@ -3,7 +3,7 @@ import type { ChangeEventHandler, FormEventHandler, RefCallback } from "react";
 import { useCallback, useMemo, useRef } from "react";
 import { classes, useToggle } from "react-hook-primitives";
 import { debounce } from "ts-jolt/browser";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { Button } from "~/components/Button";
 import { IconPencilEdit01 } from "~/icons/IconPencilEdit01";
@@ -29,10 +29,10 @@ import type { ConfigurationContextType } from "../Config.context.js";
 const styles = css`
   display: grid;
   grid-template-columns: 1fr ${makeRem(54)} ${makeRem(54)} auto;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
   align-items: center;
   font-size: ${makeRem(14)};
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
   height: ${makeRem(62 - 16 * 2)};
 
   .actions {

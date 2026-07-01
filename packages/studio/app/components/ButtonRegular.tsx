@@ -4,6 +4,7 @@ import type { JSX } from "react";
 import { forwardRef } from "react";
 import { match } from "ts-pattern";
 import {
+  makeSpace,
   makeColor,
   makeFontWeight,
   makeRem,
@@ -49,7 +50,7 @@ const styles = css`
 
   &.v {
     &-contained {
-      border-radius: ${makeRem(8)};
+      border-radius: ${makeSpace(8)};
       line-height: 1;
       &.c {
         &-primary {
@@ -63,7 +64,7 @@ const styles = css`
       }
     }
     &-outlined {
-      border-radius: ${makeRem(8)};
+      border-radius: ${makeSpace(8)};
       line-height: 1;
       &.c {
         &-primary {
@@ -96,23 +97,23 @@ const styles = css`
 
   &.s {
     &-dense {
-      height: ${makeRem(24)};
+      height: ${makeSpace(24)};
       font-size: ${makeRem(10)};
-      padding: 0 ${makeRem(16)};
-      gap: ${makeRem(4)};
+      padding: 0 ${makeSpace(16)};
+      gap: ${makeSpace(4)};
     }
     &-normal {
-      height: ${makeRem(32)};
-      font-size: ${makeRem(12)};
-      font-weight: ${makeFontWeight("Mulish-medium")};
-      padding: 0 ${makeRem(16)};
-      gap: ${makeRem(8)};
+      height: ${makeSpace(32)};
+      font-size: ${makeSpace(12)};
+      font-weight: ${makeFontWeight("mulish-medium")};
+      padding: 0 ${makeSpace(16)};
+      gap: ${makeSpace(8)};
     }
     &-big {
-      height: ${makeRem(44)};
+      height: ${makeSpace(44)};
       font-size: ${makeRem(14)};
-      font-weight: ${makeFontWeight("Mulish-medium")};
-      padding: 0 ${makeRem(20)};
+      font-weight: ${makeFontWeight("mulish-medium")};
+      padding: 0 ${makeSpace(20)};
       gap: ${makeRem(10)};
     }
   }

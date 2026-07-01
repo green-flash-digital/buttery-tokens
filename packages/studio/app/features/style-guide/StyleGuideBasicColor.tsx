@@ -7,6 +7,7 @@ import {
 import { Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
 import {
+  makeSpace,
   makeColor,
   makeFontFamily,
   makeFontWeight,
@@ -31,7 +32,7 @@ import {
 const tableStyles = css`
   td:not(:first-child) {
     text-align: center;
-    font-family: ${makeFontFamily("Consolas")};
+    font-family: ${makeFontFamily("consolas")};
     font-size: ${makeRem(14)} !important;
   }
 
@@ -39,23 +40,23 @@ const tableStyles = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: ${makeRem(4)};
+    gap: ${makeSpace(4)};
   }
 
   .compliance {
     border: 1px solid ${makeColor("neutral-light", { opacity: 0.2 })};
-    border-radius: ${makeRem(4)};
-    padding: 0 ${makeRem(4)};
+    border-radius: ${makeSpace(4)};
+    padding: 0 ${makeSpace(4)};
     height: ${makeRem(18)};
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: ${makeRem(4)};
-    font-weight: ${makeFontWeight("Mulish-medium")};
+    gap: ${makeSpace(4)};
+    font-weight: ${makeFontWeight("mulish-medium")};
 
     span {
-      font-size: ${makeRem(12)};
-      font-family: ${makeFontFamily("Consolas")};
+      font-size: ${makeSpace(12)};
+      font-family: ${makeFontFamily("consolas")};
       line-height: 0.7;
       transform: translateY(1px);
     }
@@ -70,24 +71,24 @@ const tableStyles = css`
 
 const colorBlockStyles = css`
   font-size: ${makeRem(14)};
-  font-family: ${makeFontFamily("Consolas")};
+  font-family: ${makeFontFamily("consolas")};
 
   &.base {
     height: ${makeRem(80)};
     margin-bottom: 8px;
-    padding: ${makeRem(8)};
+    padding: ${makeSpace(8)};
   }
 
   &.alt {
-    height: ${makeRem(32)};
-    padding: 0 ${makeRem(8)};
+    height: ${makeSpace(32)};
+    padding: 0 ${makeSpace(8)};
     display: flex;
     align-items: center;
   }
 `;
 
 const gapStyles = css`
-  height: ${makeRem(44)};
+  height: ${makeSpace(44)};
 `;
 
 const checker = new ColorAccessibilityChecker();

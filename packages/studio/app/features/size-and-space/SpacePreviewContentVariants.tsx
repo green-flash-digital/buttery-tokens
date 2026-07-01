@@ -1,17 +1,17 @@
 import { css } from "@linaria/core";
 import { Fragment } from "react/jsx-runtime";
-import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import type { ConfigurationStateSizeAndSpace_SpaceVariants } from "./size-and-space.utils.js";
 
 const styles = css`
   ${makeReset("ul")};
 
-  font-size: ${makeRem(12)};
+  font-size: ${makeSpace(12)};
   display: grid;
   grid-template-columns: auto auto auto 1fr;
   grid-template-rows: auto;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
   align-items: center;
 
   .px,

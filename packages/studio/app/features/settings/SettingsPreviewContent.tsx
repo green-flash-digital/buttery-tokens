@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { css } from "@linaria/core";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { CodeBlock } from "~/components/CodeBlock";
 
@@ -9,7 +9,7 @@ import { useConfigurationContext } from "../Config.context";
 const styles = css`
   display: flex;
   flex-direction: column;
-  gap: ${makeRem(32)};
+  gap: ${makeSpace(32)};
 `;
 
 export function SettingsPreviewContent() {

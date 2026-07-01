@@ -4,6 +4,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import {
+  makeSpace,
   makeColor,
   makeFontWeight,
   makeRem,
@@ -40,19 +41,19 @@ const styles = css`
 
   &.v-block {
     display: grid;
-    grid-template-columns: ${makeRem(24)} 1fr;
+    grid-template-columns: ${makeSpace(24)} 1fr;
     grid-template-rows: auto auto;
     grid-template-areas:
       "radio-icon radio-text-title"
       "radio-icon radio-text-description";
-    column-gap: ${makeRem(8)};
+    column-gap: ${makeSpace(8)};
     border: ${makeRem(1)} solid ${makeColor("neutral", { opacity: 0.2 })};
-    font-size: ${makeRem(12)};
+    font-size: ${makeSpace(12)};
     transition: all 0.1s ease-in-out;
     min-height: ${makeRem(52)};
     align-content: center;
-    border-radius: ${makeRem(4)};
-    padding: ${makeRem(12)} ${makeRem(16)};
+    border-radius: ${makeSpace(4)};
+    padding: ${makeSpace(12)} ${makeSpace(16)};
 
     .icon {
       grid-area: radio-icon;
@@ -63,8 +64,8 @@ const styles = css`
     }
     .title {
       grid-area: radio-text-title;
-      margin-bottom: ${makeRem(4)};
-      font-weight: ${makeFontWeight("Mulish-semiBold")};
+      margin-bottom: ${makeSpace(4)};
+      font-weight: ${makeFontWeight("mulish-semiBold")};
     }
 
     .description {

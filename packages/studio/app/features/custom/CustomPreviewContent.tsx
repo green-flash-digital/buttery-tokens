@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { Table } from "~/components/Table";
 import { TableHead } from "~/components/TableHead";
@@ -11,12 +11,12 @@ import { useConfigurationContext } from "../Config.context";
 const codeStyles = css`
   font-family: consolas;
   font-size: ${makeRem(14)};
-  padding: ${makeRem(2)} ${makeRem(8)};
+  padding: ${makeRem(2)} ${makeSpace(8)};
   border-radius: ${makeRem(6)};
   background: ${makeColor("neutral-light", { opacity: 0.1 })};
   color: ${makeColor("neutral-light")};
-  line-height: ${makeRem(20)};
-  height: ${makeRem(20)};
+  line-height: ${makeSpace(20)};
+  height: ${makeSpace(20)};
   white-space: nowrap;
   display: inline-block;
 `;

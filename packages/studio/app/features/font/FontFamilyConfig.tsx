@@ -2,7 +2,7 @@ import { css } from "@linaria/core";
 import { useCallback } from "react";
 import { exhaustiveMatchGuard, generateGUID } from "ts-jolt/isomorphic";
 import { manualFontStyles } from "@buttery/core/schemas";
-import { makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { LOG } from "~/utils/util.logger";
 import { VariantAdd } from "~/components/VariantAdd";
@@ -17,7 +17,7 @@ const styles = css`
   ${makeReset("ul")};
   display: flex;
   flex-direction: column;
-  gap: ${makeRem(8)};
+  gap: ${makeSpace(8)};
 `;
 
 export function FontFamilyConfig() {

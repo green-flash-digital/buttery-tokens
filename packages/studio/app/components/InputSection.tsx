@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 export type InputSectionPropsNative = JSX.IntrinsicElements["div"];
 export type InputSectionPropsCustom = {
@@ -18,12 +18,12 @@ export type InputSectionProps = InputSectionPropsNative &
 const styles = css`
   &.normal {
     & + & {
-      margin-top: ${makeRem(32)};
+      margin-top: ${makeSpace(32)};
     }
   }
   &.dense {
     & + & {
-      margin-top: ${makeRem(24)};
+      margin-top: ${makeSpace(24)};
     }
   }
 `;

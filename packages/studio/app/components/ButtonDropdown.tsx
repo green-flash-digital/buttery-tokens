@@ -2,7 +2,7 @@ import { classes, useDropdownMenu } from "react-hook-primitives";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import { css } from "@linaria/core";
-import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import { IconArrowDown } from "~/icons/IconArrowDown";
 
@@ -69,7 +69,7 @@ const dropdownStyles = createDropdownStyles(css`
   }
 
   ${makeReset("ul")};
-  border-radius: ${makeRem(4)} !important;
+  border-radius: ${makeSpace(4)} !important;
 
   &.c-primary {
     border: ${makeRem(1)} solid ${makeColor("primary")};
@@ -84,20 +84,20 @@ const dropdownStyles = createDropdownStyles(css`
   }
 
   &.s-dense {
-    padding: ${makeRem(4)};
+    padding: ${makeSpace(4)};
 
     button {
       font-size: ${makeRem(10)};
-      padding: ${makeRem(4)} ${makeRem(8)};
+      padding: ${makeSpace(4)} ${makeSpace(8)};
     }
   }
 
   &.s-normal {
-    padding: ${makeRem(4)};
+    padding: ${makeSpace(4)};
 
     button {
-      font-size: ${makeRem(12)};
-      padding: ${makeRem(4)} ${makeRem(12)};
+      font-size: ${makeSpace(12)};
+      padding: ${makeSpace(4)} ${makeSpace(12)};
     }
   }
 `);

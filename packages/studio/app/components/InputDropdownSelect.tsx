@@ -7,7 +7,7 @@ import {
   useForwardedRef,
 } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { IconArrowDown } from "~/icons/IconArrowDown";
 
@@ -82,7 +82,7 @@ const textContainerStyles = css`
 
   &:has(input.s-dense) {
     .icon {
-      height: ${makeRem(24)};
+      height: ${makeSpace(24)};
       aspect-ratio: 1 / 1;
       right: 0;
       top: 50%;

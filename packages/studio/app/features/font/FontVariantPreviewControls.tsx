@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import { useMemo } from "react";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { ButtonGroup } from "~/components/ButtonGroup";
 import { Button } from "~/components/Button";
@@ -13,7 +13,7 @@ import { FontVariantPreviewControlsHelp } from "./FontVariantPreviewControlsHelp
 const styles = css`
   display: grid;
   grid-template-columns: auto auto;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
   align-items: center;
 `;
 

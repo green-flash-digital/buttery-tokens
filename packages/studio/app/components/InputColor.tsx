@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeRem, makeReset } from "@buttery/studio-tokens";
 
 export type InputColorPropsNative = Omit<
   JSX.IntrinsicElements["input"],
@@ -32,13 +32,13 @@ const styles = css`
 
   &.s-dense {
     border-radius: ${makeRem(2)};
-    height: ${makeRem(24)};
+    height: ${makeSpace(24)};
     aspect-ratio: 1 / 1;
   }
 
   &.s-regular {
-    border-radius: ${makeRem(4)};
-    height: ${makeRem(32)};
+    border-radius: ${makeSpace(4)};
+    height: ${makeSpace(32)};
     aspect-ratio: 1 / 1;
   }
 `;

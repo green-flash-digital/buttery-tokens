@@ -3,7 +3,7 @@ import { defineTemplate } from "./types.js";
 import type { TokensConfig } from "../ButteryTokens.js";
 import { createCSSProperty } from "../utils/index.js";
 
-function getSpaceSteps(config: TokensConfig): number[] {
+function getSpaceSteps(config: TokensConfig): readonly number[] {
   const { baselineGrid, space } = config.config.sizeAndSpace;
   if (space.mode === "manual") return space.variants;
   return Array.from({ length: space.variants }, (_, i) => baselineGrid * (i + 1));

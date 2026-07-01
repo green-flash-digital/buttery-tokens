@@ -1,15 +1,28 @@
 import type { TokensConfig } from "../ButteryTokens.js";
 import type { TokenManifest } from "../TokenManifest.js";
 
-export type TokenTemplate = {
+export type TokenTemplate<
+  TTokens extends Record<string, unknown> = Record<string, unknown>,
+  TUtil extends Record<string, unknown> = Record<string, unknown>,
+> = {
   name: string;
   description?: string;
   namespace: string;
-  tokens(config: TokensConfig): Record<string, unknown>;
+  tokens(config: TokensConfig): TTokens;
   cssProperties(config: TokensConfig): string[];
-  util?: (tokens: TokenManifest) => object;
+  util(tokens: TokenManifest & TTokens): TUtil;
 };
 
-export function defineTemplate<T extends TokenTemplate>(def: T): T {
+export function defineTemplate<
+  TTokens extends Record<string, unknown>,
+  TUtil extends Record<string, unknown>,
+>(def: {
+  name: string;
+  description?: string;
+  namespace: string;
+  tokens(config: TokensConfig): TTokens;
+  cssProperties(config: TokensConfig): string[];
+  util(tokens: TokenManifest & TTokens): TUtil;
+}): TokenTemplate<TTokens, TUtil> {
   return def;
 }

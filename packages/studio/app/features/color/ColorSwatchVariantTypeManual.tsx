@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { generateGUID } from "ts-jolt/isomorphic";
 import { useImmer } from "use-immer";
 import { css } from "@linaria/core";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { ColorSwatchVariantAdd } from "./ColorSwatchVariantAdd";
 import { ColorSwatchVariantRemove } from "./ColorSwatchVariantRemove";
@@ -19,7 +19,7 @@ export type ColorSwatchVariantTypeManualProps = {
 };
 
 const styles = css`
-  grid-template-columns: ${makeRem(24)} 1fr auto !important;
+  grid-template-columns: ${makeSpace(24)} 1fr auto !important;
 `;
 
 export function ColorSwatchVariantTypeManual({

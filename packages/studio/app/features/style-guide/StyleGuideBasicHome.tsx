@@ -1,13 +1,13 @@
 import { css } from "@linaria/core";
 import { Fragment } from "react/jsx-runtime";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { StyleGuidePage } from "./StyleGuidePage";
 import { styleGuideSections } from "./style-guide.utils";
 
 const styles = css`
   display: block;
-  padding: ${makeRem(32)};
+  padding: ${makeSpace(32)};
 
   h1 {
     font-family: "Playfair Display";
@@ -18,12 +18,12 @@ const styles = css`
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto;
-    row-gap: ${makeRem(16)};
-    column-gap: ${makeRem(16)};
+    row-gap: ${makeSpace(16)};
+    column-gap: ${makeSpace(16)};
 
     div {
       font-family: "Playfair Display";
-      font-size: ${makeRem(32)};
+      font-size: ${makeSpace(32)};
       font-weight: 500;
 
       &.title {

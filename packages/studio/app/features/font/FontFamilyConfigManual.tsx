@@ -2,7 +2,7 @@ import { css } from "@linaria/core";
 import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { manualFontStyles } from "@buttery/core/schemas";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { InputGroup } from "~/components/InputGroup";
 import { InputText } from "~/components/InputText";
@@ -16,7 +16,7 @@ import type { ConfigurationStateFontManualFamilyValues } from "./font.utils";
 
 const inlineField = css`
   display: flex;
-  gap: ${makeRem(16)};
+  gap: ${makeSpace(16)};
 `;
 
 const allFontStyles = Object.entries(manualFontStyles).reduce<

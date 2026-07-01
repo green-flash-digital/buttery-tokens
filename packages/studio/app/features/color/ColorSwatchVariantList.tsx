@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeReset, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeReset, makeRem } from "@buttery/studio-tokens";
 
 export type ColorSwatchVariantListPropsNative = JSX.IntrinsicElements["ul"];
 export type ColorSwatchVariantListProps = ColorSwatchVariantListPropsNative;
@@ -11,14 +11,14 @@ const styles = css`
   ${makeReset("ul")};
   display: flex;
   flex-direction: column;
-  gap: ${makeRem(4)};
+  gap: ${makeSpace(4)};
   width: 100%;
 
   li {
     display: grid;
     grid-template-columns: 1fr auto;
     width: 100%;
-    gap: ${makeRem(8)};
+    gap: ${makeSpace(8)};
     align-items: center;
   }
 `;

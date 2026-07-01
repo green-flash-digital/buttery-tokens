@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { css } from "@linaria/core";
 import { match } from "ts-pattern";
 import { CustomVariantSchema } from "@buttery/core/schemas";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { VariantContainer } from "~/components/VariantContainer";
 import { VariantContainerBar } from "~/components/VariantContainerBar";
@@ -31,7 +31,7 @@ const contentStyles = css`
   .type-and-value {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: ${makeRem(16)};
+    gap: ${makeSpace(16)};
   }
 `;
 

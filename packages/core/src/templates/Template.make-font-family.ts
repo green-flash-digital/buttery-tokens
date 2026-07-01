@@ -1,6 +1,7 @@
 import { defineTemplate } from "./types.js";
 
 import { createCSSProperty } from "../utils/index.js";
+import { toKebabCase } from "../schemas/schema.font.js";
 
 function makeFontFamilyUtil<
   T extends { prefix: string; font: { families: Record<string, string> } }
@@ -19,7 +20,7 @@ export const fontFamilyTemplate = defineTemplate({
   tokens(config) {
     const families: Record<string, string> = {};
     for (const [name, def] of Object.entries(config.config.font.families)) {
-      families[name] = `"${def.family}", ${def.fallback}`;
+      families[toKebabCase(name)] = `"${def.family}", ${def.fallback}`;
     }
     return { font: { families } };
   },
@@ -27,7 +28,7 @@ export const fontFamilyTemplate = defineTemplate({
     const prefix = config.config.runtime.prefix;
     return Object.entries(config.config.font.families).map(
       ([fontFamilyName, fontFamilyValue]) => {
-        const property = createCSSProperty(prefix, "font-family", fontFamilyName);
+        const property = createCSSProperty(prefix, "font-family", toKebabCase(fontFamilyName));
         return `${property}: "${fontFamilyValue.family}", ${fontFamilyValue.fallback}`;
       }
     );

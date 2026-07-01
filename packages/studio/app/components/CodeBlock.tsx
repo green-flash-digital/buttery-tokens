@@ -3,20 +3,20 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
 import type { CodeToHastOptions, BundledLanguage, BundledTheme } from "shiki";
-import { makeFontFamily, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeFontFamily, makeRem } from "@buttery/studio-tokens";
 
 import { useHighlightCode } from "~/hooks/hook.useHighlightCode";
 
 const styles = css`
   * {
-    font-family: ${makeFontFamily("Consolas")};
+    font-family: ${makeFontFamily("consolas")};
     font-size: ${makeRem(14)};
   }
 
   pre {
     margin: 0;
-    border-radius: ${makeRem(8)};
-    padding: ${makeRem(16)};
+    border-radius: ${makeSpace(8)};
+    padding: ${makeSpace(16)};
     height: 100%;
     overflow-x: auto;
   }

@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import type { ChangeEvent } from "react";
-import { makeReset, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeReset, makeRem } from "@buttery/studio-tokens";
 
 import { InputLabel } from "~/components/InputLabel";
 import { InputCheckbox } from "~/components/InputCheckbox";
@@ -12,10 +12,10 @@ const ulStyles = css`
   li {
     label {
       display: grid;
-      grid-template-columns: ${makeRem(24)} 1fr;
-      gap: ${makeRem(4)};
+      grid-template-columns: ${makeSpace(24)} 1fr;
+      gap: ${makeSpace(4)};
       align-items: center;
-      font-size: ${makeRem(12)};
+      font-size: ${makeSpace(12)};
     }
   }
 `;

@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeColor, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem } from "@buttery/studio-tokens";
 
 import { IconPlusSign } from "~/icons/IconPlusSign";
 
@@ -30,19 +30,19 @@ export type VariantEmptyProps = VariantEmptyPropsNative &
   VariantEmptyPropsCustom;
 
 const styles = css`
-  padding: ${makeRem(16)};
+  padding: ${makeSpace(16)};
   width: 100%;
   display: grid;
   grid-template-rows: auto auto;
-  gap: ${makeRem(8)};
+  gap: ${makeSpace(8)};
   justify-items: center;
   text-align: center;
   background: rgba(255, 255, 255, 0.8);
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
   border: 1px dashed ${makeColor("neutral-light", { opacity: 0.2 })};
 
   .message {
-    padding: ${makeRem(8)};
+    padding: ${makeSpace(8)};
     color: ${makeColor("neutral-dark")};
     font-size: ${makeRem(14)};
   }

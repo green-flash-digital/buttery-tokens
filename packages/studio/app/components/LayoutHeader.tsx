@@ -2,7 +2,7 @@ import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef } from "react";
-import { makeColor, makeCustom, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeCustom, makeRem } from "@buttery/studio-tokens";
 
 export type LayoutHeaderPropsNative = JSX.IntrinsicElements["header"];
 export type LayoutHeaderProps = LayoutHeaderPropsNative;
@@ -17,7 +17,7 @@ const styles = css`
     max-width: ${makeCustom("layout-max-width")};
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    gap: ${makeRem(16)};
+    gap: ${makeSpace(16)};
     align-items: center;
     margin: 0 auto;
     padding: 0 ${makeCustom("layout-gutters")};

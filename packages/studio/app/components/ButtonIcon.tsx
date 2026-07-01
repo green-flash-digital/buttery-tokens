@@ -3,7 +3,7 @@ import { css } from "@linaria/core";
 import type { JSX, RefCallback } from "react";
 import { forwardRef, useCallback, useId } from "react";
 import { match } from "ts-pattern";
-import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 
 import type { IconBrush } from "~/icons/IconBrush";
 
@@ -36,7 +36,7 @@ const styles = css`
   aspect-ratio: 1 / 1;
   display: grid;
   place-content: center;
-  border-radius: ${makeRem(4)};
+  border-radius: ${makeSpace(4)};
   transition: all 0.15s ease-in-out;
   background: transparent;
   border: ${makeRem(1)} solid transparent;
@@ -61,13 +61,13 @@ const styles = css`
 
   &.s {
     &-dense {
-      height: ${makeRem(24)};
+      height: ${makeSpace(24)};
     }
     &-normal {
-      height: ${makeRem(32)};
+      height: ${makeSpace(32)};
     }
     &-big {
-      height: ${makeRem(44)};
+      height: ${makeSpace(44)};
     }
   }
 

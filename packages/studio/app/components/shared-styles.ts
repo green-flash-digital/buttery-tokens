@@ -1,13 +1,13 @@
 import { classes } from "react-hook-primitives";
 import { css } from "@linaria/core";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 const dropdownStyles = css`
   opacity: 0;
   border: none;
   transform: scale(0.9);
   filter: drop-shadow(3px 8px 28px rgba(130, 130, 130, 0.3));
-  border-radius: ${makeRem(8)};
+  border-radius: ${makeSpace(8)};
   padding: 0;
 
   @keyframes appear {

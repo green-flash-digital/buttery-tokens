@@ -1,6 +1,6 @@
 import { useCallback, useRef, type ChangeEventHandler } from "react";
 import { css } from "@linaria/core";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { InputLabel } from "~/components/InputLabel";
 import { InputText } from "~/components/InputText";
@@ -9,9 +9,9 @@ import { InputColor } from "../../components/InputColor";
 
 const styles = css`
   display: grid;
-  grid-template-columns: ${makeRem(24)} 1fr;
+  grid-template-columns: ${makeSpace(24)} 1fr;
   align-items: center;
-  gap: ${makeRem(8)};
+  gap: ${makeSpace(8)};
 `;
 
 export function ColorSwatchHex(props: {

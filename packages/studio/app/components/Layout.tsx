@@ -14,7 +14,7 @@ const bodyStyles = css`
 
   * {
     box-sizing: border-box;
-    font-family: ${makeFontFamily("Mulish")};
+    font-family: ${makeFontFamily("mulish")};
   }
 `;
 

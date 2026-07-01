@@ -3,6 +3,7 @@ import { css } from "@linaria/core";
 import { useCallback } from "react";
 import { classes } from "react-hook-primitives";
 import {
+  makeSpace,
   makeColor,
   makeFontWeight,
   makeRem,
@@ -67,17 +68,17 @@ const itemStyles = css`
   text-align: left;
   width: ${makeRem(400)};
   display: grid;
-  grid-template-columns: ${makeRem(24)} 1fr;
+  grid-template-columns: ${makeSpace(24)} 1fr;
   grid-template-rows: auto auto;
   grid-template-areas:
     "icon title"
     "icon description";
-  column-gap: ${makeRem(8)};
-  font-size: ${makeRem(12)};
+  column-gap: ${makeSpace(8)};
+  font-size: ${makeSpace(12)};
   transition: all 0.1s ease-in-out;
   min-height: ${makeRem(52)};
   align-content: center;
-  padding: ${makeRem(12)} ${makeRem(16)};
+  padding: ${makeSpace(12)} ${makeSpace(16)};
 
   &:first-child {
     border-top-right-radius: inherit;
@@ -101,8 +102,8 @@ const itemStyles = css`
   }
   .title {
     grid-area: title;
-    margin-bottom: ${makeRem(4)};
-    font-weight: ${makeFontWeight("Mulish-semiBold")};
+    margin-bottom: ${makeSpace(4)};
+    font-weight: ${makeFontWeight("mulish-semiBold")};
   }
   .description {
     grid-area: description;

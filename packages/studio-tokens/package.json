@@ -7,10 +7,10 @@
     "access": "public"
   },
   "exports": {
-    ".": "./dist/ts/index.js",
-    "./ts": "./dist/ts/index.js",
+    ".": "./.buttery/index.ts",
+    "./ts": "./.buttery/index.ts",
     "./scss": "./dist/scss/_index.scss",
-    "./root.css": "./dist/root.css"
+    "./root.css": "./.buttery/_generated/root.css"
   },
   "scripts": {
     "build": "yarn tsx ./scripts/build-studio-tokens.ts",

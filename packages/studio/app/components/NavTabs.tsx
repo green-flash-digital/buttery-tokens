@@ -8,6 +8,7 @@ import { css } from "@linaria/core";
 import type { JSX } from "react";
 import { forwardRef, useCallback } from "react";
 import {
+  makeSpace,
   makeColor,
   makeFontWeight,
   makePx,
@@ -41,7 +42,7 @@ const styles = css`
 
     display: flex;
     align-items: center;
-    gap: ${makeRem(24)};
+    gap: ${makeSpace(24)};
     border-bottom: ${makeRem(1)} solid
       ${makeColor("neutral-light", { opacity: 0.1 })};
 
@@ -57,7 +58,7 @@ const styles = css`
       display: grid;
       place-content: center;
       text-transform: uppercase;
-      font-weight: ${makeFontWeight("Mulish-bold")};
+      font-weight: ${makeFontWeight("mulish-bold")};
       transition: all 0.15s ease-in-out;
     }
   }
@@ -73,7 +74,7 @@ const styles = css`
     a,
     button {
       height: ${makeRem(30)};
-      font-size: ${makeRem(12)};
+      font-size: ${makeSpace(12)};
     }
   }
   &.c-primary {

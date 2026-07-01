@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import { forwardRef } from "react";
 import { css } from "@linaria/core";
 import { classes } from "react-hook-primitives";
-import { makeColor, makeFontWeight, makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeFontWeight, makeRem } from "@buttery/studio-tokens";
 
 import type { IconCode } from "~/icons/IconCode";
 
@@ -17,14 +17,14 @@ export type InputRadioCardProps = InputRadioCardPropsNative &
   InputRadioCardPropsCustom;
 
 const styles = css`
-  padding: ${makeRem(16)};
-  border-radius: ${makeRem(4)};
+  padding: ${makeSpace(16)};
+  border-radius: ${makeSpace(4)};
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: ${makeRem(6)};
   border: ${makeRem(1)} solid ${makeColor("neutral", { opacity: 0.2 })};
-  font-size: ${makeRem(12)};
+  font-size: ${makeSpace(12)};
   transition: all 0.1s ease-in-out;
   background: white;
 
@@ -47,12 +47,12 @@ const styles = css`
   }
 
   .title {
-    font-weight: ${makeFontWeight("Mulish-bold")};
+    font-weight: ${makeFontWeight("mulish-bold")};
   }
 
   .help {
     font-size: ${makeRem(10)};
-    margin-top: ${makeRem(8)};
+    margin-top: ${makeSpace(8)};
     color: ${makeColor("neutral", { opacity: 0.5 })};
   }
 

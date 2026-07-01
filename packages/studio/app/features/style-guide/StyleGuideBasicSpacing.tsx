@@ -3,6 +3,7 @@ import { match } from "ts-pattern";
 import type { JSX } from "react";
 import { classes } from "react-hook-primitives";
 import {
+  makeSpace,
   makeColor,
   makeFontFamily,
   makePx,
@@ -27,25 +28,25 @@ const styles = css`
   tbody {
     tr {
       td {
-        font-family: ${makeFontFamily("Consolas")};
-        padding-top: ${makeRem(8)};
-        padding-bottom: ${makeRem(8)};
+        font-family: ${makeFontFamily("consolas")};
+        padding-top: ${makeSpace(8)};
+        padding-bottom: ${makeSpace(8)};
       }
     }
   }
 
   .variant {
-    height: ${makeRem(32)};
-    padding: 0 ${makeRem(8)};
+    height: ${makeSpace(32)};
+    padding: 0 ${makeSpace(8)};
     border-radius: ${makeRem(2)};
     position: relative;
-    gap: ${makeRem(16)};
+    gap: ${makeSpace(16)};
     display: flex;
     align-items: center;
 
     span {
       display: block;
-      font-family: ${makeFontFamily("Consolas")};
+      font-family: ${makeFontFamily("consolas")};
 
       &.bg {
         width: var(--value);

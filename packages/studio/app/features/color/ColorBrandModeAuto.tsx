@@ -2,7 +2,7 @@ import { css } from "@linaria/core";
 import type { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { generateGUID } from "ts-jolt/isomorphic";
-import { makeRem } from "@buttery/studio-tokens";
+import { makeSpace, makeRem } from "@buttery/studio-tokens";
 
 import { VariantList } from "~/components/VariantList";
 import { VariantEmpty } from "~/components/VariantEmpty";
@@ -19,8 +19,8 @@ import { InputSection } from "../../components/InputSection";
 import { InputLabel } from "../../components/InputLabel";
 
 const inputLabelStyles = css`
-  margin-bottom: ${makeRem(16)};
-  margin-top: ${makeRem(8)};
+  margin-bottom: ${makeSpace(16)};
+  margin-top: ${makeSpace(8)};
 `;
 
 export function ColorBrandModeAuto({

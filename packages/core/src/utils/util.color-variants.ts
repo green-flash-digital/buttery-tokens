@@ -30,13 +30,15 @@ export function autoCreateVariantMap(
 
 export function createVariantsFromBaseHex(
   baseHex: string,
-  variantDef: ButteryTokensColorVariant
+  variantDef: ButteryTokensColorVariant | undefined
 ): VariantMap {
   const base = chroma(baseHex);
   const baseOklch = toOklchString(base);
   const scale = chroma
     .scale([base.brighten(2.5), base, base.darken(2)])
     .mode("oklch");
+
+  if (variantDef === undefined || variantDef === null) return { base: baseOklch };
 
   if (typeof variantDef === "number") {
     if (variantDef === 0) return { base: baseOklch };

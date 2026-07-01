@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { match } from "ts-pattern";
 import { manualFontStyles } from "@buttery/core/schemas";
-import { makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
+import { makeSpace, makeColor, makeRem, makeReset } from "@buttery/studio-tokens";
 
 
 import { useFontFamilyPreviewContext } from "./FontFamilyPreview.context";
@@ -16,26 +16,26 @@ const styles = css`
   overflow: hidden;
 
   & > li {
-    padding-bottom: ${makeRem(16)};
-    padding-left: ${makeRem(16)};
-    padding-right: ${makeRem(16)};
-    margin-bottom: ${makeRem(16)};
+    padding-bottom: ${makeSpace(16)};
+    padding-left: ${makeSpace(16)};
+    padding-right: ${makeSpace(16)};
+    margin-bottom: ${makeSpace(16)};
     border-bottom: 1px solid ${makeColor("neutral-light", { opacity: 0.2 })};
   }
 
   .heading {
     display: flex;
     align-items: center;
-    font-size: ${makeRem(16)};
-    margin: ${makeRem(20)} 0;
+    font-size: ${makeSpace(16)};
+    margin: ${makeSpace(20)} 0;
 
     h4 {
       margin: 0;
     }
 
     & > * + * {
-      margin-left: ${makeRem(8)};
-      padding-left: ${makeRem(8)};
+      margin-left: ${makeSpace(8)};
+      padding-left: ${makeSpace(8)};
       border-left: 1px solid ${makeColor("neutral-light", { opacity: 0.5 })};
       color: ${makeColor("neutral-light", { opacity: 0.7 })};
       font-size: ${makeRem(14)};
